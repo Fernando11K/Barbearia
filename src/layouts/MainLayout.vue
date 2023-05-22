@@ -23,11 +23,11 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
-      <Instagram/>
+      
     </q-drawer>
 
     <q-drawer v-model="rightDrawerOpen" side="right" overlay elevated>
-     <InstagramTemplate />
+     
     </q-drawer>
 
     <q-page-container>
@@ -56,12 +56,10 @@
 
 <script>
 import { ref } from 'vue'
-import InstagramTemplate from 'src/components/InstagramTemplate.vue'
+
 
 export default {
-  components:{
-    InstagramTemplate
-  },
+
   setup() {
     const leftDrawerOpen = ref(false)
     const rightDrawerOpen = ref(false)
