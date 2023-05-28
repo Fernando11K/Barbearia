@@ -1,13 +1,12 @@
 <template classs="">
   <q-page class="flex flex-center bg-blue-4">
-    <div class="q-pa-md row justify-center">
     <FundoBarbeariaComponent class="mobile-only" title="Example component" active></FundoBarbeariaComponent>
-    <div style="width: 100%; max-width: 400px">
+    <div class="q-pa-md row justify-center desktop-only">
+    <div style="width: 100%; max-width: 400px" class="">
       <q-chat-message v-show="bemVindo" avatar="../assets/pablo.png" name="Barbearia Tem Tudo" :text="['Olá, Bem vindo!']"
-        stamp="agora mesmo" bg-color="grey-12" />
-
-      <q-chat-message v-show="!loading" avatar="../assets/pablo.png" name="Barbearia Tem Tudo" stamp="agora mesmo"
-        bg-color="grey-12">
+        stamp="agora mesmo" bg-color="grey-12" class="" />
+      <q-chat-message v-show="!loading" avatar="../assets/pablo.png" name="Barbearia Tem Tudo" stamp="agora mesmo" 
+        bg-color="grey-12" >
         <div>
           <span>
             Infelizmente esse site ainda não
@@ -21,7 +20,7 @@
         </div>
       </q-chat-message>
 
-      <q-chat-message v-show="loading" name="Barbearia Tem Tudo" avatar="../assets/pablo.png" bg-color="grey-12">
+      <q-chat-message v-show="loading" name="Barbearia Tem Tudo" avatar="../assets/pablo.png" bg-color="grey-12" class=""> 
         <q-spinner-dots size="2rem" />
       </q-chat-message>
 
