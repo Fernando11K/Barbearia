@@ -41,10 +41,10 @@
           <template v-for="(menuItem, index) in menuList" :key="index">
             <q-item clickable :active="!menuItem.ativo.value" v-ripple
               @click="funcionalidadeNaoDisponivel(menuItem.ativo.value)">
-              <q-item-section avatar>
+              <q-item-section avatar v-show="menuItem.ativo.value">
                 <q-icon :name="menuItem.icon" />
               </q-item-section>
-              <q-item-section>
+              <q-item-section v-show="menuItem.ativo.value">
                 {{ menuItem.label }}
               </q-item-section>
             </q-item>
@@ -125,7 +125,7 @@ const menuList = [
   },
   {
     icon: 'send',
-    label: 'Outbox',
+    label: 'Tabela de Preços',
     separator: false,
     ativo: ref(false)
 
