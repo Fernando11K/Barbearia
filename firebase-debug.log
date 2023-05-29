@@ -1,0 +1,17 @@
+[debug] [2023-05-29T01:31:03.958Z] ----------------------------------------------------------------------
+[debug] [2023-05-29T01:31:03.960Z] Command:       /home/unknown/.nvm/versions/node/v18.16.0/bin/node /usr/bin/firebase deploy --only hosting
+[debug] [2023-05-29T01:31:03.961Z] CLI Version:   12.2.1
+[debug] [2023-05-29T01:31:03.961Z] Platform:      linux
+[debug] [2023-05-29T01:31:03.961Z] Node Version:  v18.16.0
+[debug] [2023-05-29T01:31:03.962Z] Time:          Sun May 28 2023 22:31:03 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2023-05-29T01:31:03.962Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-29T01:31:04.036Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-29T01:31:04.037Z] > authorizing via signed-in user (fernandosmithmendonca10@gmail.com)
+[debug] [2023-05-29T01:31:04.037Z] [iam] checking project barbearia-e-mercearia for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-29T01:31:04.039Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions [none]
+[debug] [2023-05-29T01:31:04.039Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions x-goog-quota-user=projects/barbearia-e-mercearia
+[debug] [2023-05-29T01:31:04.040Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-29T01:31:04.997Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions 200
+[debug] [2023-05-29T01:31:04.997Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-29T01:31:04.998Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/barbearia-e-mercearia [none]
