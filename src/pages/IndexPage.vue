@@ -36,7 +36,7 @@ const loading = ref(true)
 const bemVindo = ref(false)
 
 const ordemMensagens = () => {
-  console.log('Executou')
+  console.log('Desenvolvido por Fernando11000')
   setTimeout(() => {
     bemVindo.value = true
   }, 1000);
