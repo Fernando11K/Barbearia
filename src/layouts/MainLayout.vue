@@ -9,7 +9,7 @@
           <q-avatar>
             <q-icon @click="enterFullscreen" name="fa-solid fa-scissors fa-shake" />
           </q-avatar>
-          Barbearia Tem tudo
+          Barbearia Tem Tudo
         </q-toolbar-title>
 
         <q-btn class="desktop-only " dense flat round icon="menu" @click="toggleRightDrawer" />
