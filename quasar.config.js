@@ -145,8 +145,8 @@ module.exports = configure(function (ctx) {
       // chainWebpackCustomSW (/* chain */) {},
 
       manifest: {
-        name: 'Projeto Barbearia e Mercearia',
-        short_name: 'Projeto Barbearia e Mercearia',
+        name: 'Barbearia Tem Tudo e Mercearia da Pracinha',
+        short_name: 'Barbearia e Mercearia',
         description: '',
         display: 'standalone',
         orientation: 'portrait',
