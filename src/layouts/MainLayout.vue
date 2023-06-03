@@ -1,26 +1,6 @@
 <template>
   <q-layout view="hHh LpR fFf">
 
-   <!-- <q-header reveal elevated class="bg-blue-8 glossy text-white " height-hint="98">
-      <q-toolbar>
-        <q-btn class="desktop-only " dense flat round icon="menu" @click="toggleLeftDrawer" />
-
-        <q-toolbar-title class="text-center  ">
-          <q-avatar>
-            <q-icon @click="enterFullscreen" name="fa-solid fa-scissors fa-shake" />
-          </q-avatar>
-          Barbearia Tem Tudo
-        </q-toolbar-title>
-
-        <q-btn class="desktop-only " dense flat round icon="menu" @click="toggleRightDrawer" />
-      </q-toolbar>
-
-      <q-tabs class=" bg-red-6 glossy" align="left">
-        <q-route-tab to="/page1" label="Barbearia Tem Tudo" />
-        <q-route-tab to="/page2" label="Mercearia da Pracinha" />
-        <q-route-tab to="/page3" label="Em breve" />
-      </q-tabs>  -->
-  <!--  </q-header>  -->
   <QHeaderComponent :titulo="'Barbearia Tem Tudo'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" @clickBotaoPainelLateralDireito="toggleRightDrawer" />
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
