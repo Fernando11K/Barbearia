@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh LpR fFf">
 
-  <QHeaderComponent :titulo="'Barbearia Tem Tudo'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" @clickBotaoPainelLateralDireito="toggleRightDrawer" />
+  <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia Tem Tudo'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" @clickBotaoPainelLateralDireito="toggleRightDrawer" />
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
 
@@ -53,7 +53,7 @@ import { ref } from 'vue'
 import QHeaderComponent from 'src/components/MainLayout/QHeaderComponent.vue'
 import QFooterComponent from 'src/components/MainLayout/QFooterComponent.vue';
 import alert from '../hooks/alert'
-
+const corToolbar = ref('bg-blue-8 ')
 const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
 const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value

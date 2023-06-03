@@ -1,6 +1,6 @@
 
 <template>
-    <q-header reveal elevated class="bg-blue-8 glossy text-white " height-hint="98">
+    <q-header reveal elevated  :class="corToolbar" class="glossy text-white " height-hint="98">
         <q-toolbar>
             <q-btn class="desktop-only " dense flat round icon="menu" @click="capturaClickDoBotaoPainelLateralEsquerdo" />
 
@@ -24,7 +24,7 @@
 <script setup>
 import { defineEmits } from 'vue'
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo', 'clickBotaoPainelLateralDireito']);
-const props = defineProps(['titulo'])
+const props = defineProps(['titulo', 'corToolbar'])
 
 const enterFullscreen = () => {
   const element = document.documentElement
