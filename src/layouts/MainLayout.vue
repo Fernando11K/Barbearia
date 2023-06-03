@@ -66,13 +66,7 @@ const funcionalidadeNaoDisponivel = (value) => {
   }
 }
 
-const redirecionarParaInstagram = () => {
-  setTimeout(function () {
-
-    window.location.href = 'https://www.instagram.com/_pbsilva/';
-  }, 250);
-
-}
+const redirecionarParaInstagram = () => setTimeout( () =>  window.location.href = 'https://www.instagram.com/_pbsilva/', 250);
 
 const menuList = [
   {
@@ -130,18 +124,16 @@ const menuList = [
 
 </script>
 
-
-
 <style scoped lang="scss">
 .fonte-footer {
-
   font-size: 13px;
 }
-
-.imagem:hover {
-  /* Estilos para o efeito hover */
-  /* Por exemplo, alterar a opacidade da imagem */
-  opacity: 0.5;
-  transition: opacity 0.3s;
+.imagem {
+  &:hover {
+    /* Estilos para o efeito hover */
+    /* Por exemplo, alterar a opacidade da imagem */
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
 }
 </style>

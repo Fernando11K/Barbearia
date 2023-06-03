@@ -19,26 +19,18 @@
     </q-footer>        
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import alert from '../../hooks/alert'
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);
-
-const capturaClickDoBotaoPainelLateralEsquerdo = () => { 
-    emits('clickBotaoPainelLateralEsquerdo')
-}
+import alert from '../../hooks/alert'
+const alerta = alert()
 
 const celular = ref('5521969085364');
 const message = ref('Olá! Está funcionando?');
-const abrirWhatsApp = () => {
-  const url = `https://api.whatsapp.com/send?phone=${celular.value}&text=${encodeURIComponent(message.value)}`;
-  window.open(url, '_blank')
 
-}
-const alerta = alert()
-const funcionalidadeNaoDisponivel = (value) => {
-  if (value) {
-    alerta.warning('A funcionalidade estará disponível em breve!')
-  }
-}
+const capturaClickDoBotaoPainelLateralEsquerdo = () => emits('clickBotaoPainelLateralEsquerdo')
+
+const abrirWhatsApp = () => { const url = `https://api.whatsapp.com/send?phone=${celular.value}&text=${encodeURIComponent(message.value)}`; window.open(url, '_blank') }
+const funcionalidadeNaoDisponivel = () =>  alerta.warning('A funcionalidade estará disponível em breve!')
+  
 </script>
