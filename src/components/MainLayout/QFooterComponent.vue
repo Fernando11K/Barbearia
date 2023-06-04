@@ -1,6 +1,6 @@
 <template>   
    <q-footer reveal elevated class="bg-blue-8 glossy text-white ">
-      <q-separator color="grey-14" class="shadow-up-24" />
+      <q-separator :color="corAtual" class="shadow-up-24" />
       <q-toolbar class="mobile-only ">
         <div class="row justify-around col-12 fonte-footer ">
           <q-btn size="md" flat round icon="fa-solid fa-bars" class="fonte-footer  " @click="capturaClickDoBotaoPainelLateralEsquerdo">
@@ -20,10 +20,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);
 import alert from '../../hooks/alert'
 const alerta = alert()
+const corAtual = ref('')
+const cores = ['red-1', 'red-2', 'red-3', 'red-4'];
+const trocarCor = () => cores[0]
+
+
 
 const celular = ref('5521969085364');
 const message = ref('Olá! Está funcionando?');
@@ -32,5 +37,8 @@ const capturaClickDoBotaoPainelLateralEsquerdo = () => emits('clickBotaoPainelLa
 
 const abrirWhatsApp = () => { const url = `https://api.whatsapp.com/send?phone=${celular.value}&text=${encodeURIComponent(message.value)}`; window.open(url, '_blank') }
 const funcionalidadeNaoDisponivel = () =>  alerta.warning('A funcionalidade estará disponível em breve!')
-  
+ 
+onMounted(() => setInterval(trocarCor, 1000));
+
+
 </script>
