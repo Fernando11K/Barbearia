@@ -116,7 +116,9 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-webpack/developing-ssr/configuring-ssr
     ssr: {
-      pwa: false,
+      
+      workboxPluginMode: 'GenerateSW',
+      workboxOptions: { skipWaiting: true, clientsClaim: true },
 
       // manualStoreHydration: true,
       // manualPostHydrationTrigger: true,
