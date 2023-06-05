@@ -4,7 +4,7 @@
     <q-toolbar class="mobile-only ">
       <div class="row justify-around col-12 fonte-footer ">
         <q-btn size="md" flat round icon="fa-solid fa-bars" class="fonte-footer  "
-        @click="capturaClickDoBotaoPainelLateralEsquerdo">
+          @click="capturaClickDoBotaoPainelLateralEsquerdo">
         </q-btn>
         <q-btn size="md" flat round icon="fa-solid fa-house " class="fonte-footer disabled "
           @click="funcionalidadeNaoDisponivel">
@@ -22,29 +22,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);
 import alert from '../../hooks/alert'
 const alerta = alert()
 const corAtual = ref<string>()
 const corAtualIndex = ref<number>(0)
-const cores = ['blue-3', 'blue-4', 'blue-5', 'blue-6' ];
+const cores = ['blue-3', 'blue-4', 'blue-5', 'blue-6'];
+
 const trocarCor = () => {
   corAtualIndex.value = (corAtualIndex.value + 1) % cores.length;
   corAtual.value = cores[corAtualIndex.value]
 }
-onMounted(() => setInterval(trocarCor, 500));
-
-
-
+const loopCores = setInterval(trocarCor, 500)
+onMounted(() => loopCores)
+onBeforeUnmount(() => clearInterval(loopCores))
+  
 const celular = ref('5521969085364');
 const message = ref('Olá! Está funcionando?');
-
-const capturaClickDoBotaoPainelLateralEsquerdo = () => emits('clickBotaoPainelLateralEsquerdo')
-
 const abrirWhatsApp = () => { const url = `https://api.whatsapp.com/send?phone=${celular.value}&text=${encodeURIComponent(message.value)}`; window.open(url, '_blank') }
 const funcionalidadeNaoDisponivel = () => alerta.warning('A funcionalidade estará disponível em breve!')
 
+const capturaClickDoBotaoPainelLateralEsquerdo = () => emits('clickBotaoPainelLateralEsquerdo')
 
 
 </script>
