@@ -1,6 +1,6 @@
-<template classs="">
+<template>
   <q-page class="flex flex-center bg-blue-4">
-    <FundoBarbeariaComponent class="mobile-only" title="Example component" active></FundoBarbeariaComponent>
+    <FundoBarbeariaComponent class="mobile-only" title="Fundo Barbearia" active></FundoBarbeariaComponent>
     <div class="q-pa-md row justify-center desktop-only">
       <div style="width: 100%; max-width: 400px" class="">
         <q-chat-message v-show="bemVindo" avatar="../assets/pablo.png" name="Barbearia Tem Tudo"
@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup >
-import FundoBarbeariaComponent from 'src/components/FundoBarbeariaComponent.vue';
+import FundoBarbeariaComponent from 'src/components/Barbearia/PaginaPrincipal/FundoBarbeariaComponent.vue';
 import { ref, onMounted } from 'vue'
 const loading = ref(true)
 const bemVindo = ref(false)
