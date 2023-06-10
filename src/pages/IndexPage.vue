@@ -1,13 +1,13 @@
 <template>
   <q-page class="flex flex-center bg-blue-4">
-    <FundoBarbeariaComponent class="mobile-only" title="Fundo Barbearia" active></FundoBarbeariaComponent>
+    <FundoBarbeariaComponent class="mobile-only" title="Fundo Barbearia" active></FundoBarbeariaComponent>        
     <div class="q-pa-md row justify-center desktop-only">
       <div style="width: 100%; max-width: 400px" class="">
         <q-chat-message v-show="bemVindo" avatar="../assets/pablo.png" name="Barbearia Tem Tudo"
-          :text="['Olá, Bem vindo!']" stamp="agora mesmo" bg-color="grey-12" class="" />
+        :text="['Olá, Bem vindo!']" stamp="agora mesmo" bg-color="grey-12" class="" />
         <q-chat-message v-show="!loading" avatar="../assets/pablo.png" name="Barbearia Tem Tudo" stamp="agora mesmo"
-          bg-color="grey-12">
-          <div>
+        bg-color="grey-12">
+        <div>
             <span>
               Infelizmente esse site ainda não
             </span>

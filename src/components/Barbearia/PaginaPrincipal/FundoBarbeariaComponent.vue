@@ -1,9 +1,7 @@
 <template>
-  <div class="fit col-12">
-        
-    <q-img class="" :src="require('../../../assets/tabelaPrecos.jpeg')" >      
-      <CarrosselComponent  class="absolute-top" />    
-    </q-img>    
+  <div class="fit">
+    <q-img class="  relative-position" width="100%" height="100%" :src="require('../../../assets/tabelaPrecos.jpeg')" />
+    <CarrosselComponent class=" abosolute-top-center  " />    
   </div>
 </template>
 
@@ -11,3 +9,15 @@
 import CarrosselComponent from './CarrosselComponent.vue'
 
 </script>
+
+<style lang="scss" scoped>
+.abosolute-top-center {
+  position: absolute;
+  top: 0;
+  right: 15%;
+  
+}
+
+
+</style>
+  
