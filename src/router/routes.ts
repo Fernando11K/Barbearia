@@ -2,11 +2,12 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   { 
-    path: '/barbearia',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: '/barbearia/agendamento', component: () => import('pages/Barbearia/AgendamentoPage.vue')}  
+      { path: '/', component: () => import('pages/IndexPage.vue') },
+      { path: '/barbearia', component: () => import('pages/IndexPage.vue') },
+      { path: '/agendamento', component: () => import('pages/Barbearia/AgendamentoPage.vue')}  
   ]
   },    
   // {
