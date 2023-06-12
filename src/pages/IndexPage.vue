@@ -24,7 +24,7 @@
           class="">
           <q-spinner-dots size="2rem" />
         </q-chat-message>
-
+        
       </div>
     </div>
   </q-page>
@@ -32,6 +32,7 @@
 
 <script lang="ts" setup >
 import FundoBarbeariaComponent from 'src/components/Barbearia/PaginaPrincipal/FundoBarbeariaComponent.vue';
+
 import { ref, onMounted } from 'vue'
 const loading = ref(true)
 const bemVindo = ref(false)

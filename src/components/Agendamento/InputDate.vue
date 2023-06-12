@@ -18,7 +18,7 @@
             <q-popup-proxy cover transition-show="scale" transition-hide="scale">
               <q-time id="horário agendamento" v-model="date" mask="DD-MM-YYYY HH:mm" format24h  >
                 <div class="row items-center justify-end">
-                  <q-btn @click="em()" v-close-popup label="Fechar" color="primary" flat />
+                  <q-btn v-close-popup label="Fechar" color="primary" flat />
                 </div>
               </q-time>
             </q-popup-proxy>
@@ -33,10 +33,6 @@
   const dataAtualEHoraAtual = `${new Intl.DateTimeFormat().format(new Date())}${' '}${new Date().getHours()}${':'}${new Date().getMinutes()}`
   const date = ref(dataAtualEHoraAtual)
 
-  const em = () => console.log(date.value)
 
-  
-  
-  
   </script>
   

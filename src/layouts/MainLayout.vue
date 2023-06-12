@@ -1,7 +1,8 @@
 <template>
   <q-layout view="hHh LpR fFf">
 
-  <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia Tem Tudo'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" @clickBotaoPainelLateralDireito="toggleRightDrawer" />
+    <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia Tem Tudo'"
+      @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" @clickBotaoPainelLateralDireito="toggleRightDrawer" />
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
 
@@ -20,10 +21,9 @@
         <q-list>
 
           <template v-for="(menuItem, index) in menuList" :key="index">
-            <q-item clickable :active="!menuItem.ativo.value" v-ripple
-              @click="funcionalidadeNaoDisponivel(menuItem.ativo.value)">
+            <q-item clickable :active="!menuItem.ativo.value" v-ripple @click="funcionalidadeNaoDisponivel(menuItem); abreModalAgendamento(menuItem)">
               <q-item-section avatar v-show="menuItem.ativo.value">
-                <q-icon :name="menuItem.icon" />
+                <q-icon :name="menuItem.icon" :color="menuItem.iconColor" />
               </q-item-section>
               <q-item-section v-show="menuItem.ativo.value">
                 {{ menuItem.label }}
@@ -36,15 +36,15 @@
     </q-drawer>
 
     <q-drawer v-model="rightDrawerOpen" side="right" overlay elevated>
-
+      <ModalAgendamento :statusProp="statusModalAgendamento" @atualizaStatusModal="(value)=> {statusModalAgendamento = value }" />
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
 
-    <QFooterComponent @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer"  />
-    
+    <QFooterComponent @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" />
+
   </q-layout>
 </template>
 
@@ -52,21 +52,37 @@
 import { ref } from 'vue'
 import QHeaderComponent from 'src/components/MainLayout/QHeaderComponent.vue'
 import QFooterComponent from 'src/components/MainLayout/QFooterComponent.vue';
+import ModalAgendamento from 'src/components/Agendamento/ModalAgendamento.vue'
+
 import alert from '../hooks/alert'
+
 const corToolbar = ref('bg-blue-8 ')
 const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
 const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value
 const toggleRightDrawer = () => rightDrawerOpen.value = !rightDrawerOpen.value
+const statusModalAgendamento = ref(false);
 
 const alerta = alert()
 const funcionalidadeNaoDisponivel = (value) => {
-  if (value) {
-    alerta.warning('A funcionalidade estará disponível em breve!')
+
+  if (!value.ativo.value) { alerta.warning('A funcionalidade estará disponível em breve!') }
+ 
+
+}
+const abreModalAgendamento = (value) => {
+
+  if (value.label === 'Agendamento') { 
+
+     statusModalAgendamento.value = true 
+    
+     
   }
+ 
+
 }
 
-const redirecionarParaInstagram = () => setTimeout( () =>  window.location.href = 'https://www.instagram.com/_pbsilva/', 250);
+const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/_pbsilva/', 250);
 
 const menuList = [
   {
@@ -121,13 +137,13 @@ const menuList = [
 
   }
 ];
-
 </script>
 
 <style scoped lang="scss">
 .fonte-footer {
   font-size: 13px;
 }
+
 .imagem {
   &:hover {
     /* Estilos para o efeito hover */
