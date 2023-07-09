@@ -1,8 +1,8 @@
 {
-  "name": "barbeariamercearia",
+  "name": "barbearia",
   "version": "0.0.1",
-  "description": "Esse é um projeto barbearia e mercearia",
-  "productName": "Barbearia Tem Tudo e Mercearia da Pracinha",
+  "description": "Esse é um projeto barbearia",
+  "productName": "Barbearia",
   "author": "Fernando11000 <fernandoferreira10@hotmail.com.br>",
   "private": true,
   "scripts": {

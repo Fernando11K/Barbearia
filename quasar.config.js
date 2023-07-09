@@ -150,8 +150,8 @@ module.exports = configure(function (ctx) {
       // chainWebpackCustomSW (/* chain */) {},
 
       manifest: {
-        name: 'Barbearia Tem Tudo e Mercearia da Pracinha',
-        short_name: 'Barbearia e Mercearia',
+        name: 'Barbearia',
+        short_name: 'Barbearia',
         description: '',
         display: 'standalone',
         orientation: 'portrait',
@@ -217,7 +217,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'barbeariamercearia'
+        appId: 'barbearia'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

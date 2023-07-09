@@ -16,7 +16,6 @@
     <!--
     <q-tabs class=" bg-red-6 glossy" align="left">
       <q-route-tab to="/page1" label="Barbearia Tem Tudo" />
-      <q-route-tab to="/page2" label="Mercearia da Pracinha" />
       <q-route-tab to="/page3" label="Em breve" />
     </q-tabs>  -->
   </q-header>

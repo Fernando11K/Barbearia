@@ -1,6 +1,6 @@
-# Projeto Barbearia e Mercearia (barbeariamercearia)
+# Projeto Barbearia 
 
-Esse é um projeto de uma barbearia e mercearia.
+Esse é um projeto de uma barbearia.
 
 ## Install the dependencies
 ```bash

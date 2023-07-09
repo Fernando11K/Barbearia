@@ -1,19 +1,19 @@
 <template>
   <q-layout view="hHh LpR fFf">
 
-    <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia Tem Tudo'"
+    <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia'"
       @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" @clickBotaoPainelLateralDireito="toggleRightDrawer" />
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
 
-      <q-img class="full-width q-img-clickable imagem" src="../assets/instagram.jpg" style="height: 150px"
+      <q-img class="full-width q-img-clickable imagem " src="../assets/instagram.jpg" style="height: 150px; width: 500px"
         @click="redirecionarParaInstagram">
         <div class="bg-transparent">
           <q-avatar size="56px" class="q-mb-sm">
-            <img src="../assets/pablo.png">
+            <img src="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png">
           </q-avatar>
-          <div class="text-weight-bold">Pablo Ferreira</div>
-          <div>@_pbsilva</div>
+          <div class="text-weight-bold">Barbershop</div>
+          <div>@barbers.den</div>
         </div>
       </q-img>
 
@@ -82,7 +82,7 @@ const abreModalAgendamento = (value) => {
 
 }
 
-const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/_pbsilva/', 250);
+const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/barbers.den/', 250);
 
 const menuList = [
   {
