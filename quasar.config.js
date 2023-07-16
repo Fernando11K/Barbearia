@@ -80,7 +80,7 @@ module.exports = configure(function (ctx) {
 
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      // chainWebpack (/* chain */) {}
+     
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-devServer
@@ -143,6 +143,10 @@ module.exports = configure(function (ctx) {
       workboxOptions: { 
         skipWaiting: true, 
         clientsClaim: true 
+      },
+      chainWebpack(config) {
+        // Desabilitar aviso do Workbox
+        config.plugins.delete('workbox');
       },
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])

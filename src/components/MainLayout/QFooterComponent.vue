@@ -43,7 +43,7 @@ const loopCores = setInterval(trocarCor, 500)
 onMounted(() => loopCores)
 onBeforeUnmount(() => clearInterval(loopCores))
   
-const celular = ref('5521969085364');
+const celular = ref('5521975294416');
 const message = ref('Olá! Está funcionando?');
 const abrirWhatsApp = () => { const url = `https://api.whatsapp.com/send?phone=${celular.value}&text=${encodeURIComponent(message.value)}`; window.open(url, '_blank') }
 const funcionalidadeNaoDisponivel = () => alerta.warning('A funcionalidade estará disponível em breve!')
