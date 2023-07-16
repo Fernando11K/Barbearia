@@ -144,22 +144,18 @@ module.exports = configure(function (ctx) {
         skipWaiting: true, 
         clientsClaim: true 
       },
-      chainWebpack(config) {
-        // Desabilitar aviso do Workbox
-        config.plugins.delete('workbox');
-      },
 
       // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
       // if using workbox in InjectManifest mode
       // chainWebpackCustomSW (/* chain */) {},
 
       manifest: {
-        name: 'Barbearia',
-        short_name: 'Barbearia',
+        name: 'The Barber\'s Den Barbershop',
+        short_name: 'Barbearia do Den',
         description: '',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#72b6f0',
+        background_color: '#ffffff',
         theme_color: '#027be3',
         icons: [
           {

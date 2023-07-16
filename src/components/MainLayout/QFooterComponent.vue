@@ -22,7 +22,7 @@
       </div>
     </q-toolbar>
   </q-footer>
-  <ModalAgendamento :statusProp="statusModalAgendamento" v-show="false" @atualizaStatusModal="(value: boolean)=> {statusModalAgendamento = value }" />
+  <ModalAgendamento :statusProp="statusModalAgendamento" @atualizaStatusModal="(value: boolean)=> {statusModalAgendamento = value }" />
 </template>
 
 <script setup lang="ts">

@@ -12,7 +12,7 @@
           <q-avatar size="56px" class="q-mb-sm">
             <img src="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png">
           </q-avatar>
-          <div class="text-weight-bold">Barbershop</div>
+          <div class="text-weight-bold">Barber's Den</div>
           <div>@barbers.den</div>
         </div>
       </q-img>
