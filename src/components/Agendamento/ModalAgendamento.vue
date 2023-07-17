@@ -1,5 +1,5 @@
 <template>
-    <div class="q-pa-md">
+    <div>
 
         <q-btn label="Agendamento" color="primary" @click="statusModal = true"  style="min-width: 90vw; max-width: 95%;"/>        
         <q-dialog v-model="statusModal" persistent>

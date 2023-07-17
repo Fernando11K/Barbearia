@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center bg-blue-4">
+  <q-page class="bg-blue-4">
     <FundoBarbeariaComponent  class="mobile-only" title="Fundo Barbearia" active></FundoBarbeariaComponent>        
     <div class="q-pa-md row justify-center desktop-only">
       <div style="width: 100%; max-width: 400px" class="">
