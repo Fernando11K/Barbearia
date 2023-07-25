@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center bg-blue-4">
-    <FundoBarbeariaComponent  class="mobile-only" ></FundoBarbeariaComponent>        
+      <FundoBarbeariaComponent class="mobile-only" />
     <div class="q-pa-md row justify-center desktop-only">
       <div style="width: 100%; max-width: 400px" class="">
         <q-chat-message v-show="bemVindo" avatar="../assets/pablo.png" name="Barbearia"
@@ -27,6 +27,7 @@
         
       </div>
     </div>
+   
   </q-page>
 </template>
 

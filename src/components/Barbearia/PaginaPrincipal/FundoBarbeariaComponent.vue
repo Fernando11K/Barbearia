@@ -1,5 +1,6 @@
-<template>
-  <div>
+<template >
+  <div class="fit">
+
     <q-img class="relative-position" width="100%" height="100%" :src="require('../../../assets/tabelaPrecos.jpeg')" /> 
     <q-img class="relative-position" width="100%" height="100%" :src="require('../../../assets/tabelaPrecos.jpeg')" /> 
     <CarrosselComponent v-if="false" class="absolute-top-center full-width " />      
