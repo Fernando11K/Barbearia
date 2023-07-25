@@ -1,11 +1,13 @@
 <template>
   <q-page class="flex flex-center bg-blue-4">
-    <FundoBarbeariaComponent  class="mobile-only" title="Fundo Barbearia" active></FundoBarbeariaComponent>        
+    <div class="mobile-only" >
+      <FundoBarbeariaComponent  ></FundoBarbeariaComponent>        
+    </div>
     <div class="q-pa-md row justify-center desktop-only">
       <div style="width: 100%; max-width: 400px" class="">
-        <q-chat-message v-show="bemVindo" avatar="../assets/pablo.png" name="Barbearia"
+        <q-chat-message v-show="bemVindo" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" name="Barbearia"
         :text="['Olá, Bem vindo!']" stamp="agora mesmo" bg-color="grey-12" class="" />
-        <q-chat-message v-show="!loading" avatar="../assets/pablo.png" name="Barbearia" stamp="agora mesmo"
+        <q-chat-message v-show="!loading" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" name="Barbearia" stamp="agora mesmo"
         bg-color="grey-12">
         <div>
             <span>
@@ -20,9 +22,9 @@
           </div>
         </q-chat-message>
 
-        <q-chat-message v-show="loading" name="Barbearia" avatar="../assets/pablo.png" bg-color="grey-12"
+        <q-chat-message v-show="loading" name="Barbearia" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" bg-color="grey-12"
           class="">
-          <q-spinner-dots size="2rem" />
+          <q-spinner-dots  />
         </q-chat-message>
         
       </div>
@@ -43,6 +45,8 @@ const ordemMensagens = () => {
   setTimeout(() => loading.value = false, 3000);
 }
 onMounted(() => ordemMensagens() )
+
+   
 
 
 </script>
