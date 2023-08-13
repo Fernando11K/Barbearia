@@ -1,8 +1,8 @@
 <template>
   <q-layout view="hHh LpR fFf">
 
-    <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia'"
-      @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" @clickBotaoPainelLateralDireito="toggleRightDrawer" />
+    <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer"
+      @clickBotaoPainelLateralDireito="toggleRightDrawer" />
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
 
@@ -21,11 +21,12 @@
         <q-list>
 
           <template v-for="(menuItem, index) in menuList" :key="index">
-            <q-item clickable :active="!menuItem.ativo.value" v-ripple @click="funcionalidadeNaoDisponivel(menuItem); abreModalAgendamento(menuItem)">
-              <q-item-section avatar v-show="menuItem.ativo.value">
+            <q-item clickable :active="!menuItem.ativo" v-ripple
+              @click="verificaDisponibilidadeDaFuncionalidade(menuItem)">
+              <q-item-section avatar v-show="menuItem.ativo">
                 <q-icon :name="menuItem.icon" :color="menuItem.iconColor" />
               </q-item-section>
-              <q-item-section v-show="menuItem.ativo.value">
+              <q-item-section v-show="menuItem.ativo">
                 {{ menuItem.label }}
               </q-item-section>
             </q-item>
@@ -33,12 +34,11 @@
           </template>
         </q-list>
       </q-scroll-area>
-    </q-drawer>
 
-    <q-drawer v-model="rightDrawerOpen" side="right" overlay elevated>
-      <ModalAgendamento :statusProp="statusModalAgendamento" @atualizaStatusModal="(value)=> {statusModalAgendamento = value }" />
     </q-drawer>
-
+    <ModalAgendamento :statusProp="statusModalAgendamento"
+      @atualizaStatusModal="(value) => { statusModalAgendamento = value }" />
+    <q-drawer v-if="false" v-model="rightDrawerOpen" side="right" overlay elevated></q-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -64,23 +64,17 @@ const toggleRightDrawer = () => rightDrawerOpen.value = !rightDrawerOpen.value
 const statusModalAgendamento = ref(false);
 
 const alerta = alert()
-const funcionalidadeNaoDisponivel = (value) => {
+const verificaDisponibilidadeDaFuncionalidade = (itemMenu) => {
 
-  if (!value.ativo.value) { alerta.warning('A funcionalidade estará disponível em breve!') }
- 
-
-}
-const abreModalAgendamento = (value) => {
-
-  if (value.label === 'Agendamento') { 
-
-     statusModalAgendamento.value = true 
-    
-     
-  }
- 
+  !itemMenu.ativo ? alerta.warning('A funcionalidade estará disponível em breve!') : abreModalAgendamento(itemMenu)
 
 }
+
+
+const abreModalAgendamento = (itemMenu) => {
+
+  if (itemMenu.label === 'Agendamento') statusModalAgendamento.value = true
+};
 
 const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/barbers.den/', 250);
 
@@ -89,7 +83,7 @@ const menuList = [
     icon: 'fa-regular fa-calendar-days fa-beat',
     label: 'Agendamento',
     separator: true,
-    ativo: ref(true),
+    ativo: true,
     iconColor: 'primary'
 
   },
@@ -97,35 +91,35 @@ const menuList = [
     icon: 'send',
     label: 'Tabela de Preços',
     separator: false,
-    ativo: ref(false)
+    ativo: false
 
   },
   {
     icon: 'delete',
     label: 'Trash',
     separator: false,
-    ativo: ref(false)
+    ativo: false
 
   },
   {
     icon: 'error',
     label: 'Spam',
     separator: true,
-    ativo: ref(false)
+    ativo: false
 
   },
   {
     icon: 'settings',
     label: 'Settings',
     separator: false,
-    ativo: ref(false)
+    ativo: false
 
   },
   {
     icon: 'feedback',
     label: 'Send Feedback',
     separator: false,
-    ativo: ref(false)
+    ativo: false
 
   },
   {
@@ -133,7 +127,7 @@ const menuList = [
     iconColor: 'primary',
     label: 'Help',
     separator: false,
-    ativo: ref(false)
+    ativo: false
 
   }
 ];

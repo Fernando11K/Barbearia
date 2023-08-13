@@ -1,6 +1,6 @@
 import { useQuasar } from 'quasar'
 
-type Notificacoes  = {
+type Notificacoes = {
   positive: (message: string) => void;
   danger: (message: string) => void;
   warning: (message: string) => void;
@@ -15,7 +15,7 @@ const alert = (): Notificacoes => {
     $q.notify({
       type: 'positive',
       message: message,
-      position: 'center' 
+      position: 'center'
     })
   }
 
@@ -24,7 +24,7 @@ const alert = (): Notificacoes => {
       type: 'negative',
       message: message,
       position: 'center',
-      timeout: 1000 
+      timeout: 1000
     });
   }
 
@@ -32,8 +32,8 @@ const alert = (): Notificacoes => {
     $q.notify({
       type: 'warning',
       message: message,
-      position: 'center',       
-      timeout: 500 
+      position: 'center',
+      timeout: 500
     })
   }
 
@@ -41,7 +41,7 @@ const alert = (): Notificacoes => {
     $q.notify({
       type: 'info',
       message: message,
-      position: 'center' 
+      position: 'center'
     })
   }
 
@@ -49,7 +49,7 @@ const alert = (): Notificacoes => {
     const notif = $q.notify({
       type: 'ongoing',
       message: message,
-      position: 'center' 
+      position: 'center'
     })
 
     setTimeout(() => {

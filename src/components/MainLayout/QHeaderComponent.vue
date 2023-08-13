@@ -1,6 +1,6 @@
 
 <template>
-  <q-header  color="purple-13" reveal elevated :class="corToolbar" class="glossy text-white " height-hint="98">
+  <q-header color="purple-13" reveal elevated :class="corToolbar" class="glossy text-white " height-hint="98">
     <q-toolbar>
       <q-btn class="desktop-only " dense flat round icon="menu" @click="capturaClickDoBotaoPainelLateralEsquerdo" />
 
@@ -8,16 +8,12 @@
         <q-avatar>
           <q-icon @click="toggleFullscreen" name="fa-solid fa-scissors fa-shake" />
         </q-avatar>
-        {{ props.titulo }}
+        {{ titulo }}
       </q-toolbar-title>
 
-      <q-btn class="desktop-only " dense flat round icon="menu" @click="capturaClickDoBotaoPainelLateralDireito" />
+      <q-btn v-if="false" class="desktop-only" dense flat round icon="menu"
+        @click="capturaClickDoBotaoPainelLateralDireito" />
     </q-toolbar>
-    <!--
-    <q-tabs class=" bg-red-6 glossy" align="left">
-      <q-route-tab to="/page1" label="Barbearia Tem Tudo" />
-      <q-route-tab to="/page3" label="Em breve" />
-    </q-tabs>  -->
   </q-header>
 </template>
 
@@ -25,7 +21,7 @@
 
 import { AppFullscreen } from 'quasar'
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo', 'clickBotaoPainelLateralDireito']);
-const props = defineProps(['titulo', 'corToolbar'])
+defineProps(['titulo', 'corToolbar'])
 
 const toggleFullscreen = () => (AppFullscreen.isActive) ? AppFullscreen.exit() : AppFullscreen.request()
 const capturaClickDoBotaoPainelLateralEsquerdo = () => emits('clickBotaoPainelLateralEsquerdo')
