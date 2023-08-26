@@ -1,5 +1,5 @@
 <template>
-    <q-input dense outlined bg-color="white" :modelValue='modelValue' @update:modelValue='atualiza'
+    <q-input dense outlined bg-color="grey-1" :modelValue='modelValue' @update:modelValue='atualiza'
         :type="isPassword ? 'password' : 'text'" label="Senha">
         <template v-slot:append>
             <q-icon :name="isPassword ? 'visibility_off' : 'visibility'" class="cursor-pointer"

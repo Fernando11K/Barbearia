@@ -1,5 +1,5 @@
 <template>
-    <q-input for="email" standout="bg-info" outlined dense bg-color="white" :modelValue='modelValue'
+    <q-input for="email" standout="bg-info" round outlined dense bg-color="grey-1" :modelValue='modelValue'
         @update:modelValue='atualiza' type='text' label='Usuário'>
         <template v-slot:prepend>
             <q-icon name="fa-solid fa-user" />

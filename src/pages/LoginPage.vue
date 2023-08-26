@@ -1,19 +1,17 @@
 <template>
-    <q-page class="bg-black window-width row justify-center items-center">
-        <section class="q-ma-sm shadow-24 login glossy bg-black">
-            <q-card style="max-width: 350px" class="bg-dark fit glossy">
-                <div class="text-center q-pt-sm ">
-                    <q-icon size="70px" color="white" name="fa-solid fa-user" />
-                    <div class="text-bold text-h5 text-white q-pt-sm">Barber's Den</div>
-                </div>
-                <q-card-section class="row justify-center">
-                    <InputUsuarioLogin v-model="usuario.email" class="full-width q-pa-md shadow-24 glossy" />
-                    <InputSenhaLogin v-model="usuario.senha" class="full-width q-pa-md shadow-24 glossy" />
-                    <q-btn @click="autenticacaoLocal" class="q-mt-md glossy" color="white" text-color="danger"
-                        label="ENTRAR" />
-                </q-card-section>
-            </q-card>
-        </section>
+    <q-page class="bg-white window-width row justify-center">
+        <q-card class="bg-white fit q-ma-xs" style="max-width: 400px">
+            <div class="text-center q-pt-sm">
+                <q-icon size="70px" color="dark" name="fa-solid fa-user" />
+                <div class="text-bold text-h5 text-dark q-pt-sm">Barber's Den - Login</div>
+            </div>
+            <q-card-section class="row justify-center">
+                <InputUsuarioLogin v-model="usuario.email" class="full-width q-pa-md" />
+                <InputSenhaLogin v-model="usuario.senha" class="full-width q-pa-md" />
+                <q-btn unelevated rounded @click="autenticacaoLocal" class="q-mt-md  col-11" color="primary"
+                    text-color="white" label="ENTRAR" />
+            </q-card-section>
+        </q-card>
     </q-page>
     <q-dialog v-model="alert">
         <q-card class="bg-red-14 q-pa-sm">
