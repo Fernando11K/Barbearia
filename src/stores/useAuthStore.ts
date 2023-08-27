@@ -6,11 +6,10 @@ interface AuthState {
 
 }
 
-
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
         token: localStorage.getItem('token') ?? null,
-        estaAutenticado: false
+        estaAutenticado: JSON.parse(localStorage.getItem('autenticado') || 'false')
 
     }),
     getters: {
@@ -25,12 +24,13 @@ export const useAuthStore = defineStore('auth', {
             this.token = token;
             localStorage.setItem('token', token)
         },
+        setEstaAutenticado(autenticado: boolean) {
+            this.estaAutenticado = autenticado
+            localStorage.setItem('autenticado', JSON.stringify(autenticado))
+        },
         clearToken() {
             this.token = null;
             localStorage.removeItem('token');
         },
-        setEstaAutenticado(autenticado: boolean) {
-            this.estaAutenticado = autenticado
-        }
     },
 });
