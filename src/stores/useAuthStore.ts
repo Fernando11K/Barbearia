@@ -2,21 +2,24 @@ import { defineStore } from 'pinia';
 
 interface AuthState {
     token: string | null;
-    estaAutenticado: boolean
+
 
 }
 
+/*
+Nem tudo está sendo utilizado, pois estou utilizando a auteticação do firebase
+*/
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
-        token: localStorage.getItem('token') ?? null,
-        estaAutenticado: JSON.parse(localStorage.getItem('autenticado') || 'false')
+        token: localStorage.getItem('token') ?? null
+
 
     }),
     getters: {
         getToken(): string | null {
             return this.token;
-        },
-        getEstaAutenticado(): boolean { return this.estaAutenticado }
+        }
+
 
     },
     actions: {
@@ -25,7 +28,7 @@ export const useAuthStore = defineStore('auth', {
             localStorage.setItem('token', token)
         },
         setEstaAutenticado(autenticado: boolean) {
-            this.estaAutenticado = autenticado
+
             localStorage.setItem('autenticado', JSON.stringify(autenticado))
         },
         clearToken() {

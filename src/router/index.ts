@@ -14,12 +14,16 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
+  auth.onAuthStateChanged((usuario) => {
+    if (to.meta.requiresAuth && !usuario) {
+      next('/login')
+    } else {
+      next()
+    }
 
-  if (to.meta.requiresAuth && !auth.currentUser) {
-    next('/login')
-  } else {
-    next()
-  }
+  })
 })
+
+
 
 export default router;
