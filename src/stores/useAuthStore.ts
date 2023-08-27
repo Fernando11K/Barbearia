@@ -1,22 +1,23 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue'
 
 interface AuthState {
     token: string | null;
+    estaAutenticado: boolean
 
 }
-const estaAutenticado = ref(true)
+
 
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
-        token: localStorage.getItem('token') ?? null
+        token: localStorage.getItem('token') ?? null,
+        estaAutenticado: false
 
     }),
     getters: {
         getToken(): string | null {
             return this.token;
         },
-        getEstaAutenticado: (): boolean => estaAutenticado.value
+        getEstaAutenticado(): boolean { return this.estaAutenticado }
 
     },
     actions: {
@@ -29,7 +30,7 @@ export const useAuthStore = defineStore('auth', {
             localStorage.removeItem('token');
         },
         setEstaAutenticado(autenticado: boolean) {
-            estaAutenticado.value = autenticado
+            this.estaAutenticado = autenticado
         }
     },
 });

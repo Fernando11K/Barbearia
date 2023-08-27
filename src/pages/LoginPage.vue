@@ -44,11 +44,11 @@ const alert = false
 const authStore = useAuthStore();
 
 const autenticacaoLocal = async () => {
-    const retorno = await signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.senha)
+    await signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.senha)
         .then((userCredential) => {
             const user = userCredential.user;
             authStore.setEstaAutenticado(true);
-            router.push('/agendamento')
+            router.push('/home')
             return user.getIdToken();
         })
         .catch((error) => {
@@ -57,7 +57,7 @@ const autenticacaoLocal = async () => {
             const errorMessage = error.message;
             console.error('Erro de login:', errorCode, errorMessage);
         })
-    authStore.setToken(retorno);
+
 
 
 }

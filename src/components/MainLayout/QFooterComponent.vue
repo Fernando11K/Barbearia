@@ -6,8 +6,7 @@
         <q-btn size="md" flat round icon="fa-solid fa-bars" class="fonte-footer  "
           @click="capturaClickDoBotaoPainelLateralEsquerdo">
         </q-btn>
-        <q-btn size="md" flat round icon="fa-solid fa-house " class="fonte-footer disabled "
-          @click="funcionalidadeNaoDisponivel">
+        <q-btn size="md" flat round icon="fa-solid fa-house " class="fonte-footer " @click="home">
         </q-btn>
         <q-btn v-if="false" size="md" flat round icon="fa-solid fa-bell fa-beat" class="fonte-footer disabled"
           @click="funcionalidadeNaoDisponivel">
@@ -27,15 +26,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
 import ModalAgendamento from 'src/components/Agendamento/ModalAgendamento.vue'
-const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);
 import alert from '../../hooks/alert'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useRouter } from 'vue-router';
+const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);
+
 const alerta = alert()
 const corAtual = ref<string>()
 const corAtualIndex = ref<number>(0)
 const cores = ['blue-3', 'blue-4', 'blue-5', 'blue-6'];
 const statusModalAgendamento = ref(false)
+const router = useRouter()
 const trocarCor = () => {
   corAtualIndex.value = (corAtualIndex.value + 1) % cores.length;
   corAtual.value = cores[corAtualIndex.value]
@@ -50,6 +52,7 @@ const abrirWhatsApp = () => { const url = `https://api.whatsapp.com/send?phone=$
 const funcionalidadeNaoDisponivel = () => alerta.warning('A funcionalidade estará disponível em breve!')
 
 const capturaClickDoBotaoPainelLateralEsquerdo = () => emits('clickBotaoPainelLateralEsquerdo')
+const home = () => { router.push('/home') }
 
 
 </script>

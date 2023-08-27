@@ -10,9 +10,10 @@ import { useAuthStore } from 'stores/useAuthStore';
 
 const authStore = useAuthStore();
 
-console.log('App')
 onMounted(() => {
   onAuthStateChanged(auth, (user) => {
+    console.log('usuario')
+    console.log(user)
     if (user) {
 
       authStore.setEstaAutenticado(true);
