@@ -6,11 +6,12 @@
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
 
-      <q-img class="full-width q-img-clickable imagem " src="../assets/instagram.jpg" style="height: 150px; width: 500px"
-        @click="redirecionarParaInstagram">
+      <q-img alt="logo instagram" class="full-width q-img-clickable imagem " src="../assets/instagram.jpg"
+        style="height: 150px; width: 500px" @click="redirecionarParaInstagram">
         <div class="bg-transparent">
           <q-avatar size="56px" class="q-mb-sm">
-            <img src="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png">
+            <img alt="retrato de um homem com barba"
+              src="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png">
           </q-avatar>
           <div class="text-weight-bold">Barber's Den</div>
           <div>@barbers.den</div>
@@ -22,7 +23,7 @@
 
           <template v-for="(menuItem, index) in menuList" :key="index">
             <q-item clickable :active="!menuItem.ativo" v-ripple
-              @click="verificaDisponibilidadeDaFuncionalidade(menuItem)">
+              @click="verificaDisponibilidadeDaFuncionalidade(menuItem)" :to="menuItem.rota">
               <q-item-section avatar v-show="menuItem.ativo">
                 <q-icon :name="menuItem.icon" :color="menuItem.iconColor" />
               </q-item-section>
@@ -84,14 +85,16 @@ const menuList = [
     label: 'Agendamento',
     separator: true,
     ativo: true,
-    iconColor: 'primary'
+    iconColor: 'primary',
+    rota: 'agendamento'
 
   },
   {
-    icon: 'send',
+    icon: 'fa-solid fa-house',
     label: 'Tabela de Preços',
-    separator: false,
-    ativo: false
+    ativo: false,
+    separator: false
+
 
   },
   {

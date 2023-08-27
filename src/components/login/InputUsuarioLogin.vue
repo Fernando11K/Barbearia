@@ -11,7 +11,7 @@
 
 const emits = defineEmits(['update:modelValue'])
 defineProps(['modelValue'])
-const atualiza = (value: any) => emits('update:modelValue', value)
+const atualiza = (value: string | number | null) => emits('update:modelValue', value)
 
 
 </script>

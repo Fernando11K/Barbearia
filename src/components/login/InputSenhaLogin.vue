@@ -1,6 +1,6 @@
 <template>
     <q-input dense outlined bg-color="grey-1" :modelValue='modelValue' @update:modelValue='atualiza'
-        :type="isPassword ? 'password' : 'text'" label="Senha">
+        :type="isPassword ? 'password' : 'text'" label="Senha" autocomplete="current-password">
         <template v-slot:append>
             <q-icon :name="isPassword ? 'visibility_off' : 'visibility'" class="cursor-pointer"
                 @click="isPassword = !isPassword" />
@@ -19,7 +19,7 @@ const emits = defineEmits(['update:modelValue'])
 defineProps(['modelValue'])
 
 const isPassword = ref(<boolean>true)
-const atualiza = (senha: any) => emits('update:modelValue', senha)
+const atualiza = (senha: string | number | null) => emits('update:modelValue', senha)
 
 
 </script>

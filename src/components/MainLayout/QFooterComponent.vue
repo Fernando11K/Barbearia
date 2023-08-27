@@ -9,11 +9,11 @@
         <q-btn size="md" flat round icon="fa-solid fa-house " class="fonte-footer disabled "
           @click="funcionalidadeNaoDisponivel">
         </q-btn>
-        <q-btn v-if="false" size="md" flat round icon="fa-solid fa-bell fa-beat"  class="fonte-footer disabled"
+        <q-btn v-if="false" size="md" flat round icon="fa-solid fa-bell fa-beat" class="fonte-footer disabled"
           @click="funcionalidadeNaoDisponivel">
         </q-btn>
-        <q-btn size="md" flat round icon="fa-regular fa-calendar-days fa-beat"  class="fonte-footer "
-          @click="statusModalAgendamento=true" >
+        <q-btn size="md" flat round icon="fa-regular fa-calendar-days fa-beat" class="fonte-footer "
+          @click="statusModalAgendamento = true">
         </q-btn>
         <q-btn size="md" flat round class="fonte-footer " @click="abrirWhatsApp">
           <q-icon size="md" name="fa-brands fa-whatsapp fa-bounce" color="light-green-13">
@@ -22,7 +22,8 @@
       </div>
     </q-toolbar>
   </q-footer>
-  <ModalAgendamento :statusProp="statusModalAgendamento"  v-show="false"  @atualizaStatusModal="(value: boolean)=> {statusModalAgendamento = value }" />
+  <ModalAgendamento :statusProp="statusModalAgendamento" v-show="false"
+    @atualizaStatusModal="(value: boolean) => { statusModalAgendamento = value }" />
 </template>
 
 <script setup lang="ts">
@@ -42,7 +43,7 @@ const trocarCor = () => {
 const loopCores = setInterval(trocarCor, 500)
 onMounted(() => loopCores)
 onBeforeUnmount(() => clearInterval(loopCores))
-  
+
 const celular = ref('5521975294416');
 const message = ref('Olá! Está funcionando?');
 const abrirWhatsApp = () => { const url = `https://api.whatsapp.com/send?phone=${celular.value}&text=${encodeURIComponent(message.value)}`; window.open(url, '_blank') }
