@@ -1,0 +1,98 @@
+[debug] [2023-08-27T20:14:21.479Z] ----------------------------------------------------------------------
+[debug] [2023-08-27T20:14:21.480Z] Command:       /usr/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-08-27T20:14:21.480Z] CLI Version:   12.4.5
+[debug] [2023-08-27T20:14:21.480Z] Platform:      linux
+[debug] [2023-08-27T20:14:21.480Z] Node Version:  v18.13.0
+[debug] [2023-08-27T20:14:21.480Z] Time:          Sun Aug 27 2023 17:14:21 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2023-08-27T20:14:21.481Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-27T20:14:21.524Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-27T20:14:21.524Z] > authorizing via signed-in user (fernandosmithmendonca10@gmail.com)
+[debug] [2023-08-27T20:14:21.524Z] [iam] checking project barbearia-e-mercearia for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-27T20:14:21.526Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions [none]
+[debug] [2023-08-27T20:14:21.526Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions x-goog-quota-user=projects/barbearia-e-mercearia
+[debug] [2023-08-27T20:14:21.526Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-27T20:14:22.516Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions 200
+[debug] [2023-08-27T20:14:22.517Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-e-mercearia:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-27T20:14:22.518Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/barbearia-e-mercearia [none]
+[debug] [2023-08-27T20:14:23.025Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/barbearia-e-mercearia 200
+[debug] [2023-08-27T20:14:23.025Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/barbearia-e-mercearia {"projectId":"barbearia-e-mercearia","projectNumber":"299336766206","displayName":"barbearia","name":"projects/barbearia-e-mercearia","resources":{"hostingSite":"barbearia-e-mercearia"},"state":"ACTIVE","etag":"1_562455e8-f7fa-4c25-b6ea-8992a0d689a3"}
+[info] 
+[info] === Deploying to 'barbearia-e-mercearia'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2023-08-27T20:14:23.036Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/versions [none]
+[debug] [2023-08-27T20:14:23.036Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-08-27T20:14:24.660Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/versions 200
+[debug] [2023-08-27T20:14:24.661Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/versions {"name":"projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[barbearia-e-mercearia]: beginning deploy... 
+[info] i  hosting[barbearia-e-mercearia]: found 54 files in dist/pwa 
+[debug] [2023-08-27T20:14:24.667Z] [hosting] uploading with 200 concurrency
+[debug] [2023-08-27T20:14:24.719Z] [hosting] hash cache [ZGlzdC9wd2E] stored for 54 files
+[debug] [2023-08-27T20:14:24.719Z] [hosting][hash queue][FINAL] {"max":43,"min":6,"avg":20.222222222222214,"active":0,"complete":54,"success":54,"errored":0,"retried":0,"total":54,"elapsed":50}
+[debug] [2023-08-27T20:14:24.720Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159:populateFiles [none]
+[debug] [2023-08-27T20:14:24.720Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159:populateFiles {"files":{"/css/app.31d6cfe0.css":"f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec","/manifest.json":"7c935009608b4cc9f171ac55d41794c977583098723f35ef07444c9f4e03b045","/index.html":"c2dbbfde0327145da020f9f9390b5704b2ae6abdf244d118d021ffe39895503f","/css/201.bf5899b1.css":"2565d422df8c8ecdf0f8be208ee133fe8bbe5d3d00d914e84600c5f899646636","/css/361.35201b60.css":"3c70e8884c1a5774f4aa8f88ba49fd108a696192426f91255b71d7ebb0dd6505","/css/446.d1578d45.css":"1d1bfc4cf0e0048dcfbcae36511f8d30c0bf795765f1a9e9aedc6fade39a5d83","/service-worker.js":"4fd4ce3c21e4589716697bacbac77b6a1e7cf6112fe4f177fb2dbd4bf4e348ed","/workbox-eef3c273.js":"fe7c2996c62bec8f8f60cece8d969f38c2966276c43f45ee65bb7a782227003d","/fonts/fa-v4compatibility.0e3a648b.ttf":"9cf0a72383ee473e5eca3a8149324f513f4d3b014e08a6747f3682b63fb1a8de","/fonts/la-regular-400.8dc1cedf.woff2":"dbbfb7f2fc036b20c5c2addd5255326cb1742cc35dcf12ad3114105043c17cd4","/fonts/la-regular-400.aa859c0d.woff":"b343193efd0ced7828e8de6300a85333308eaa32c031f1c97b002c5b5aea7816","/icons/apple-icon-120x120.png":"6b895930b3a1d9c44e8c54be2246ed911cb5c9b85005ddf5f6d3925f3d06a075","/icons/apple-icon-152x152.png":"8d2cb0fda5a7ed247f2d34eb0e65446c1a34d30f0497044159d360418e924f8a","/icons/icon-128x128.png.png":"ae2f5d2813c9c052deed11f4f75d1eb51e5e98251a0496757b70a8ad1a63eedb","/icons/apple-icon-167x167.png":"920cacab5efea2889f6c0e9c895750e21b18dc063de879f238a30fb18f40f604","/icons/icon-152x152.png":"eaefe19b90000425cba79d41530e9d71a585ac555626b2604535ce9346b9f751","/icons/ms-icon-144x144.png":"400c6be42ab2ef5a4f0a1711f4d21313e9061aa039172014b48f2773593fd51a","/icons/safari-pinned-tab.svg":"dae674ec2124c2006b2b20192f9f05109b77fc8e23cb2ecdf63e59f5a84c8cdc","/js/201.0f952a2d.js":"e448db4816812d21edf5f6d30d38680ea240e3dc12b41f39b078537fd090fc40","/js/361.24041de8.js":"0904b4639a20ea34d061aaf7e40380520c647cdcad8ab7a871af0ef5ded785f7","/js/446.79e7f7c8.js":"2b51b03a51af3b5d74d53b327bd689ff900bed44587dc34b7a4a554a6911b090","/fonts/KFOkCnqEu92Fr1MmgVxIIzQ.68bb21d0.woff":"c32ce0c71c6bd1335fbd97b7df4fb131837112d8928b98a1411a1fa4574d5e9d","/fonts/KFOlCnqEu92Fr1MmEU9fBBc-.48af7707.woff":"d9aaed20b9316a69719b65d1949c327f5d7eeb29bcae437533dacdc20fd074b9","/fonts/KFOlCnqEu92Fr1MmWUlfBBc-.77ecb942.woff":"0db369b7f2245185ad0c5b87e51f0a0d56e09b9b861a58286191e0fc701577f7","/fonts/KFOlCnqEu92Fr1MmSU5fBBc-.c2f7ab22.woff":"3c454552d52920b40aaad500768ff768fde941262af64a81cb48908ed037d91e","/fonts/KFOmCnqEu92Fr1Mu4mxM.f1e2a767.woff":"72d13535a69378caa8f34f0fd37618b3173da396830c7b26c10a952335b391e1","/fonts/KFOlCnqEu92Fr1MmYUtfBBc-.f5677eb2.woff":"e24c87b8ed28ffac2db843d1a2e0c332d3a38744634c4dda3b3ef5c84715266f","/fonts/fa-regular-400.3223dc79.woff2":"43982b000f97aad4d5bdd6e68e76ee7d313ba3835ca4d5d75f33bc81e706a65f","/fonts/fa-regular-400.d8747423.ttf":"70477cfd39603d059d0b456a6a55ce0e0cb06d0b5574394baa67481afb7580b3","/icons/apple-icon-180x180.png":"8b6e0d1c6fb7cab8821e3c00fa4908e455154d29919e631ba73285f18d7ccc7e","/icons/icon-192x192.png":"57932dcf2da09b2ffd315f16889136ffd2481fac6baab6e135b0211c93125713","/icons/icon-256x256.png":"43f2abdcc344e3c4a1c78f6ec1bfdef288213c06b441da03c81395c608c77646","/img/C2.07ed3a93.jpg":"56dc1842e41e0c36ac69b3c1f709bc23d7e5544bc33a410e5501695c70039fcd","/js/799.0d5fabd0.js":"ce3725279c6dcf53351f4ee884682412c29009378a810963ef2e6eadcb15dc37","/img/C1.a1d9c0a0.jpg":"16eb25584bdca30b3dd1bae5a9c0458d048b45f312f38f61475640f2b84acf0e","/js/app.19e5740c.js":"ed29b7558e6f079889088022e5e8b5f78d55c2f4f2100a1b39cbfa5198a8c998","/js/chunk-common.11a06d95.js":"89d059e8d5d0d22766f0f955d0da67cb61a395a80f6a07d334fb450d727ae8b2","/img/instagram.ef55efff.jpg":"421525a21ba4dc5b3ef2fe2f80561fea713e1cd30c690952af3b4b07dc0e6132","/fonts/la-solid-900.3efd5ba1.woff2":"7c7f2bf805d91e6980f774e81d0654af8d0e8f7b3b5dde915f3fe0c3b525328a","/fonts/la-brands-400.3a8109c4.woff2":"23faf3b21de90180217d908f959e28f08d85e83b4f1def0dbc6a74a266228a34","/icons/icon-384x384.png":"747c3d828e0f790d05e01e1bfc7f87fffff636331f913c4d891654625f1c389c","/img/tabelaPrecos.4e7619f1.jpeg":"8ec0792a1c3eb96d18c28215ae99045191af4c4d59f10e1e6881f0b3f521a6a7","/fonts/fa-brands-400.e033a13e.woff2":"6d56682ec75632f55f2808d57a32a80367bf75941707bdd5dd9c1c9f81ce3aed","/fonts/la-brands-400.925b340f.woff":"8d9809e343b8fcaaef7278740b028a3c9eb0364533bf3d2cf73183ab273d7af4","/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.c5371cfb.woff2":"4ce79c10df7a25c668108dc8169592982a73a1ef911e9907bf02d6bddaa9b563","/fonts/la-solid-900.89363487.woff":"25676b26ab19b50a69c705c994d19c884529bf37e545bbece01a0b54e5e98ba5","/fonts/fa-brands-400.150de8ea.ttf":"803fcce55717d1b3c461ebaef43b91d55352586de33d724e4ee1145bc99db9e8","/fonts/fa-solid-900.bb975c96.woff2":"d543125448aa8ce17082a25f6ab20d4b8a26299a23bf7f5dbd3c8f496661267c","/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.4d73cb90.woff":"d9e6de8c5463d77dcf526cde39a40b30e84abbee8289929136d125c4fc31194a","/icons/icon-512x512.png":"9e24319560311f1f86b09eebe10aba92708725928a8425fad03858477356bb93","/img/C3.31917cf5.jpg":"68cac72f4a26d2ca2a57af7440c6db6f9da0152e945b2254e4783bb1429172b1","/css/vendor.d80df780.css":"b71c74d08edb8a581944a5ed6ab4e797c48eada9d94ff8699609b8ee9b76c290","/fonts/fa-solid-900.4a2cd718.ttf":"d501641f355ae9f88f998e02800b633507d07a5a9ba9c499a08d5437c1d7795e","/js/vendor.a809b405.js":"d059cdea1cbedecc91cdc7433571316cb8a7b1b30af842b30297c9b6b699c573"}}
+[debug] [2023-08-27T20:14:25.991Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159:populateFiles 200
+[debug] [2023-08-27T20:14:25.991Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159:populateFiles {"uploadRequiredHashes":["ed29b7558e6f079889088022e5e8b5f78d55c2f4f2100a1b39cbfa5198a8c998","c2dbbfde0327145da020f9f9390b5704b2ae6abdf244d118d021ffe39895503f","4fd4ce3c21e4589716697bacbac77b6a1e7cf6112fe4f177fb2dbd4bf4e348ed"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files"}
+[debug] [2023-08-27T20:14:25.994Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/ed29b7558e6f079889088022e5e8b5f78d55c2f4f2100a1b39cbfa5198a8c998 [none]
+[debug] [2023-08-27T20:14:25.994Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/ed29b7558e6f079889088022e5e8b5f78d55c2f4f2100a1b39cbfa5198a8c998 [stream]
+[debug] [2023-08-27T20:14:25.996Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/c2dbbfde0327145da020f9f9390b5704b2ae6abdf244d118d021ffe39895503f [none]
+[debug] [2023-08-27T20:14:25.996Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/c2dbbfde0327145da020f9f9390b5704b2ae6abdf244d118d021ffe39895503f [stream]
+[debug] [2023-08-27T20:14:25.998Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/4fd4ce3c21e4589716697bacbac77b6a1e7cf6112fe4f177fb2dbd4bf4e348ed [none]
+[debug] [2023-08-27T20:14:25.998Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/4fd4ce3c21e4589716697bacbac77b6a1e7cf6112fe4f177fb2dbd4bf4e348ed [stream]
+[debug] [2023-08-27T20:14:26.000Z] [hosting][populate queue][FINAL] {"max":1275,"min":1275,"avg":1275,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1282}
+[debug] [2023-08-27T20:14:26.000Z] [hosting] uploads queued: 3
+[debug] [2023-08-27T20:14:27.115Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/ed29b7558e6f079889088022e5e8b5f78d55c2f4f2100a1b39cbfa5198a8c998 200
+[debug] [2023-08-27T20:14:27.115Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/ed29b7558e6f079889088022e5e8b5f78d55c2f4f2100a1b39cbfa5198a8c998 [stream]
+[debug] [2023-08-27T20:14:27.938Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/c2dbbfde0327145da020f9f9390b5704b2ae6abdf244d118d021ffe39895503f 200
+[debug] [2023-08-27T20:14:27.938Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/c2dbbfde0327145da020f9f9390b5704b2ae6abdf244d118d021ffe39895503f [stream]
+[debug] [2023-08-27T20:14:27.949Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/4fd4ce3c21e4589716697bacbac77b6a1e7cf6112fe4f177fb2dbd4bf4e348ed 200
+[debug] [2023-08-27T20:14:27.950Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-e-mercearia/versions/d261b1d971bb1159/files/4fd4ce3c21e4589716697bacbac77b6a1e7cf6112fe4f177fb2dbd4bf4e348ed [stream]
+[debug] [2023-08-27T20:14:27.950Z] [hosting][upload queue][FINAL] {"max":1957,"min":1124,"avg":1675.6666666666667,"active":0,"complete":3,"success":3,"errored":0,"retried":0,"total":3,"elapsed":1958}
+[info] ✔  hosting[barbearia-e-mercearia]: file upload complete 
+[debug] [2023-08-27T20:14:27.953Z] [hosting] deploy completed after 3292ms
+[debug] [2023-08-27T20:14:27.953Z] [
+  {
+    "config": {
+      "public": "dist/pwa",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "site": "barbearia-e-mercearia"
+    },
+    "version": "projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159"
+  }
+]
+[info] i  hosting[barbearia-e-mercearia]: finalizing version... 
+[debug] [2023-08-27T20:14:27.957Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/versions/d261b1d971bb1159 updateMask=status%2Cconfig
+[debug] [2023-08-27T20:14:27.958Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/versions/d261b1d971bb1159 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2023-08-27T20:14:29.013Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/versions/d261b1d971bb1159 200
+[debug] [2023-08-27T20:14:29.013Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/versions/d261b1d971bb1159 {"name":"projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-08-27T20:14:24.021051Z","createUser":{"email":"fernandosmithmendonca10@gmail.com"},"finalizeTime":"2023-08-27T20:14:28.905319Z","finalizeUser":{"email":"fernandosmithmendonca10@gmail.com"}}
+[debug] [2023-08-27T20:14:29.014Z] [hosting] finalized version for barbearia-e-mercearia:[object Object]
+[info] ✔  hosting[barbearia-e-mercearia]: version finalized 
+[info] i  hosting[barbearia-e-mercearia]: releasing new version... 
+[debug] [2023-08-27T20:14:29.015Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/channels/live/releases versionName=projects%2F299336766206%2Fsites%2Fbarbearia-e-mercearia%2Fversions%2Fd261b1d971bb1159
+[debug] [2023-08-27T20:14:29.015Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/channels/live/releases {}
+[debug] [2023-08-27T20:14:30.290Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/channels/live/releases 200
+[debug] [2023-08-27T20:14:30.290Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-e-mercearia/channels/live/releases {"name":"projects/299336766206/sites/barbearia-e-mercearia/channels/live/releases/1693167269521000","version":{"name":"projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-08-27T20:14:24.021051Z","createUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/AAcHTtfm6wwI5QTaZ0O9oK7q34BQxghcoPpGvWQQbRmG0xxDwgw"},"finalizeTime":"2023-08-27T20:14:28.905319Z","finalizeUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/AAcHTtfm6wwI5QTaZ0O9oK7q34BQxghcoPpGvWQQbRmG0xxDwgw"}},"type":"DEPLOY","releaseTime":"2023-08-27T20:14:29.521Z","releaseUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/AAcHTtfm6wwI5QTaZ0O9oK7q34BQxghcoPpGvWQQbRmG0xxDwgw"}}
+[debug] [2023-08-27T20:14:30.290Z] [hosting] release: {"name":"projects/299336766206/sites/barbearia-e-mercearia/channels/live/releases/1693167269521000","version":{"name":"projects/299336766206/sites/barbearia-e-mercearia/versions/d261b1d971bb1159","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-08-27T20:14:24.021051Z","createUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/AAcHTtfm6wwI5QTaZ0O9oK7q34BQxghcoPpGvWQQbRmG0xxDwgw"},"finalizeTime":"2023-08-27T20:14:28.905319Z","finalizeUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/AAcHTtfm6wwI5QTaZ0O9oK7q34BQxghcoPpGvWQQbRmG0xxDwgw"}},"type":"DEPLOY","releaseTime":"2023-08-27T20:14:29.521Z","releaseUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/AAcHTtfm6wwI5QTaZ0O9oK7q34BQxghcoPpGvWQQbRmG0xxDwgw"}}
+[info] ✔  hosting[barbearia-e-mercearia]: release complete 
+[info] 
+[info] ✔  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/barbearia-e-mercearia/overview
+[info] Hosting URL: https://barbearia-e-mercearia.web.app
+[debug] [2023-08-27T20:14:35.771Z] Error: Timed out.
+    at Timeout.<anonymous> (/usr/local/lib/node_modules/firebase-tools/lib/utils.js:254:49)
+    at listOnTimeout (node:internal/timers:564:17)
+    at process.processTimers (node:internal/timers:507:7)
+[error] 
+[error] Error: An unexpected error has occurred.

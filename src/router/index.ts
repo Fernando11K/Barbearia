@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from '../stores/useAuthStore'
+//import { useAuthStore } from '../stores/useAuthStore'
 import routes from './routes';
-//import { auth } from 'src/boot/firebase'
+import { auth } from 'src/boot/firebase'
 
 //import { useAuthStore } from 'stores/useAuthStore';
 
@@ -14,10 +14,8 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-  const store = useAuthStore()
-  console.log('before')
-  console.log(store.getEstaAutenticado)
-  if (to.meta.requiresAuth && !store.getEstaAutenticado) {
+
+  if (to.meta.requiresAuth && !auth.currentUser) {
     next('/login')
   } else {
     next()
