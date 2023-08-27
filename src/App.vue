@@ -2,10 +2,28 @@
   <router-view />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from 'src/boot/firebase'
+import { useAuthStore } from 'stores/useAuthStore';
 
-export default defineComponent({
-  name: 'App'
+const authStore = useAuthStore();
+
+console.log('App')
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+
+      authStore.setEstaAutenticado(true);
+
+    } else {
+      authStore.setEstaAutenticado(false);
+    }
+  })
+
 })
+
+
+
 </script>

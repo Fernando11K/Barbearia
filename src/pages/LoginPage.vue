@@ -35,6 +35,8 @@ import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth } from 'src/boot/firebase.ts'
 import { useAuthStore } from '../stores/useAuthStore';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 
 
 const usuario = ref({ email: '', senha: '' })
@@ -44,11 +46,9 @@ const authStore = useAuthStore();
 const autenticacaoLocal = async () => {
     const retorno = await signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.senha)
         .then((userCredential) => {
-            // Login bem-sucedido, você pode acessar o usuário autenticado através de userCredential.user
-
             const user = userCredential.user;
-
             authStore.setEstaAutenticado(true);
+            router.push('/agendamento')
             return user.getIdToken();
         })
         .catch((error) => {

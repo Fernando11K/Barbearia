@@ -5,10 +5,18 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '/', component: () => import('pages/IndexPage.vue') },
-      { path: '/home', component: () => import('pages/IndexPage.vue') },
-      { path: '/barbearia', component: () => import('pages/IndexPage.vue') },
-      { path: '/agendamento', component: () => import('pages/AgendamentoPage.vue') },
+      {
+        path: '/home', component: () => import('pages/IndexPage.vue'),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: '/barbearia', component: () => import('pages/IndexPage.vue'),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: '/agendamento', component: () => import('pages/AgendamentoPage.vue'),
+        meta: { requiresAuth: true },
+      },
       { path: '/login', component: () => import('../pages/LoginPage.vue') }
     ]
   },
@@ -18,5 +26,4 @@ const routes: RouteRecordRaw[] = [
   //   children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
   // },
 ];
-
 export default routes;

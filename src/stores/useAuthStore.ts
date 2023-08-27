@@ -5,7 +5,7 @@ interface AuthState {
     token: string | null;
 
 }
-const estaAutenticado = ref(false)
+const estaAutenticado = ref(true)
 
 export const useAuthStore = defineStore('auth', {
     state: (): AuthState => ({
