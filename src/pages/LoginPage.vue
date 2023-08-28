@@ -6,9 +6,9 @@
                 <div class="text-bold text-h5 text-dark q-pt-sm">Barber's Den - Login</div>
             </div>
             <q-card-section>
-                <q-form class="row justify-center" @submit.prevent="autenticacaoLocal()">
-                    <InputUsuarioLogin v-model="usuario.email" class="full-width q-pa-md" />
-                    <InputSenhaLogin v-model="usuario.senha" class="full-width q-pa-md" />
+                <q-form class="row justify-center" @submit.prevent="autenticacaoGoogle">
+                    <InputUsuarioLogin v-model="login.email" class="full-width q-pa-md" />
+                    <InputSenhaLogin v-model="login.senha" class="full-width q-pa-md" />
                     <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="primary" text-color="white"
                         label="ENTRAR" />
                 </q-form>
@@ -27,50 +27,57 @@
         </q-card>
     </q-dialog>
 </template>
-<script setup>
+<script lang="ts"  setup>
 
 import { ref } from 'vue';
 import InputUsuarioLogin from '/src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth } from 'src/boot/firebase.ts'
-import { useAuthStore } from '../stores/useAuthStore';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from 'src/boot/firebase'
+//import { useAuthStore } from '../stores/useAuthStore';
+import { useUsuarioStore } from '../stores/useUsuarioStore';
 import { useRouter } from 'vue-router';
+import IUsuario from '../interfaces/IUsuario'
 const router = useRouter()
 
-
-const usuario = ref({ email: '', senha: '' })
+const login = ref({ email: '', senha: '' })
 const alert = false
-const authStore = useAuthStore();
+const usuario = ref(<IUsuario>({ nome: '', nomeCompleto: '', email: '' }))
+const usuarioStore = useUsuarioStore()
+//const authStore = useAuthStore();
 
-const autenticacaoLocal = async () => {
-    await signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.senha)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            authStore.setEstaAutenticado(true);
-            router.push('/home')
-            return user.getIdToken();
-        })
-        .catch((error) => {
-            // Algum erro ocorreu durante o login
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('Erro de login:', errorCode, errorMessage);
-        })
+usuarioStore.preencheState()
 
-
-
-}
-// const autenticacaoGoogle = () => {
-//     const provider = new GoogleAuthProvider();
-//     signInWithPopup(auth, provider)
-//         .then((response) => {
-//             console.log(response)
+// const autenticacaoLocal = async () => {
+//     await signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.senha)
+//         .then((userCredential) => {
+//             const usuario = userCredential.user;
+//             authStore.setEstaAutenticado(true);
+//             router.push('/home')
+//             console.log(usuario)
 //         })
-//         .catch((error) => console.log(error)
-//         )
+//         .catch((error) => {
+//             // Algum erro ocorreu durante o login
+//             const errorCode = error.code;
+//             const errorMessage = error.message;
+//             console.error('Erro de login:', errorCode, errorMessage);
+//         })
 
 // }
+const autenticacaoGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+        .then((response) => {
+            const { displayName: nomeCompleto, email, photoURL: urlFoto, emailVerified: emailVerificado } = response.user
+            const [nome] = (nomeCompleto?.split(' ') ?? '')
+            usuario.value = { nomeCompleto, email, emailVerificado, nome, urlFoto }
+
+            router.push('/home')
+        })
+        .catch((error) => console.log(error)
+        )
+
+}
 
 </script>
   

@@ -80,6 +80,16 @@ const abreModalAgendamento = (itemMenu) => {
 const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/barbers.den/', 250);
 
 const menuList = [
+
+  {
+    icon: 'fa-solid fa-user',
+    label: 'Entrar',
+    iconColor: 'primary',
+    separator: true,
+    rota: '/login',
+    ativo: true
+
+  },
   {
     icon: 'fa-regular fa-calendar-days fa-beat',
     label: 'Agendamento',
