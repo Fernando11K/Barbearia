@@ -6,7 +6,7 @@
                 <div class="text-bold text-h5 text-dark q-pt-sm">Barber's Den - Login</div>
             </div>
             <q-card-section>
-                <q-form class="row justify-center" @submit.prevent="autenticacaoGoogle">
+                <q-form class="row justify-center" @submit.prevent="autenticacaoLocal">
                     <InputUsuarioLogin v-model="login.email" class="full-width q-pa-md" />
                     <InputSenhaLogin v-model="login.senha" class="full-width q-pa-md" />
                     <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="primary" text-color="white"
@@ -32,7 +32,7 @@
 import { ref } from 'vue';
 import InputUsuarioLogin from '/src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, UserCredential, AuthError } from 'firebase/auth';
 import { auth } from 'src/boot/firebase'
 //import { useAuthStore } from '../stores/useAuthStore';
 import { useUsuarioStore } from '../stores/useUsuarioStore';
@@ -42,42 +42,41 @@ const router = useRouter()
 
 const login = ref({ email: '', senha: '' })
 const alert = false
-const usuario = ref(<IUsuario>({ nome: '', nomeCompleto: '', email: '' }))
+//const usuario = ref(<IUsuario>({ nome: '', nomeCompleto: '', email: '' }))
 const usuarioStore = useUsuarioStore()
 //const authStore = useAuthStore();
 
 usuarioStore.preencheState()
 
-// const autenticacaoLocal = async () => {
-//     await signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.senha)
-//         .then((userCredential) => {
-//             const usuario = userCredential.user;
-//             authStore.setEstaAutenticado(true);
-//             router.push('/home')
-//             console.log(usuario)
-//         })
-//         .catch((error) => {
-//             // Algum erro ocorreu durante o login
-//             const errorCode = error.code;
-//             const errorMessage = error.message;
-//             console.error('Erro de login:', errorCode, errorMessage);
-//         })
-
-// }
-const autenticacaoGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-        .then((response) => {
-            const { displayName: nomeCompleto, email, photoURL: urlFoto, emailVerified: emailVerificado } = response.user
-            const [nome] = (nomeCompleto?.split(' ') ?? '')
-            usuario.value = { nomeCompleto, email, emailVerificado, nome, urlFoto }
-
+const autenticacaoLocal = async () => {
+    await signInWithEmailAndPassword(auth, login.value.email, login.value.senha)
+        .then((userCredential: UserCredential) => {
+            console.log(userCredential)
             router.push('/home')
+
         })
-        .catch((error) => console.log(error)
-        )
+        .catch((error: AuthError) => {
+            // Algum erro ocorreu durante o login
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Erro de login:', errorCode, errorMessage);
+        })
 
 }
+// const autenticacaoGoogle = () => {
+//     const provider = new GoogleAuthProvider();
+//     signInWithPopup(auth, provider)
+//         .then((response) => {
+//             const { displayName: nomeCompleto, email, photoURL: urlFoto, emailVerified: emailVerificado } = response.user
+//             const [nome] = (nomeCompleto?.split(' ') ?? '')
+//             usuario.value = { nomeCompleto, email, emailVerificado, nome, urlFoto }
+
+//             router.push('/home')
+//         })
+//         .catch((error) => console.log(error)
+//         )
+
+// }
 
 </script>
   
