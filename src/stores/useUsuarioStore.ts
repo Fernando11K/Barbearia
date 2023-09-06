@@ -34,7 +34,7 @@ export const useUsuarioStore = defineStore('usuario', {
             //     auth.onAuthStateChanged((usuario: any) => {
             //        console.log('dentro da state')
             //      console.log(usuario)
-            //  *})
+            //  })
             console.log('state')
             console.log(auth.currentUser)
         }
