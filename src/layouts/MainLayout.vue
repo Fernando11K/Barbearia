@@ -24,10 +24,10 @@
           <template v-for="(menuItem, index) in menuList" :key="index">
             <q-item clickable :active="!menuItem.ativo" v-ripple
               @click="verificaDisponibilidadeDaFuncionalidade(menuItem)" :to="menuItem.rota">
-              <q-item-section avatar v-show="menuItem.ativo">
+              <q-item-section avatar v-if="menuItem.ativo">
                 <q-icon :name="menuItem.icon" :color="menuItem.iconColor" />
               </q-item-section>
-              <q-item-section v-show="menuItem.ativo">
+              <q-item-section v-if="menuItem.ativo">
                 {{ menuItem.label }}
               </q-item-section>
             </q-item>
@@ -55,8 +55,11 @@ import QHeaderComponent from 'src/components/MainLayout/QHeaderComponent.vue'
 import QFooterComponent from 'src/components/MainLayout/QFooterComponent.vue';
 import ModalAgendamento from 'src/components/Agendamento/ModalAgendamento.vue'
 
-import alert from '../hooks/alert'
+import { useUsuarioStore } from '../stores/useUsuarioStore';
 
+import alert from '../hooks/alerta'
+
+const usuarioStore = useUsuarioStore()
 const corToolbar = ref('bg-blue-8 ')
 const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
@@ -83,11 +86,11 @@ const menuList = [
 
   {
     icon: 'fa-solid fa-user',
-    label: 'Entrar',
+    label: usuarioStore.getNome ?? 'Entrar',
     iconColor: 'primary',
     separator: true,
-    rota: '/login',
-    ativo: true
+    rota: !usuarioStore.getEmail ? '/login' : '',
+    ativo: usuarioStore.getEmail && !usuarioStore.getNome ? false : ativo
 
   },
   {

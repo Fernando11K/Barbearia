@@ -30,7 +30,7 @@
   
 <script lang="ts" setup>
 
-import alert from 'src/hooks/alert';
+import alert from 'src/hooks/alerta';
 import { ref, watchEffect } from 'vue';
 import FormularioAgendamento from './FormularioAgendamento.vue';
 const props = defineProps({

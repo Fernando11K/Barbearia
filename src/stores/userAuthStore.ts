@@ -9,7 +9,7 @@ interface AuthState {
 /*
 Nem tudo está sendo utilizado, pois estou utilizando a auteticação do firebase
 */
-export const useAuthStore = defineStore('auth', {
+export const userAuthStore = defineStore('auth', {
     state: (): AuthState => ({
         token: localStorage.getItem('token') ?? null
 

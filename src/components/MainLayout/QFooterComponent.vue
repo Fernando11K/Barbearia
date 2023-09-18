@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import ModalAgendamento from 'src/components/Agendamento/ModalAgendamento.vue'
-import alert from '../../hooks/alert'
+import alert from '../../hooks/alerta'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router';
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);
@@ -56,3 +56,4 @@ const home = () => { router.push('/home') }
 
 
 </script>
+../../hooks/alerta

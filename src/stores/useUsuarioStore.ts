@@ -1,17 +1,14 @@
+import { User } from 'firebase/auth';
 import { defineStore } from 'pinia';
-import IUsuario from 'src/interfaces/IUsuario';
 import { auth } from 'src/boot/firebase'
+import Usuario from 'src/model/Usuario';
+
+
 
 
 export const useUsuarioStore = defineStore('usuario', {
 
-    state: (): IUsuario => ({
-        nome: null,
-        nomeCompleto: null,
-        email: null,
-        emailVerificado: null,
-        urlFoto: null,
-    }),
+    state: (): Usuario => new Usuario(),
     getters: {
         getNome(state) {
             return state.nome;
@@ -30,13 +27,19 @@ export const useUsuarioStore = defineStore('usuario', {
         },
     },
     actions: {
-        preencheState() {
-            //     auth.onAuthStateChanged((usuario: any) => {
-            //        console.log('dentro da state')
-            //      console.log(usuario)
-            //  })
-            console.log('state')
-            console.log(auth.currentUser)
+        async preencheState() {
+            auth.onAuthStateChanged((user: User | null) => {
+                if (user) {
+                    const { displayName: nomeCompleto, email, photoURL: urlFoto, emailVerified: emailVerificado } = user
+
+                    this.nome = nomeCompleto?.split(' ')[0] ?? null
+                    this.nomeCompleto = nomeCompleto
+                    this.email = email
+                    this.urlFoto = urlFoto
+                    this.emailVerificado = emailVerificado
+                }
+            })
+
         }
     }
 })

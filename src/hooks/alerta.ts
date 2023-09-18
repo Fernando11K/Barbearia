@@ -1,55 +1,58 @@
 import { useQuasar } from 'quasar'
 
-type Notificacoes = {
-  positive: (message: string) => void;
-  danger: (message: string) => void;
-  warning: (message: string) => void;
-  info: (message: string) => void;
-  ongoing: (message: string) => void;
+export type Notificacoes = {
+  positive: (message: string, tempo?: number) => void;
+  danger: (message: string, tempo?: number) => void;
+  warning: (message: string, tempo?: number) => void;
+  info: (message: string, tempo?: number) => void;
+  ongoing: (message: string, tempo?: number) => void;
 }
 
 const alert = (): Notificacoes => {
   const $q = useQuasar()
 
-  const positive = (message: string) => {
+  const positive = (message: string, tempo = 1000) => {
     $q.notify({
       type: 'positive',
       message: message,
-      position: 'center'
+      position: 'center',
+      timeout: tempo
     })
   }
 
-  const danger = (message: string) => {
+  const danger = (message: string, tempo = 1000) => {
     $q.notify({
       type: 'negative',
       message: message,
       position: 'center',
-      timeout: 1000
+      timeout: tempo
     });
   }
 
-  const warning = (message: string) => {
+  const warning = (message: string, tempo = 1000) => {
     $q.notify({
       type: 'warning',
       message: message,
       position: 'center',
-      timeout: 500
+      timeout: tempo
     })
   }
 
-  const info = (message: string) => {
+  const info = (message: string, tempo = 1000) => {
     $q.notify({
       type: 'info',
       message: message,
-      position: 'center'
+      position: 'center',
+      timeout: tempo
     })
   }
 
-  const ongoing = (message: string) => {
+  const ongoing = (message: string, tempo = 1000) => {
     const notif = $q.notify({
       type: 'ongoing',
       message: message,
-      position: 'center'
+      position: 'center',
+      timeout: tempo
     })
 
     setTimeout(() => {

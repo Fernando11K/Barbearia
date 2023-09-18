@@ -60,7 +60,7 @@ import { AxiosResponse } from 'axios';
 import { apiViaCep } from 'src/boot/axios';
 import { computed, onMounted, ref } from 'vue';
 import InputDate from './InputDate.vue';
-import alert from '../../hooks/alert'
+import alert from '../../hooks/alerta'
 
 onMounted(() => emiteValidacaoDados());
 const emits = defineEmits(['dadosValidos']);
@@ -140,4 +140,4 @@ const iconeReativoTipoResidencia = computed(() => (modelTipoResidencia.value.id 
 const alterarCorInputCEP = computed(() => (cepValido.value) ? 'light-green-14' : 'red-13')
 
 
-</script>
+</script>../../hooks/alerta

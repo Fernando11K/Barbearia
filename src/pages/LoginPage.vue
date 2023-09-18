@@ -11,11 +11,14 @@
                     <InputSenhaLogin v-model="login.senha" class="full-width q-pa-md" />
                     <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="primary" text-color="white"
                         label="ENTRAR" />
+
+                    <q-btn icon='fa-brands fa-google' @click="autenticacaoGoogle" outline rounded
+                        class="q-mt-md col-11 bg-black" text-color="white" label="Fazer login com o Google" />
                 </q-form>
             </q-card-section>
         </q-card>
     </q-page>
-    <q-dialog v-model="alert">
+    <q-dialog v-model="model">
         <q-card class="bg-red-14 q-pa-sm">
             <q-card-actions class="glossy shadow-24" align="center">
                 <q-icon class="shadow-24" color="amber" name="fa-solid fa-triangle-exclamation text" size="25px" />
@@ -24,29 +27,26 @@
 
                 <q-btn class="q-ml-sm glossy" dense color="dark" rounded label="OK" text-color="white" v-close-popup />
             </q-card-actions>
+
         </q-card>
     </q-dialog>
 </template>
 <script lang="ts"  setup>
 
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { auth } from 'src/boot/firebase'
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, UserCredential } from 'firebase/auth';
 import InputUsuarioLogin from '/src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, UserCredential, AuthError } from 'firebase/auth';
-import { auth } from 'src/boot/firebase'
-//import { useAuthStore } from '../stores/useAuthStore';
+import alert from '../hooks/alerta'
 import { useUsuarioStore } from '../stores/useUsuarioStore';
-import { useRouter } from 'vue-router';
-import IUsuario from '../interfaces/IUsuario'
-const router = useRouter()
-
-const login = ref({ email: '', senha: '' })
-const alert = false
-//const usuario = ref(<IUsuario>({ nome: '', nomeCompleto: '', email: '' }))
 const usuarioStore = useUsuarioStore()
-//const authStore = useAuthStore();
 
-usuarioStore.preencheState()
+const router = useRouter()
+const login = ref({ email: '', senha: '' })
+const model = false
+const alerta = alert()
 
 const autenticacaoLocal = async () => {
     await signInWithEmailAndPassword(auth, login.value.email, login.value.senha)
@@ -55,28 +55,25 @@ const autenticacaoLocal = async () => {
             router.push('/home')
 
         })
-        .catch((error: AuthError) => {
-            // Algum erro ocorreu durante o login
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('Erro de login:', errorCode, errorMessage);
+        .catch(() => {
+            alerta.danger('Usuário ou senha inválidos', 3000)
+
         })
 
 }
-// const autenticacaoGoogle = () => {
-//     const provider = new GoogleAuthProvider();
-//     signInWithPopup(auth, provider)
-//         .then((response) => {
-//             const { displayName: nomeCompleto, email, photoURL: urlFoto, emailVerified: emailVerificado } = response.user
-//             const [nome] = (nomeCompleto?.split(' ') ?? '')
-//             usuario.value = { nomeCompleto, email, emailVerificado, nome, urlFoto }
-
-//             router.push('/home')
-//         })
-//         .catch((error) => console.log(error)
-//         )
-
-// }
+const autenticacaoGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+        .then(() => {
+            alerta.positive(`Seja bem vindo!, ${usuarioStore.getNome}.`, 3000)
+            router.push('/home')
+        })
+        .catch((error) => {
+            console.log(error),
+                alerta.danger('Ocorreu um erro')
+        }
+        )
+}
 
 </script>
   
@@ -87,4 +84,3 @@ const autenticacaoLocal = async () => {
     border-radius: 25px;
 }
 </style>
-  
