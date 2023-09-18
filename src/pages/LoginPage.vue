@@ -36,7 +36,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth } from 'src/boot/firebase'
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, UserCredential } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import InputUsuarioLogin from '/src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
 import alert from '../hooks/alerta'
@@ -50,8 +50,7 @@ const alerta = alert()
 
 const autenticacaoLocal = async () => {
     await signInWithEmailAndPassword(auth, login.value.email, login.value.senha)
-        .then((userCredential: UserCredential) => {
-            console.log(userCredential)
+        .then(() => {
             router.push('/home')
 
         })
@@ -65,12 +64,15 @@ const autenticacaoGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
         .then(() => {
-            alerta.positive(`Seja bem vindo!, ${usuarioStore.getNome}.`, 3000)
+            if (usuarioStore.getNome) {
+
+                alerta.positive(`Seja bem vindo!, ${usuarioStore.getNome}.`, 3000)
+            }
             router.push('/home')
         })
-        .catch((error) => {
-            console.log(error),
-                alerta.danger('Ocorreu um erro')
+        .catch(() => {
+
+            alerta.danger('Ocorreu um erro')
         }
         )
 }

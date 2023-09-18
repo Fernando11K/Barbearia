@@ -22,12 +22,12 @@
         <q-list>
 
           <template v-for="(menuItem, index) in menuList" :key="index">
-            <q-item clickable :active="!menuItem.ativo" v-ripple
+            <q-item clickable v-if="menuItem.ativo" :active="!menuItem.ativo" v-ripple
               @click="verificaDisponibilidadeDaFuncionalidade(menuItem)" :to="menuItem.rota">
-              <q-item-section avatar v-if="menuItem.ativo">
+              <q-item-section avatar>
                 <q-icon :name="menuItem.icon" :color="menuItem.iconColor" />
               </q-item-section>
-              <q-item-section v-if="menuItem.ativo">
+              <q-item-section>
                 {{ menuItem.label }}
               </q-item-section>
             </q-item>
@@ -90,7 +90,7 @@ const menuList = [
     iconColor: 'primary',
     separator: true,
     rota: !usuarioStore.getEmail ? '/login' : '',
-    ativo: usuarioStore.getEmail && !usuarioStore.getNome ? false : ativo
+    ativo: usuarioStore.getEmail ? false : true
 
   },
   {
