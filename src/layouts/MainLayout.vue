@@ -49,7 +49,7 @@
   </q-layout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import QHeaderComponent from 'src/components/MainLayout/QHeaderComponent.vue'
 import QFooterComponent from 'src/components/MainLayout/QFooterComponent.vue';
@@ -68,14 +68,14 @@ const toggleRightDrawer = () => rightDrawerOpen.value = !rightDrawerOpen.value
 const statusModalAgendamento = ref(false);
 
 const alerta = alert()
-const verificaDisponibilidadeDaFuncionalidade = (itemMenu) => {
+const verificaDisponibilidadeDaFuncionalidade = (itemMenu: any) => {
 
   !itemMenu.ativo ? alerta.warning('A funcionalidade estará disponível em breve!') : abreModalAgendamento(itemMenu)
 
 }
 
 
-const abreModalAgendamento = (itemMenu) => {
+const abreModalAgendamento = (itemMenu: any) => {
 
   if (itemMenu.label === 'Agendamento') statusModalAgendamento.value = true
 };
@@ -90,7 +90,7 @@ const menuList = [
     iconColor: 'primary',
     separator: true,
     rota: !usuarioStore.getEmail ? '/login' : '',
-    ativo: usuarioStore.getEmail ? false : true
+    ativo: true
 
   },
   {

@@ -6,9 +6,16 @@ import Usuario from 'src/model/Usuario';
 
 
 
+
 export const useUsuarioStore = defineStore('usuario', {
 
-    state: (): Usuario => new Usuario(),
+    state: () => ({
+        nome: null,
+        nomeCompleto: null,
+        email: null,
+        emailVerificado: false,
+        urlFoto: null,
+    } as Usuario),
     getters: {
         getNome(state) {
             return state.nome;
@@ -29,6 +36,7 @@ export const useUsuarioStore = defineStore('usuario', {
     actions: {
         async preencheState() {
             auth.onAuthStateChanged((user: User | null) => {
+                console.log(user)
                 if (user) {
                     const { displayName: nomeCompleto, email, photoURL: urlFoto, emailVerified: emailVerificado } = user
 

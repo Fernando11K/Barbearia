@@ -9,6 +9,7 @@ const usuarioStore = useUsuarioStore();
 
 onMounted(() => {
   usuarioStore.preencheState()
+
 })
 
 
