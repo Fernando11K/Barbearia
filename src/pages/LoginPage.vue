@@ -54,10 +54,7 @@ const autenticacaoLocal = async () => {
             router.push('/home')
 
         })
-        .catch(() => {
-            alerta.danger('Usuário ou senha inválidos', 3000)
-
-        })
+        .catch(() => alerta.danger('Usuário ou senha inválidos', 3000))
 
 }
 const autenticacaoGoogle = async () => {
