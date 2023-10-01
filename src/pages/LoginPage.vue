@@ -60,13 +60,13 @@ const autenticacaoLocal = async () => {
         })
 
 }
-const autenticacaoGoogle = () => {
+const autenticacaoGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    await signInWithPopup(auth, provider)
         .then(() => {
             if (usuarioStore.getNome) {
 
-                alerta.positive(`Seja bem vindo!, ${usuarioStore.getNome}.`, 3000)
+                alerta.positive(`Seja bem vindo ${usuarioStore.getNome}!`, 3000)
             }
             router.push('/home')
         })

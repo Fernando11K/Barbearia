@@ -36,7 +36,6 @@ export const useUsuarioStore = defineStore('usuario', {
     actions: {
         async preencheState() {
             auth.onAuthStateChanged((user: User | null) => {
-                console.log(user)
                 if (user) {
                     const { displayName: nomeCompleto, email, photoURL: urlFoto, emailVerified: emailVerificado } = user
 
@@ -48,6 +47,13 @@ export const useUsuarioStore = defineStore('usuario', {
                 }
             })
 
+        },
+        limparDados() {
+            this.nome = null;
+            this.nomeCompleto = null;
+            this.email = null;
+            this.emailVerificado = false;
+            this.urlFoto = null;
         }
     }
 })
