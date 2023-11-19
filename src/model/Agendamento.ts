@@ -28,7 +28,7 @@ class Agendamento {
             local: this.local
 
         }
-        criarAgendamento(dadosAgendamento)
+        return criarAgendamento(dadosAgendamento)
 
     }
 

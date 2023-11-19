@@ -31,7 +31,7 @@
   
 <script lang="ts" setup>
 
-import alert from 'src/hooks/alerta';
+
 import { ref, watchEffect } from 'vue';
 import FormularioAgendamento from './FormularioAgendamento.vue';
 
@@ -56,21 +56,21 @@ watchEffect(() => statusModal.value = props.statusProp);
 const validaDados = (validadeDosDados: boolean) => desabilitaBotao.value = validadeDosDados;
 
 const realizaAgendamento = () => {
-    statusModal.value = false
+
     atualizaStatusModalExternamente()
     desabilitaBotao.value = false
     formularioAgendamentoRef.value?.enviaDados()
     agendar()
 
+
+
 }
 const agendar = () => {
-
-    const agendamento = new Agendamento(dadosParaAgendamento.value.data,
-        dadosParaAgendamento.value.barbeiro,
-        dadosParaAgendamento.value.servico,
-        dadosParaAgendamento.value.local
-    )
-    agendamento.agendar()
+    if (dadosParaAgendamento.value) {
+        const { data, barbeiro, servico, local } = dadosParaAgendamento.value
+        const agendamento = new Agendamento(data, barbeiro, servico, local)
+        return agendamento.agendar()
+    }
 
 }
 const atualizaStatusModalExternamente = () => emits('atualizaStatusModal');

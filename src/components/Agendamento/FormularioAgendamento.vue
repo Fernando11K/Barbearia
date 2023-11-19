@@ -55,12 +55,10 @@
 
 <script lang="ts" setup>
 import { IEndereco } from '../../interfaces/IEndereco'
-
-import { AxiosResponse } from 'axios';
-import { apiViaCep } from 'src/boot/axios';
 import { computed, onMounted, ref, defineExpose } from 'vue';
 import InputDate from './InputDate.vue';
 import alert from '../../hooks/alerta'
+import { getDadosViaCep } from 'src/service/EnderecoService'
 
 
 onMounted(() => emiteValidacaoDados());
@@ -133,31 +131,19 @@ const tipoResidencia = [
 const modelTipoResidencia = ref(tipoResidencia[0])
 
 const cepValido = ref(false)
+
 const requisitaDadosViaCep = () => {
    cepValido.value = false
    loading.value = false
    if (dadosEndereco.value.cep.length === 8) {
-      loading.value = true
-
-      apiViaCep.get(`viacep.com.br/ws/${dadosEndereco.value.cep}/json/`)
-         .then((response: AxiosResponse) => {
-            dadosEndereco.value = {
-               cep: response.data.cep,
-               uf: response.data.uf,
-               cidade: response.data.localidade,
-               bairro: response.data.bairro,
-               logradouro: response.data.logradouro,
-               numeroResidencia: '',
-               complemento: '',
-               tipoResidencia: '',
-               numeroApartamento: ''
-            }
+      getDadosViaCep(dadosEndereco.value.cep)
+         .then(response => {
+            dadosEndereco.value = response
             loading.value = false
             cepValido.value = true
             alerta.info('Após terminar de preencher um campo, clique fora dele para validar!')
-         })
-         .catch((erro: XMLHttpRequest) => {
-            console.error(erro);
+
+         }).catch(() => {
             alerta.danger('CEP inválido ou não localizado, por favor verifique e tente novamente. ')
             loading.value = false
 
@@ -165,6 +151,7 @@ const requisitaDadosViaCep = () => {
    }
 
 }
+
 const validaDados = () => {
    if (local.value.id === 0) return false;
 

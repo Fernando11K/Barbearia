@@ -1,6 +1,5 @@
 import { agendamentoRef, push } from 'src/boot/firebase';
-import alert from 'src/hooks/alerta';
-const alerta = alert()
+
 const criarAgendamento = (dadosAgendamento: any) => {
     try {
         const dados = {
@@ -11,9 +10,12 @@ const criarAgendamento = (dadosAgendamento: any) => {
 
         }
         push(agendamentoRef, dados);
-        alerta.positive('Agendamento realizado com sucesso')
+        //  alerta.positive('Agendamento realizado com sucesso')
+        return true
     } catch (erro) {
-        alerta.danger('Ocorreu um erro ao reallizar o agendamento')
+        // alerta.danger('Ocorreu um erro ao reallizar o agendamento')
+        console.log(erro)
+        return false
 
     }
 };
