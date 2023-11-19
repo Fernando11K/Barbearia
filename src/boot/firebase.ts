@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth'
+import { getDatabase, ref, push } from 'firebase/database';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,6 +22,8 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(firebaseApp);
 const auth = getAuth(firebaseApp);
+const dataBase = getDatabase(firebaseApp)
+const agendamentoRef = ref(dataBase, '/agendamentos')
 
-export { firebaseApp, analytics, auth }
+export { firebaseApp, analytics, auth, agendamentoRef, push }
 

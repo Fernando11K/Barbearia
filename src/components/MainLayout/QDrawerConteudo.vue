@@ -42,18 +42,20 @@ const usuarioStore = useUsuarioStore()
 const emits = defineEmits(['abreModalAgendamento'])
 const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/barbers.den/', 250);
 
-const verificaDisponibilidadeDaFuncionalidade = (itemMenu: any) => {
+const verificaDisponibilidadeDaFuncionalidade = (itemMenu: any) => (!itemMenu.ativo) ? alerta.warning('A funcionalidade estará disponível em breve!') : executaAcao(itemMenu.label)
 
-    (!itemMenu.ativo) ? alerta.warning('A funcionalidade estará disponível em breve!') : executaAcao(itemMenu.label)
 
-}
 const executaAcao = (label: string) => {
 
     logout(label)
     abreModalAgendamento(label)
 }
 
-const abreModalAgendamento = (label: string) => { if (label === 'Agendamento') emits('abreModalAgendamento') };
+const abreModalAgendamento = (label: string) => {
+    if (label === 'Agendamento' && !usuarioStore.getEmail) {
+        emits('abreModalAgendamento')
+    }
+};
 
 const logout = async (label: string) => {
     if (label == 'Sair') {
@@ -83,8 +85,7 @@ const menuList = computed(() => [
         label: 'Agendamento',
         separator: true,
         ativo: true,
-        iconColor: 'primary',
-        rota: 'agendamento'
+        iconColor: 'primary'
 
     },
     {

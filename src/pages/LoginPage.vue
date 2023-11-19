@@ -10,7 +10,7 @@
                     <InputUsuarioLogin v-model="login.email" class="full-width q-pa-md" />
                     <InputSenhaLogin v-model="login.senha" class="full-width q-pa-md" />
                     <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="primary" text-color="white"
-                        label="ENTRAR" />
+                        label="ENTRAR" :disabled="!login.email || !login.senha" />
 
                     <q-btn icon='fa-brands fa-google' @click="autenticacaoGoogle" outline rounded
                         class="q-mt-md col-11 bg-black" text-color="white" label="Fazer login com o Google" />

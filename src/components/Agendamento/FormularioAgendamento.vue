@@ -1,10 +1,10 @@
 <template >
    <section class="row col-12 ">
-      <InputDate autofocus class="col-12 q-pb-sm " />
+      <InputDate v-model="data" autofocus class="col-12 q-pb-sm " @updateModelValue="atualiza" />
 
-      <q-select @blur="emiteValidacaoDados()" dense rounded outlined v-model="modelLocalAtendimento"
-         :options="localAtendimento" label="Selecione o local de atendimento:" behavior="menu"
-         class="col-12 q-pr-xs q-pb-sm" :class="{ 'col-6': modelLocalAtendimento.id === 1 }">
+      <q-select @blur="emiteValidacaoDados()" dense rounded outlined v-model="local" :options="localAtendimento"
+         label="Selecione o local de atendimento:" behavior="menu" class="col-12 q-pr-xs q-pb-sm"
+         :class="{ 'col-6': local.id === 1 }">
          <template v-slot:prepend>
             <q-icon name="fa-solid fa-location-dot" color="primary" />
          </template>
@@ -13,8 +13,8 @@
 
       <q-input dense unmasked-value @blur="requisitaDadosViaCep" rounded outlined v-model.trim="dadosEndereco.cep"
          label="Digite o CEP do outro local:" mask="#####-###" fill-mask clearable class="q-pr-xs q-pb-sm"
-         :class="{ 'col-6': cepValido, 'col-12': !cepValido }" v-if="modelLocalAtendimento.id === 1"
-         :color="alterarCorInputCEP" :loading="loading" />
+         :class="{ 'col-6': cepValido, 'col-12': !cepValido }" v-if="local.id === 1" :color="alterarCorInputCEP"
+         :loading="loading" />
 
       <q-select @blur="emiteValidacaoDados()" dense type="text" rounded outlined v-model="modelTipoResidencia"
          :options="tipoResidencia" label="Selecione o tipo de residência" class="col-6 q-pb-sm" v-if="cepValido">
@@ -58,17 +58,20 @@ import { IEndereco } from '../../interfaces/IEndereco'
 
 import { AxiosResponse } from 'axios';
 import { apiViaCep } from 'src/boot/axios';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, defineExpose } from 'vue';
 import InputDate from './InputDate.vue';
 import alert from '../../hooks/alerta'
 
+
 onMounted(() => emiteValidacaoDados());
-const emits = defineEmits(['dadosValidos']);
+const emits = defineEmits(['dadosValidos', 'preencheDados']);
+
+
 
 const dadosEndereco = ref(<IEndereco>{})
 const loading = ref(false)
 const alerta = alert()
-
+const data = ref(`${new Intl.DateTimeFormat().format(new Date())}${' '}${new Date().getHours()}${':'}${new Date().getMinutes()}`)
 
 const localAtendimento = [
    {
@@ -80,7 +83,43 @@ const localAtendimento = [
       label: 'Outro local'
    }
 ];
-const modelLocalAtendimento = ref(localAtendimento[0])
+
+const local = ref(localAtendimento[0])
+const listaDeBarbeiros = [
+   'João Silva',
+   'Maria Oliveira',
+   'Antônio Santos',
+   'Isabel Pereira',
+   'Ricardo Mendes',
+   'Laura Costa',
+   'Pedro Almeida',
+   'Carla Rocha',
+   'Fernando Carvalho',
+   'Amanda Souza'
+];
+
+
+const dadosAgendamento = ref<any>({})
+
+const enviaDados = () => {
+
+   dadosAgendamento.value = {
+      local: local,
+      data: data,
+      barbeiro: listaDeBarbeiros[Math.floor(Math.random() * listaDeBarbeiros.length)],
+      servico: 'Corte'
+   }
+
+   preencheDados()
+}
+const preencheDados = () => {
+   emits('preencheDados', dadosAgendamento.value)
+}
+
+const atualiza = (dados: any) => data.value = dados
+
+
+
 const tipoResidencia = [
    {
       id: 0,
@@ -127,7 +166,7 @@ const requisitaDadosViaCep = () => {
 
 }
 const validaDados = () => {
-   if (modelLocalAtendimento.value.id === 0) return false;
+   if (local.value.id === 0) return false;
 
    if (modelTipoResidencia.value.id === 0) return !dadosEndereco.value.numeroResidencia;
 
@@ -139,5 +178,9 @@ const emiteValidacaoDados = () => emits('dadosValidos', validaDados())
 const iconeReativoTipoResidencia = computed(() => (modelTipoResidencia.value.id === 0) ? 'fa-solid fa-house' : 'fa-solid fa-building')
 const alterarCorInputCEP = computed(() => (cepValido.value) ? 'light-green-14' : 'red-13')
 
+defineExpose({
 
-</script>../../hooks/alerta
+   enviaDados
+}
+)
+</script>

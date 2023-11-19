@@ -12,7 +12,8 @@
                 </q-card-section>
 
                 <q-card-section>
-                    <FormularioAgendamento @dadosValidos="validaDados" />
+                    <FormularioAgendamento ref="formularioAgendamentoRef" @preencheDados="preencheDados"
+                        @dadosValidos="validaDados" />
                 </q-card-section>
 
                 <q-separator />
@@ -33,22 +34,44 @@
 import alert from 'src/hooks/alerta';
 import { ref, watchEffect } from 'vue';
 import FormularioAgendamento from './FormularioAgendamento.vue';
+
+
+import { Agendamento } from 'src/model/Agendamento';
+const dadosParaAgendamento = ref(null)
+const preencheDados = (dados: any) => dadosParaAgendamento.value = dados
+
+const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
+
 const props = defineProps({
     statusProp: { type: Boolean }
 });
 const emits = defineEmits(['atualizaStatusModal']);
-const alerta = alert()
 const desabilitaBotao = ref(true)
 const statusModal = ref(false)
+
 watchEffect(() => statusModal.value = props.statusProp);
+
+
 
 const validaDados = (validadeDosDados: boolean) => desabilitaBotao.value = validadeDosDados;
 
 const realizaAgendamento = () => {
-    alerta.positive('Agendamento realizado com sucesso')
     statusModal.value = false
     atualizaStatusModalExternamente()
     desabilitaBotao.value = false
+    formularioAgendamentoRef.value?.enviaDados()
+    agendar()
+
+}
+const agendar = () => {
+
+    const agendamento = new Agendamento(dadosParaAgendamento.value.data,
+        dadosParaAgendamento.value.barbeiro,
+        dadosParaAgendamento.value.servico,
+        dadosParaAgendamento.value.local
+    )
+    agendamento.agendar()
+
 }
 const atualizaStatusModalExternamente = () => emits('atualizaStatusModal');
 
