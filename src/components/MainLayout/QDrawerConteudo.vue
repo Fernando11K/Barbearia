@@ -54,7 +54,7 @@ const executaAcao = (label: string) => {
 const abreModalAgendamento = (label: string) => {
     if (label === 'Agendamento' && usuarioStore.getEmail) {
         emits('abreModalAgendamento')
-    } else {
+    } else if (label === 'Agendamento' && !usuarioStore.getEmail) {
         alerta.warning('É necessário estar logado para realizar agendamento!')
     }
 };
