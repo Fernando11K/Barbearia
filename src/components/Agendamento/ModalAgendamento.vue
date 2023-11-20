@@ -38,6 +38,7 @@ import FormularioAgendamento from './FormularioAgendamento.vue';
 
 import { Agendamento } from 'src/model/Agendamento';
 const dadosParaAgendamento = ref(null)
+
 const preencheDados = (dados: any) => dadosParaAgendamento.value = dados
 
 const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
