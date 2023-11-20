@@ -105,6 +105,14 @@ const menuList = computed(() => [
         rota: '/login',
         ativo: usuarioStore.getEmail,
         iconColor: 'primary',
+    },
+    {
+        icon: 'fa-regular fa-clipboard',
+        label: 'Gerencia Agendamentos',
+        separator: true,
+        rota: '/gerencia-agendamentos',
+        ativo: usuarioStore.getEmail,
+        iconColor: 'primary',
     }
 ]);
 
