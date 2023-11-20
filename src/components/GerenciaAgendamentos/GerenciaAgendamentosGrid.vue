@@ -1,26 +1,29 @@
 <template>
     <section class="q-pa-md">
         <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="data"
-            :selected-rows-label="getSelectedString" selection="multiple" v-model:selected="selected">
+            :selected-rows-label="getSelectedString" selection="multiple" v-model:selected="selected"
+            table-header-class="text-bold">
 
             <template v-slot:body="props">
-                <q-tr :props="props" @click="onRowClick(props.row)">
+                <q-tr :props="props">
                     <q-td>
                         <q-checkbox v-model="props.selected" />
                     </q-td>
                     <q-td key="acoes" :props="props">
-                        <q-btn color="primary" icon="fa-solid fa-pen-to-square" flat round />
+                        <q-btn color="primary" icon="fa-solid fa-pen-to-square" flat round class="q-mr-md" />
                     </q-td>
                     <q-td key="data" :props="props">
-                        {{ props.row.data }}
+                        <span class="q-mr-md">
+                            {{ props.row.data }}
+                        </span>
                     </q-td>
                     <q-td key="barbeiro" :props="props">
-                        <q-badge color="green">
+                        <q-badge color="green" class="q-mr-md">
                             {{ props.row.barbeiro }}
                         </q-badge>
                     </q-td>
                     <q-td key="cliente" :props="props">
-                        <q-badge color="purple">
+                        <q-badge color="purple" class="q-mr-md">
                             {{ props.row.cliente }}
                         </q-badge>
                     </q-td>
@@ -39,7 +42,7 @@
 import { ref } from 'vue'
 
 const columns = [
-    { name: 'acoes', align: 'center', label: 'AÇÕES', field: 'calories', sortable: true },
+    { name: 'acoes', align: 'center', label: 'EDITAR', field: 'calories', sortable: true },
     {
         name: 'data',
         align: 'center',
@@ -322,3 +325,16 @@ const getSelectedString = () => {
 
 
 </script>
+
+<style lang="scss" scoped>
+/* Estilos para linhas ímpares e pares */
+.q-table--flat tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+    /* Cor para linhas ímpares */
+}
+
+.q-table--flat tbody tr:nth-child(even) {
+    background-color: #EBFAFD;
+    /* Cor para linhas pares */
+}
+</style>

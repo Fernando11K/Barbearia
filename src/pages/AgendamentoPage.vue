@@ -1,6 +1,6 @@
 <template>
     <q-page class="bg-grey-3  q-pa-md">
-        <q-card class="bg-white">
+        <q-card class="bg-white q-pa-md">
             <CardTituloGerenciaAgendamentos />
             <GerenciaAgendamentosGrid />
         </q-card>

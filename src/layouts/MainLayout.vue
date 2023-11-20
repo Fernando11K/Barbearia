@@ -4,7 +4,7 @@
     <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer"
       @clickBotaoPainelLateralDireito="toggleRightDrawer" />
 
-    <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
+    <q-drawer v-model="leftDrawerOpen" side="left" bordered>
       <QDrawerConteudo @abreModalAgendamento="abreModalAgendamento" />
     </q-drawer>
     <q-drawer v-if="false" v-model="rightDrawerOpen" side="right" overlay elevated></q-drawer>
