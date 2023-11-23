@@ -2,7 +2,7 @@
     <section class="q-pa-md">
         <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="data"
             :selected-rows-label="getSelectedString" selection="multiple" v-model:selected="selected"
-            table-header-class="text-bold">
+            table-header-class="text-bold" rowsPerPageLabel="Resultados por Pagina:">
 
             <template v-slot:body="props">
                 <q-tr :props="props">
