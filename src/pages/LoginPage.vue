@@ -39,14 +39,14 @@ import { auth } from 'src/boot/firebase'
 import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import InputUsuarioLogin from '/src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
-import alert from '../hooks/alerta'
+import { positive, danger } from '../hooks/alerta'
 import { useUsuarioStore } from '../stores/useUsuarioStore';
 const usuarioStore = useUsuarioStore()
 
 const router = useRouter()
 const login = ref({ email: '', senha: '' })
 const model = false
-const alerta = alert()
+
 
 const autenticacaoLocal = async () => {
     await signInWithEmailAndPassword(auth, login.value.email, login.value.senha)
@@ -54,7 +54,7 @@ const autenticacaoLocal = async () => {
             router.push('/home')
 
         })
-        .catch(() => alerta.danger('Usuário ou senha inválidos', 3000))
+        .catch(() => danger('Usuário ou senha inválidos', 3000))
 
 }
 const autenticacaoGoogle = async () => {
@@ -63,13 +63,13 @@ const autenticacaoGoogle = async () => {
         .then(() => {
             if (usuarioStore.getNome) {
 
-                alerta.positive(`Seja bem vindo ${usuarioStore.getNome}!`, 3000)
+                positive(`Seja bem vindo ${usuarioStore.getNome}!`, 3000)
             }
             router.push('/home')
         })
         .catch(() => {
 
-            alerta.danger('Ocorreu um erro')
+            danger('Ocorreu um erro')
         }
         )
 }

@@ -33,16 +33,16 @@
 import { auth } from 'src/boot/firebase'
 import { signOut } from 'firebase/auth';
 import { useUsuarioStore } from '../../stores/useUsuarioStore';
-import alert from '../../hooks/alerta'
+import { warning, info, danger } from '../../hooks/alerta'
 import { computed } from 'vue';
 
-const alerta = alert()
+
 const usuarioStore = useUsuarioStore()
 
 const emits = defineEmits(['abreModalAgendamento'])
 const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/barbers.den/', 250);
 
-const verificaDisponibilidadeDaFuncionalidade = (itemMenu: any) => (!itemMenu.ativo) ? alerta.warning('A funcionalidade estará disponível em breve!') : executaAcao(itemMenu.label)
+const verificaDisponibilidadeDaFuncionalidade = (itemMenu: any) => (!itemMenu.ativo) ? warning('A funcionalidade estará disponível em breve!') : executaAcao(itemMenu.label)
 
 
 const executaAcao = (label: string) => {
@@ -55,7 +55,7 @@ const abreModalAgendamento = (label: string) => {
     if (label === 'Agendamento' && usuarioStore.getEmail) {
         emits('abreModalAgendamento')
     } else if (label === 'Agendamento' && !usuarioStore.getEmail) {
-        alerta.warning('É necessário estar logado para realizar agendamento!')
+        warning('É necessário estar logado para realizar agendamento!')
     }
 };
 
@@ -63,10 +63,10 @@ const logout = async (label: string) => {
     if (label == 'Sair') {
         await signOut(auth)
             .then(() => {
-                alerta.info('Usuário deslogado com sucesso!')
+                info('Usuário deslogado com sucesso!')
                 usuarioStore.limparDados()
             })
-            .catch(() => alerta.danger('Usuário ou senha inválidos', 3000))
+            .catch(() => danger('Usuário ou senha inválidos', 3000))
 
     }
 }

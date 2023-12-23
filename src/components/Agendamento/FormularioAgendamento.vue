@@ -57,7 +57,7 @@
 import { IEndereco } from '../../interfaces/IEndereco'
 import { computed, onMounted, ref, defineExpose } from 'vue';
 import InputDate from './InputDate.vue';
-import alert from '../../hooks/alerta'
+import { info, danger } from '../../hooks/alerta'
 import { getDadosViaCep } from 'src/service/EnderecoService'
 
 
@@ -68,7 +68,7 @@ const emits = defineEmits(['dadosValidos', 'preencheDados']);
 
 const dadosEndereco = ref(<IEndereco>{})
 const loading = ref(false)
-const alerta = alert()
+
 const data = ref(`${new Intl.DateTimeFormat().format(new Date())}${' '}${new Date().getHours()}${':'}${new Date().getMinutes()}`)
 
 const localAtendimento = [
@@ -141,10 +141,10 @@ const requisitaDadosViaCep = () => {
             dadosEndereco.value = response
             loading.value = false
             cepValido.value = true
-            alerta.info('Após terminar de preencher um campo, clique fora dele para validar!')
+            info('Após terminar de preencher um campo, clique fora dele para validar!')
 
          }).catch(() => {
-            alerta.danger('CEP inválido ou não localizado, por favor verifique e tente novamente. ')
+            danger('CEP inválido ou não localizado, por favor verifique e tente novamente. ')
             loading.value = false
 
          })

@@ -13,7 +13,6 @@
     </q-page-container>
 
     <QFooterComponent @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer" />
-
     <ModalAgendamento :statusProp="statusModalAgendamento" @atualizaStatusModal="abreModalAgendamento" />
   </q-layout>
 </template>
@@ -29,7 +28,7 @@ const corToolbar = ref('bg-blue-8')
 const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
 const statusModalAgendamento = ref(false);
-const abreModalAgendamento = () => statusModalAgendamento.value = true
+const abreModalAgendamento = () => statusModalAgendamento.value = !statusModalAgendamento.value
 const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value
 const toggleRightDrawer = () => rightDrawerOpen.value = !rightDrawerOpen.value
 </script>
