@@ -1,5 +1,9 @@
 <template>
-  <router-view />
+  <router-view v-slot="{ Component, route }">
+    <Transition name="fade">
+      <component :is="Component" :key="route.path" />
+    </Transition>
+  </router-view>
 </template>
 
 <script setup lang="ts">
@@ -14,3 +18,15 @@ onMounted(() => {
 
 
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.9s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,6 +1,6 @@
 <template >
    <section class="row col-12 ">
-      <InputDate v-model="data" autofocus class="col-12 q-pb-sm " @updateModelValue="atualiza" />
+      <InputDate v-model="dataAtual" autofocus class="col-12 q-pb-sm " @updateModelValue="atualiza" />
 
       <q-select @blur="emiteValidacaoDados()" dense rounded outlined v-model="local" :options="localAtendimento"
          label="Selecione o local de atendimento:" behavior="menu" class="col-12 q-pr-xs q-pb-sm"
@@ -59,6 +59,9 @@ import { computed, onMounted, ref, defineExpose } from 'vue';
 import InputDate from './InputDate.vue';
 import { info, danger } from '../../hooks/alerta'
 import { getDadosViaCep } from 'src/service/EnderecoService'
+import { date } from 'quasar'
+const timeStamp = Date.now()
+const dataAtual = date.formatDate(timeStamp, 'DD/MM/YYYY HH:mm')
 
 
 onMounted(() => emiteValidacaoDados());
@@ -69,7 +72,7 @@ const emits = defineEmits(['dadosValidos', 'preencheDados']);
 const dadosEndereco = ref(<IEndereco>{})
 const loading = ref(false)
 
-const data = ref(`${new Intl.DateTimeFormat().format(new Date())}${' '}${new Date().getHours()}${':'}${new Date().getMinutes()}`)
+
 
 const localAtendimento = [
    {
@@ -102,8 +105,8 @@ const dadosAgendamento = ref<any>({})
 const enviaDados = () => {
 
    dadosAgendamento.value = {
-      local: local,
-      data: data,
+      local: local.value,
+      data: data.value,
       barbeiro: listaDeBarbeiros[Math.floor(Math.random() * listaDeBarbeiros.length)],
       servico: 'Corte'
    }

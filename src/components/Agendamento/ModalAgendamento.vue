@@ -32,22 +32,21 @@
 <script lang="ts" setup>
 import FormularioAgendamento from './FormularioAgendamento.vue';
 import { ref, watchEffect } from 'vue';
+import { criarAgendamento } from 'src/service/AgendamentoService'
 import { Agendamento } from 'src/model/Agendamento';
 
-const dadosParaAgendamento = ref(null)
 
-const preencheDados = (dados: any) => dadosParaAgendamento.value = dados
+const agendamento = ref<Agendamento | null>(null)
 
-const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
-
-const props = defineProps({
-    statusProp: { type: Boolean }
-});
+const props = defineProps({ statusProp: { type: Boolean } });
 const emits = defineEmits(['atualizaStatusModal']);
 const desabilitaBotao = ref(true)
 const statusModal = ref(false)
-
 watchEffect(() => statusModal.value = props.statusProp);
+
+const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
+
+const preencheDados = (dados: any) => agendamento.value = new Agendamento(dados.data, dados.barbeiro, dados.servico, dados.local)
 
 
 
@@ -61,16 +60,8 @@ const realizaAgendamento = () => {
     agendar()
 
 
-
 }
-const agendar = () => {
-    if (dadosParaAgendamento.value) {
-        const { data, barbeiro, servico, local } = dadosParaAgendamento.value
-        const agendamento = new Agendamento(data, barbeiro, servico, local)
-        return agendamento.agendar()
-    }
-
-}
+const agendar = () => { if (agendamento.value) { criarAgendamento(agendamento.value.getAgendamento()) } }
 const atualizaStatusModalExternamente = () => emits('atualizaStatusModal');
 
 </script>

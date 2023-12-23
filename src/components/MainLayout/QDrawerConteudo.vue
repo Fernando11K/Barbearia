@@ -99,6 +99,14 @@ const menuList = computed(() => [
 
     },
     {
+        icon: 'fa-regular fa-clipboard',
+        label: 'Gerencia Agendamentos',
+        separator: true,
+        rota: '/gerencia-agendamentos',
+        ativo: usuarioStore.getEmail,
+        iconColor: 'primary',
+    },
+    {
         icon: 'fa-solid fa-person-walking-arrow-right',
         label: 'Sair',
         separator: true,
@@ -106,14 +114,6 @@ const menuList = computed(() => [
         ativo: usuarioStore.getEmail,
         iconColor: 'primary',
     },
-    {
-        icon: 'fa-regular fa-clipboard',
-        label: 'Gerencia Agendamentos',
-        separator: true,
-        rota: '/gerencia-agendamentos',
-        ativo: usuarioStore.getEmail,
-        iconColor: 'primary',
-    }
 ]);
 
 

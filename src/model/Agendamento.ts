@@ -1,5 +1,5 @@
 import { useUsuarioStore } from 'src/stores/useUsuarioStore';
-import { criarAgendamento } from 'src/service/AgendamentoService'
+
 
 
 const usuario = useUsuarioStore()
@@ -19,18 +19,8 @@ class Agendamento {
         this.status = true;
         this.local = local
     }
-    agendar() {
-        const dadosAgendamento = {
-            cliente: this.cliente,
-            data: this.data,
-            servico: this.servico,
-            barbeiro: this.barbeiro,
-            local: this.local
 
-        }
-        return criarAgendamento(dadosAgendamento)
 
-    }
 
     // Métodos acessores
     getCliente(): string {
@@ -71,6 +61,13 @@ class Agendamento {
 
     setStatus(status: boolean): void {
         this.status = status;
+    }
+    getLocal(): string {
+        return this.local
+    }
+    getAgendamento(): Agendamento {
+        return this
+
     }
 }
 export { Agendamento }
