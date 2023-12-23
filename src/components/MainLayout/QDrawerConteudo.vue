@@ -25,6 +25,10 @@
                 </q-item>
                 <q-separator :key="'sep' + index" v-if="menuItem.separator" />
             </template>
+
+            <q-chip class="fixed-bottom q-ma-xl" outline color="info" text-color="white" icon-right="star">
+                v.0.0.1
+            </q-chip>
         </q-list>
     </q-scroll-area>
 </template>
