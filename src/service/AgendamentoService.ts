@@ -18,16 +18,17 @@ const criarAgendamento = (agendamento: Agendamento) => {
     }
     push(agendamentoRef, dados)
         .then(response => {
+            console.log(`ID_AGENDAMENTO: ${response.key}`)
             positive('Agendamento realizado com sucesso')
             return true
         })
-        .catch(erro => {
+        .catch(() => {
             danger('Ocorreu um erro ao reallizar o agendamento')
             return false
         })
 
 };
-const buscarAgendamentos = async () => {
+const buscarAgendamentos = () => {
     const listaAgendamentos = ref<Array<Agendamento>>([])
     onValue(agendamentoRef, (snapshot) => {
 
@@ -41,11 +42,6 @@ const buscarAgendamentos = async () => {
         onlyOnce: true
     });
     return listaAgendamentos.value
-
-
 }
-
-
-
 
 export { criarAgendamento, buscarAgendamentos }

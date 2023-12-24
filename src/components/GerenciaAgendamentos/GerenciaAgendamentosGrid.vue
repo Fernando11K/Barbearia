@@ -44,8 +44,8 @@ import { onMounted, ref } from 'vue'
 import { buscarAgendamentos } from 'src/service/AgendamentoService'
 const rows = ref()
 const loading = ref(true)
-onMounted(async () => {
-    rows.value = await buscarAgendamentos()
+rows.value = buscarAgendamentos()
+onMounted(() => {
     loading.value = false
 })
 
@@ -64,7 +64,6 @@ const columns = [
 
 
 const selected = ref([])
-
 
 
 

@@ -24,6 +24,7 @@ const analytics = getAnalytics(firebaseApp);
 const auth = getAuth(firebaseApp);
 const dataBase = getDatabase(firebaseApp)
 const agendamentoRef = ref(dataBase, '/agendamentos')
+const barbeiroRef = ref(dataBase, '/barbeiros')
 
-export { firebaseApp, analytics, auth, agendamentoRef, push, onValue }
+export { firebaseApp, analytics, auth, agendamentoRef, barbeiroRef, push, onValue }
 

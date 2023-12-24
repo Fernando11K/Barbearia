@@ -1,7 +1,7 @@
 <template>
-  <q-footer reveal elevated class="bg-blue-8 glossy text-white ">
+  <q-footer v-if="q.platform.is.mobile" reveal elevated class="bg-blue-8 glossy text-white ">
     <q-separator :color="corAtual" class="shadow-up-24 glossy " />
-    <q-toolbar class="mobile-only ">
+    <q-toolbar class="orientation-portrait ">
       <div class="row justify-around col-12 fonte-footer ">
         <q-btn size="md" flat round icon="fa-solid fa-bars" class="fonte-footer  "
           @click="capturaClickDoBotaoPainelLateralEsquerdo">
@@ -31,6 +31,8 @@ import { useUsuarioStore } from 'src/stores/useUsuarioStore';
 import { warning } from '../../hooks/alerta'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
+const q = useQuasar()
 
 const usuarioStore = useUsuarioStore()
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);

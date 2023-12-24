@@ -1,8 +1,16 @@
 <template >
    <section class="row col-12 ">
-      <InputDate v-model="dataAtual" autofocus class="col-12 q-pb-sm " @updateModelValue="atualiza" />
+      <InputDate v-model="data" autofocus class="col-12" @updateModelValue="atualiza" @blur="emiteValidacaoDados()" />
+      <q-select @blur="emiteValidacaoDados()" v-model.trim="barbeiro" :options="opcoesBarbeiros" use-input @filter="filtro"
+         transition-show="scale" transition-hide="scale" options-cover clearable label="Selecione o profissional:" dense
+         rounded outlined class="col-12 q-pr-xs q-pb-sm"
+         :rules="[val => val.length > 0 || 'Favor selecionar um profissional para o atendimento']">
+         <template v-slot:prepend>
+            <q-icon name="fa-solid fa-user-tie" color="primary" />
+         </template>
+      </q-select>
 
-      <q-select @blur="emiteValidacaoDados()" dense rounded outlined v-model="local" :options="localAtendimento"
+      <q-select v-model="local" @blur="emiteValidacaoDados()" dense rounded outlined :options="localAtendimento"
          label="Selecione o local de atendimento:" behavior="menu" class="col-12 q-pr-xs q-pb-sm"
          :class="{ 'col-6': local.id === 1 }">
          <template v-slot:prepend>
@@ -11,7 +19,7 @@
 
       </q-select>
 
-      <q-input dense unmasked-value @blur="requisitaDadosViaCep" rounded outlined v-model.trim="dadosEndereco.cep"
+      <q-input v-model.trim="dadosEndereco.cep" dense unmasked-value @blur="requisitaDadosViaCep" rounded outlined
          label="Digite o CEP do outro local:" mask="#####-###" fill-mask clearable class="q-pr-xs q-pb-sm"
          :class="{ 'col-6': cepValido, 'col-12': !cepValido }" v-if="local.id === 1" :color="alterarCorInputCEP"
          :loading="loading" />
@@ -59,12 +67,39 @@ import { computed, onMounted, ref, defineExpose } from 'vue';
 import InputDate from './InputDate.vue';
 import { info, danger } from '../../hooks/alerta'
 import { getDadosViaCep } from 'src/service/EnderecoService'
-import { date } from 'quasar'
+import { QSelectOption, date } from 'quasar'
+import { buscarBarbeiros } from 'src/service/BabeiroService'
+import { EnumTipoResidencia } from 'src/model/enum/EnumTipoResidencia'
 const timeStamp = Date.now()
 const dataAtual = date.formatDate(timeStamp, 'DD/MM/YYYY HH:mm')
+const data = ref(dataAtual)
+const barbeiro = ref<QSelectOption<number | undefined>>({ value: undefined, label: '' })
+const listaBarbeiros = buscarBarbeiros()
+const opcoesBarbeiros = ref(listaBarbeiros)
 
 
-onMounted(() => emiteValidacaoDados());
+
+
+const filtro = (valor: any, update: any) => {
+   console.log(valor)
+   if (valor === '') {
+      update(() => {
+         opcoesBarbeiros.value = listaBarbeiros
+      })
+      return;
+   }
+   update(() => {
+      const needle = valor.toLowerCase();
+      opcoesBarbeiros.value = listaBarbeiros.filter(v => v.label.toLowerCase().indexOf(needle) > -1);
+   });
+}
+
+
+onMounted(() => {
+
+   emiteValidacaoDados()
+
+});
 const emits = defineEmits(['dadosValidos', 'preencheDados']);
 
 
@@ -86,18 +121,6 @@ const localAtendimento = [
 ];
 
 const local = ref(localAtendimento[0])
-const listaDeBarbeiros = [
-   'João Silva',
-   'Maria Oliveira',
-   'Antônio Santos',
-   'Isabel Pereira',
-   'Ricardo Mendes',
-   'Laura Costa',
-   'Pedro Almeida',
-   'Carla Rocha',
-   'Fernando Carvalho',
-   'Amanda Souza'
-];
 
 
 const dadosAgendamento = ref<any>({})
@@ -107,7 +130,7 @@ const enviaDados = () => {
    dadosAgendamento.value = {
       local: local.value,
       data: data.value,
-      barbeiro: listaDeBarbeiros[Math.floor(Math.random() * listaDeBarbeiros.length)],
+      barbeiro: barbeiro.value.label,
       servico: 'Corte'
    }
 
@@ -117,7 +140,7 @@ const preencheDados = () => {
    emits('preencheDados', dadosAgendamento.value)
 }
 
-const atualiza = (dados: any) => data.value = dados
+const atualiza = (dados: string) => data.value = dados
 
 
 
@@ -156,11 +179,10 @@ const requisitaDadosViaCep = () => {
 }
 
 const validaDados = () => {
+
    if (local.value.id === 0) return false;
-
-   if (modelTipoResidencia.value.id === 0) return !dadosEndereco.value.numeroResidencia;
-
-   if (modelTipoResidencia.value.id === 1) return !(dadosEndereco.value.numeroResidencia && dadosEndereco.value.numeroApartamento);
+   if (modelTipoResidencia.value.id === EnumTipoResidencia.Casa) return !dadosEndereco.value.numeroResidencia;
+   if (modelTipoResidencia.value.id === EnumTipoResidencia.Apartamento) return !(dadosEndereco.value.numeroResidencia && dadosEndereco.value.numeroApartamento);
 
 }
 const emiteValidacaoDados = () => emits('dadosValidos', validaDados())
