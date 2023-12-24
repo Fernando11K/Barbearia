@@ -63,7 +63,7 @@
 
 <script lang="ts" setup>
 import { IEndereco } from '../../interfaces/IEndereco'
-import { computed, onMounted, ref, defineExpose, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import InputDate from './InputDate.vue';
 import { info, danger } from '../../hooks/alerta'
 import { getDadosViaCep } from 'src/service/EnderecoService'
@@ -72,6 +72,7 @@ import { buscarBarbeiros } from 'src/service/BabeiroService'
 import { EnumLocalAtendimento } from 'src/model/enum/EnumLocalAtendimento'
 import { EnumTipoResidencia } from 'src/model/enum/EnumTipoResidencia'
 
+const emits = defineEmits(['dadosValidos', 'preencheDados']);
 const timeStamp = Date.now()
 const dataAtual = date.formatDate(timeStamp, 'DD/MM/YYYY HH:mm')
 const data = ref(dataAtual)
@@ -79,10 +80,7 @@ const barbeiro = ref<QSelectOption<number | null>>({ value: null, label: '' })
 const listaBarbeiros = buscarBarbeiros()
 const opcoesBarbeiros = ref(listaBarbeiros)
 
-
-
-
-const filtro = (valor: any, update: any) => {
+const filtro = (valor: string, update: any) => {
    console.log(valor)
    if (valor === '') {
       update(() => {
@@ -96,19 +94,10 @@ const filtro = (valor: any, update: any) => {
    });
 }
 
-
-onMounted(() => {
-
-   emiteValidacaoDados()
-
-});
-const emits = defineEmits(['dadosValidos', 'preencheDados']);
-
-
+onMounted(() => { emiteValidacaoDados() });
 
 const dadosEndereco = ref(<IEndereco>{})
 const loading = ref(false)
-
 
 
 const localAtendimento = [

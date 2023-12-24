@@ -1,8 +1,7 @@
 <template>
     <div>
-        <q-btn v-if="false" label="Agendamento" color="primary" @click="!statusModal"
-            style="min-width: 90vw; max-width: 95%;" />
-        <q-dialog v-model="statusModal" persistent>
+        <q-btn v-if="false" label="Agendamento" color="primary" style="min-width: 90vw; max-width: 95%;" />
+        <q-dialog v-model="statusModal" class="q-mt-xl" persistent>
             <q-card class="my-card">
                 <q-card-section class="bg-primary  text-white ">
                     <div class="text-h6 row justify-between">
@@ -36,7 +35,10 @@ import { criarAgendamento } from 'src/service/AgendamentoService'
 import { Agendamento } from 'src/model/Agendamento';
 
 
+
+
 const agendamento = ref<Agendamento | null>(null)
+
 
 const props = defineProps({ statusProp: { type: Boolean } });
 const emits = defineEmits(['atualizaStatusModal']);
@@ -47,7 +49,6 @@ watchEffect(() => statusModal.value = props.statusProp);
 const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
 
 const preencheDados = (dados: any) => agendamento.value = new Agendamento(dados.data, dados.barbeiro, dados.servico, dados.local)
-
 
 
 const validaDados = (validadeDosDados: boolean) => desabilitaBotao.value = validadeDosDados;
