@@ -1,6 +1,8 @@
 <template >
   <div class="fit">
-    <q-img class="relative-position" width="100%" height="100%" :src="require('../../../assets/tabelaPrecos.jpeg')" />
+    <q-skeleton v-if="!imagemCarregada" animation="wave" :style="{ 'min-height': `${q.screen.height}px` }" />
+    <q-img class="relative-position" width="100%" height="100%" :src="require('../../../assets/tabelaPrecos.jpeg')"
+      loading="lazy" @load="imagemCarregada = true" />
     <q-separator :color="corAtual" class="shadow-up-24 glossy " />
 
     <CarrosselComponent v-if="true" class="absolute-top-center  " />
@@ -11,6 +13,12 @@
 <script lang="ts" setup>
 import CarrosselComponent from './CarrosselComponent.vue'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useQuasar } from 'quasar'
+const q = useQuasar()
+const imagemCarregada = ref(false);
+onMounted(() => loopCores)
+onBeforeUnmount(() => clearInterval(loopCores))
+
 const corAtual = ref<string>()
 const corAtualIndex = ref<number>(0)
 const cores = ['blue-3', 'blue-4', 'blue-5', 'blue-6'];
@@ -20,8 +28,6 @@ const trocarCor = () => {
   corAtual.value = cores[corAtualIndex.value]
 }
 const loopCores = setInterval(trocarCor, 500)
-onMounted(() => loopCores)
-onBeforeUnmount(() => clearInterval(loopCores))
 
 </script>
 
