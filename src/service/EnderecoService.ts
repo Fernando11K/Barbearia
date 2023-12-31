@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { apiViaCep } from 'src/boot/axios';
 
-const getDadosViaCep = async (cep: string) => {
+const buscarDadosViaCep = async (cep: string) => {
 
     return apiViaCep.get(`viacep.com.br/ws/${cep}/json/`)
         .then((response: AxiosResponse) => {
@@ -25,4 +25,4 @@ const getDadosViaCep = async (cep: string) => {
         })
 
 }
-export { getDadosViaCep }
+export { buscarDadosViaCep }

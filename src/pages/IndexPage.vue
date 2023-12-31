@@ -30,7 +30,7 @@
 
     <!-- place QPageScroller at end of page -->
     <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
-      <q-btn fab icon="keyboard_arrow_up" color="blue" />
+      <q-btn fab icon="keyboard_arrow_up" color="blue" class="" />
     </q-page-scroller>
   </q-page>
 </template>

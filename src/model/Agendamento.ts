@@ -8,10 +8,10 @@ class Agendamento {
     private data: string;
     private barbeiro: string;
     private servico: string;
-    private local: string;
+    private local: number;
     private status: boolean;
 
-    constructor(data: string, barbeiro: string, servico: string, local: string) {
+    constructor(data: string, barbeiro: string, servico: string, local: number) {
         this.cliente = usuario.getEmail;
         this.data = data;
         this.barbeiro = barbeiro;
@@ -62,10 +62,10 @@ class Agendamento {
     setStatus(status: boolean): void {
         this.status = status;
     }
-    getLocal(): string {
+    getLocal(): number {
         return this.local
     }
-    getAgendamento(): Agendamento {
+    getAgendamento(): this {
         return this
 
     }

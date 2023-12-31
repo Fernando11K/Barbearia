@@ -62,4 +62,3 @@ const home = () => { router.push('/home') }
 
 
 </script>
-../../hooks/alerta

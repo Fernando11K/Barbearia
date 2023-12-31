@@ -13,7 +13,7 @@
 
       <q-select v-model="local" dense rounded outlined :options="localAtendimento"
          label="Selecione o local de atendimento:" behavior="menu" class="col-12 q-pr-xs q-pb-sm"
-         :class="{ 'col-6': local.id === 1 }">
+         :class="{ 'col-6': local.id === EnumLocalAtendimento.Outro_Local }">
          <template v-slot:prepend>
             <q-icon name="fa-solid fa-location-dot" color="primary" />
          </template>
@@ -22,8 +22,8 @@
 
       <q-input v-model.trim="dadosEndereco.cep" dense unmasked-value @blur="requisitaDadosViaCep" rounded outlined
          label="Digite o CEP do outro local:" mask="#####-###" fill-mask clearable class="q-pr-xs q-pb-sm"
-         :class="{ 'col-6': cepValido, 'col-12': !cepValido }" v-if="local.id === 1" :color="alterarCorInputCEP"
-         :loading="loading" />
+         :class="{ 'col-6': cepValido, 'col-12': !cepValido }" v-if="local.id === EnumLocalAtendimento.Outro_Local"
+         :color="alterarCorInputCEP" :loading="loading" />
 
       <q-select dense type="text" rounded outlined v-model="modelTipoResidencia" :options="tipoResidencia"
          label="Selecione o tipo de residência" class="col-6 q-pb-sm" v-if="cepValido">
@@ -66,13 +66,15 @@ import { IEndereco } from '../../interfaces/IEndereco'
 import { computed, onMounted, ref, watch } from 'vue';
 import InputDate from './InputDate.vue';
 import { info, danger } from '../../hooks/alerta'
-import { getDadosViaCep } from 'src/service/EnderecoService'
+import { buscarDadosViaCep } from 'src/service/EnderecoService'
 import { QSelectOption, date } from 'quasar'
 import { buscarBarbeiros } from 'src/service/BabeiroService'
 import { EnumLocalAtendimento } from 'src/model/enum/EnumLocalAtendimento'
 import { EnumTipoResidencia } from 'src/model/enum/EnumTipoResidencia'
+import { Agendamento } from 'src/model/Agendamento';
 
 const emits = defineEmits(['dadosValidos', 'preencheDados']);
+onMounted(() => { emiteValidacaoDados() });
 const timeStamp = Date.now()
 const dataAtual = date.formatDate(timeStamp, 'DD/MM/YYYY HH:mm')
 const data = ref(dataAtual)
@@ -83,18 +85,12 @@ const opcoesBarbeiros = ref(listaBarbeiros)
 const filtro = (valor: string, update: any) => {
    console.log(valor)
    if (valor === '') {
-      update(() => {
-         opcoesBarbeiros.value = listaBarbeiros
-      })
+      update(() => opcoesBarbeiros.value = listaBarbeiros)
       return;
    }
-   update(() => {
-      const needle = valor.toLowerCase();
-      opcoesBarbeiros.value = listaBarbeiros.filter(v => v.label.toLowerCase().indexOf(needle) > -1);
-   });
+   update(() => opcoesBarbeiros.value = listaBarbeiros.filter(v => v.label.toLowerCase().indexOf(valor.toLowerCase()) > -1));
 }
 
-onMounted(() => { emiteValidacaoDados() });
 
 const dadosEndereco = ref(<IEndereco>{})
 const loading = ref(false)
@@ -108,20 +104,10 @@ const localAtendimento = [
 const local = ref(localAtendimento[0])
 
 
-const dadosAgendamento = ref<any>({})
 
-const enviaDados = () => {
 
-   dadosAgendamento.value = {
-      local: local.value,
-      data: data.value,
-      barbeiro: barbeiro.value.label,
-      servico: 'Corte'
-   }
-
-   preencheDados()
-}
-const preencheDados = () => { emits('preencheDados', dadosAgendamento.value) }
+const enviaDados = () => { preencheDados() }
+const preencheDados = () => { emits('preencheDados', new Agendamento(data.value, barbeiro.value.label, 'corte', local.value.id)) }
 
 const atualiza = (dados: string) => data.value = dados
 
@@ -143,7 +129,7 @@ const requisitaDadosViaCep = () => {
    cepValido.value = false
    loading.value = false
    if (dadosEndereco.value.cep.length === 8) {
-      getDadosViaCep(dadosEndereco.value.cep)
+      buscarDadosViaCep(dadosEndereco.value.cep)
          .then(response => {
             dadosEndereco.value = response
             loading.value = false

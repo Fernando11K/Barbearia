@@ -48,7 +48,7 @@ watchEffect(() => statusModal.value = props.statusProp);
 
 const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
 
-const preencheDados = (dados: any) => agendamento.value = new Agendamento(dados.data, dados.barbeiro, dados.servico, dados.local)
+const preencheDados = (dados: Agendamento) => agendamento.value = dados
 
 
 const validaDados = (validadeDosDados: boolean) => desabilitaBotao.value = validadeDosDados;
