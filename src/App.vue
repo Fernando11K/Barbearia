@@ -1,6 +1,6 @@
 <template>
   <router-view v-slot="{ Component, route }">
-    <Transition name="fade">
+    <Transition name="slide">
       <component :is="Component" :key="route.path" />
     </Transition>
   </router-view>
@@ -17,17 +17,16 @@ onMounted(() => {
 
 })
 
-
 </script>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.9s;
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.05s;
 }
 
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(50%);
 }
 </style>

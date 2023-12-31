@@ -13,7 +13,7 @@
 
     <q-scroll-area class="fit">
         <q-list>
-            <template v-for="(menuItem, index) in menuList" :key="index">
+            <template v-for="(menuItem, index) in menu" :key="index">
                 <q-item clickable v-if="menuItem.ativo" :active="!menuItem.ativo" v-ripple
                     @click="verificaDisponibilidadeDaFuncionalidade(menuItem)" :to="menuItem.rota">
                     <q-item-section avatar>
@@ -34,7 +34,7 @@ import { auth } from 'src/boot/firebase'
 import { signOut } from 'firebase/auth';
 import { useUsuarioStore } from '../../stores/useUsuarioStore';
 import { warning, info, danger } from '../../hooks/alerta'
-import { computed } from 'vue';
+import { menu } from 'src/utils/menu'
 
 
 const usuarioStore = useUsuarioStore()
@@ -70,51 +70,4 @@ const logout = async (label: string) => {
 
     }
 }
-
-const menuList = computed(() => [
-
-    {
-        icon: 'fa-solid fa-user',
-        label: usuarioStore.getNome ? usuarioStore.getNome : usuarioStore.getEmail ? 'Bem vindo' : 'Entrar',
-        iconColor: 'primary',
-        separator: true,
-        rota: !usuarioStore.getEmail ? '/login' : '',
-        ativo: true
-
-    },
-    {
-        icon: 'fa-regular fa-calendar-days fa-beat',
-        label: 'Agendamento',
-        separator: true,
-        ativo: true,
-        iconColor: 'primary'
-
-    },
-    {
-        icon: 'fa-solid fa-house',
-        label: 'Tabela de Preços',
-        ativo: false,
-        separator: false
-
-
-    },
-    {
-        icon: 'fa-regular fa-clipboard',
-        label: 'Gerencia Agendamentos',
-        separator: true,
-        rota: '/gerencia-agendamentos',
-        ativo: usuarioStore.getEmail,
-        iconColor: 'primary',
-    },
-    {
-        icon: 'fa-solid fa-person-walking-arrow-right',
-        label: 'Sair',
-        separator: true,
-        rota: '/login',
-        ativo: usuarioStore.getEmail,
-        iconColor: 'primary',
-    },
-]);
-
-
 </script>
