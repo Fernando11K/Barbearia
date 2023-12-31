@@ -4,7 +4,7 @@
             <q-card>
                 <q-skeleton v-if="!imagemCarregada" animation="wave" :style="{ 'min-height': `${q.screen.height}px` }" />
                 <q-img class="relative-position" :src="require('src/assets/tabelaPrecos.jpeg')" loading="lazy"
-                    @load="imagemCarregada = true" width="100%" height="100%" />
+                    @load="imagemCarregada = true" width="100%" height="100%" :ratio="9 / 16" />
             </q-card>
         </div>
     </q-page>
