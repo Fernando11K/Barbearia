@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh LpR fFf">
+  <q-layout view="hHh LpR fFf" :class="{ 'bg-dark': q.platform.is.desktop }">
 
     <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer"
       @clickBotaoPainelLateralDireito="toggleRightDrawer" />
@@ -23,6 +23,9 @@ import QHeaderComponent from 'src/components/MainLayout/QHeaderComponent.vue'
 import QFooterComponent from 'src/components/MainLayout/QFooterComponent.vue';
 import ModalAgendamento from 'src/components/Agendamento/ModalAgendamento.vue'
 import QDrawerConteudo from 'src/components/MainLayout/QDrawerConteudo.vue';
+import { useQuasar } from 'quasar';
+
+const q = useQuasar()
 
 const corToolbar = ref('bg-blue-8')
 const leftDrawerOpen = ref(false)

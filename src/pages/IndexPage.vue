@@ -1,7 +1,7 @@
 <template>
-  <q-page class="bg-blue-4 flex flex-center">
-    <div v-if="q.platform.is.desktop && exibeMensagem" class="q-pa-md row justify-center desktop-only">
-      <div style="width: 100%; max-width: 400px" class="">
+  <q-page class="bg-white fonte-index fonte-principal">
+    <section v-if="false && q.platform.is.desktop && exibeMensagem" class="row justify-center  q-pa-md ">
+      <div style="max-width: 400px" class="full-width">
         <q-chat-message v-show="bemVindo" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png"
           name="Barbearia" :text="['Olá, Bem vindo!']" stamp="agora mesmo" bg-color="grey-12" class="" />
         <q-chat-message v-show="!loading" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png"
@@ -22,33 +22,44 @@
           <q-spinner-dots />
         </q-chat-message>
       </div>
-    </div>
-
-    <section v-else>
-      <q-card class="row justify-center" style="border-radius: 0%">
-        <q-card-section vertical class="col-12 col-md-9">
-          <q-card-section>
-            <div class="text-h5 text-bold tex-left">O Refúgio Clássico da Elegância Masculina</div>
-
-          </q-card-section>
-          <q-card-section style="font-size: 16px;">
-            Sinta a diferença na Barbers Dean, onde a tradição encontra a modernidade para criar experiências únicas.
-            Nossos
-            barbeiros experientes são verdadeiros mestres na arte do corte e da barba, proporcionando não apenas um
-            serviço,
-            mas uma jornada para o estilo clássico e a excelência.
+    </section>
 
 
-            Barbers Dean: onde a tradição encontra a modernidade, e cada cliente é tratado como parte de nossa história.
-            Estilo, qualidade e camaradagem - experimente o melhor na Barbers Dean.
-            <div class="q-pt-xs">Agende seu momento de elegância agora! 🎩💈 </div>
-            <span>#BarbersDean #EstiloClássico #ExperiênciaMemorável</span>
+    <section v-else class="full-width">
 
-          </q-card-section>
-        </q-card-section>
-      </q-card>
+      <div class="row bg-grey-1">
 
-      <CarrosselComponent />
+        <q-parallax :height="700"
+          src="https://img.freepik.com/fotos-gratis/homem-em-um-salao-de-barbearia-fazendo-o-corte-de-cabelo-e-barba_1303-20955.jpg?w=1380&t=st=1704053733~exp=1704054333~hmac=8c4d4243928536f929f56e1512804befa96be96a6544ac5de899362fe17b042e">
+          <h2 class="text-white">O Refúgio Clássico da Elegância Masculina</h2>
+
+
+
+        </q-parallax>
+        <div class="bg-white q-pa-xl justify-center">
+          Sinta a diferença na Barbers Dean, onde a tradição encontra a modernidade para criar experiências únicas.
+          Nossos
+          barbeiros experientes são verdadeiros mestres na arte do corte e da barba, proporcionando não apenas um
+          serviço,
+          mas uma jornada para o estilo clássico e a excelência.
+
+
+          Barbers Dean: onde a tradição encontra a modernidade, e cada cliente é tratado como parte de nossa história.
+          Estilo, qualidade e camaradagem - experimente o melhor na Barbers Dean.
+          <div class="q-pt-xs">Agende seu momento de elegância agora! 🎩💈 </div>
+          <span>#BarbersDean #EstiloClássico #ExperiênciaMemorável</span>
+
+        </div>
+
+      </div>
+      <q-separator color="grey-4" />
+
+      <div class="bg-blue-1">
+        <div class="text-center text-h2 q-pa-xl">Conheça Nossos Trabalhos</div>
+        <CarrosselComponent class="justify-center " />
+      </div>
+
+
     </section>
 
     <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
@@ -82,4 +93,16 @@ onMounted(() => {
 
 
 </script>
+
+<style scoped>
+.fonte-principal {
+  font-size: 1.2rem;
+
+}
+
+.fonte-conteudo {
+  font-size: 1rem;
+
+}
+</style>
 

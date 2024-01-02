@@ -1,7 +1,6 @@
 <template>
-    <q-card class="fit">
-        <q-carousel swipeable animated v-model="slide" thumbnails infinite
-            :style="{ 'min-height': q.platform.is.desktop ? '920px' : 'auto' }">
+    <div class="row q-pa-md my-card">
+        <q-carousel swipeable animated v-model="slide" thumbnails infinite height="75%" class="col-9">
             <q-carousel-slide :name="1"
                 img-src="https://img.freepik.com/free-photo/hairdresser-grooming-their-client_23-2149205925.jpg?w=740&t=st=1704036365~exp=1704036965~hmac=73af9ba319730098652e45ad9e76ebc88f500e5706697132417a53584dd3ddf0" />
             <q-carousel-slide :name="2"
@@ -13,15 +12,24 @@
             <q-carousel-slide :name="5"
                 img-src="https://img.freepik.com/fotos-gratis/jovem-afro-americano-visitando-uma-barbearia_1157-47699.jpg?w=1380&t=st=1704053958~exp=1704054558~hmac=c4bcd2240783556f2f8116edfba9fc9f87aeb4e5352df664e423404396404d12" />
         </q-carousel>
-    </q-card>
+    </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useQuasar } from 'quasar'
-const q = useQuasar()
+
+
 const slide = ref(1)
 
 
 </script>
+<style scoped>
+.my-card {
+    height: 920px;
+    max-width: 100%;
+
+
+
+}
+</style>
 
