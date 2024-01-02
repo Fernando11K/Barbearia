@@ -1,6 +1,7 @@
 
 <template>
-  <q-header color="purple-13" reveal elevated :class="corToolbar" class="glossy text-white transparent " height-hint="98">
+  <q-header color="purple-13" reveal elevated class="glossy text-white bg-blue-8" height-hint="98"
+    :class="{ 'transparent': q.platform.is.desktop }">
     <q-toolbar>
       <q-btn v-show="q.platform.is.desktop || (q.platform.is.mobile && telaHorizontal)" class="orientation-landscape"
         dense flat round icon="menu" @click="capturaClickDoBotaoPainelLateralEsquerdo" />
@@ -24,7 +25,7 @@ import { AppFullscreen, useQuasar } from 'quasar'
 import { computed } from 'vue';
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo', 'clickBotaoPainelLateralDireito']);
 const q = useQuasar()
-defineProps(['titulo', 'corToolbar'])
+defineProps(['titulo'])
 
 
 const toggleFullscreen = () => (AppFullscreen.isActive) ? AppFullscreen.exit() : AppFullscreen.request()

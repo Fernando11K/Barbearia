@@ -29,8 +29,7 @@
 
       <div class="row bg-grey-1">
 
-        <q-parallax :height="700"
-          src="https://img.freepik.com/fotos-gratis/homem-em-um-salao-de-barbearia-fazendo-o-corte-de-cabelo-e-barba_1303-20955.jpg?w=1380&t=st=1704053733~exp=1704054333~hmac=8c4d4243928536f929f56e1512804befa96be96a6544ac5de899362fe17b042e">
+        <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')">
           <h2 class="text-white">O Refúgio Clássico da Elegância Masculina</h2>
 
 
@@ -52,11 +51,16 @@
         </div>
 
       </div>
-      <q-separator color="grey-4" />
+      <q-separator color="blue-2" />
 
-      <div class="bg-blue-1">
-        <div class="text-center text-h2 q-pa-xl">Conheça Nossos Trabalhos</div>
-        <CarrosselComponent class="justify-center " />
+      <div>
+        <div class="text-center text-h2 q-pa-md text-bold text-blue-2 bg-dark text-italic"
+          :class="{ 'text-h5': q.platform.is.mobile }">Conheça
+          Nossos
+          Trabalhos
+        </div>
+
+        <CarrosselComponent class="justify-center" />
       </div>
 
 

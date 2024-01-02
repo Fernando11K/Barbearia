@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="hHh LpR fFf" :class="{ 'bg-dark': q.platform.is.desktop }">
+  <q-layout view="hHh LpR fFf" :class="{ 'bg-blue-8': q.platform.is.desktop }">
 
-    <QHeaderComponent :corToolbar="corToolbar" :titulo="'Barbearia'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer"
+    <QHeaderComponent :titulo="'Barbearia'" @clickBotaoPainelLateralEsquerdo="toggleLeftDrawer"
       @clickBotaoPainelLateralDireito="toggleRightDrawer" />
 
     <q-drawer v-model="leftDrawerOpen" side="left" bordered>
@@ -27,7 +27,7 @@ import { useQuasar } from 'quasar';
 
 const q = useQuasar()
 
-const corToolbar = ref('bg-blue-8')
+
 const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
 const statusModalAgendamento = ref(false);
