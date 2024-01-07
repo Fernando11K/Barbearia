@@ -31,7 +31,6 @@
   
 <script lang="ts" setup>
 import { QInput } from 'quasar';
-import { defineProps } from 'vue'
 import { date } from 'quasar'
 const dataAtual = new Date();
 const data6MesFuturos = date.addToDate(dataAtual, { months: 6 })
