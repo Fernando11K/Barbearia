@@ -1,7 +1,6 @@
 <template >
    <section class="row col-12 ">
 
-      <InputDate v-model="data" autofocus class="col-12" @updateModelValue="atualiza" />
       <q-select v-model.trim="barbeiro" :options="opcoesBarbeiros" use-input @filter="filtro" transition-show="scale"
          transition-hide="scale" options-cover clearable label="Selecione o profissional:" dense rounded outlined
          class="col-12 q-pr-xs"
@@ -10,6 +9,7 @@
             <q-icon name="fa-solid fa-user-tie" color="primary" />
          </template>
       </q-select>
+      <InputDate v-model="data" autofocus class="col-12" @updateModelValue="atualiza" />
 
       <q-select v-model="local" dense rounded outlined :options="localAtendimento"
          label="Selecione o local de atendimento:" behavior="menu" class="col-12 q-pr-xs q-pb-sm"
@@ -67,7 +67,7 @@ import { computed, onMounted, ref, watch } from 'vue';
 import InputDate from './InputDate.vue';
 import { info, danger } from '../../hooks/alerta'
 import { buscarDadosViaCep } from 'src/service/EnderecoService'
-import { QSelectOption, date } from 'quasar'
+import { QSelectOption } from 'quasar'
 import { buscarBarbeiros } from 'src/service/BabeiroService'
 import { EnumLocalAtendimento } from 'src/model/enum/EnumLocalAtendimento'
 import { EnumTipoResidencia } from 'src/model/enum/EnumTipoResidencia'
@@ -75,9 +75,8 @@ import { Agendamento } from 'src/model/Agendamento';
 
 const emits = defineEmits(['dadosValidos', 'preencheDados']);
 onMounted(() => { emiteValidacaoDados() });
-const timeStamp = Date.now()
-const dataAtual = date.formatDate(timeStamp, 'DD/MM/YYYY HH:mm')
-const data = ref(dataAtual)
+
+const data = ref('')
 const barbeiro = ref<QSelectOption<number | null>>({ value: null, label: '' })
 const listaBarbeiros = buscarBarbeiros()
 const opcoesBarbeiros = ref(listaBarbeiros)
@@ -97,9 +96,6 @@ const localAtendimento = [
 ];
 
 const local = ref(localAtendimento[0])
-
-
-
 
 const enviaDados = () => { preencheDados() }
 const preencheDados = () => { emits('preencheDados', new Agendamento(data.value, barbeiro.value.label, 'corte', local.value.id)) }
@@ -143,11 +139,11 @@ const validaDados = () => {
    return !data.value || !barbeiro.value?.label || (local.value.id === EnumLocalAtendimento.Outro_Local && (regrasValidacaoOutroLocal.value))
 }
 const regrasValidacaoOutroLocal = computed(() => (modelTipoResidencia.value.id === EnumTipoResidencia.Casa && !dadosEndereco.value.numeroResidencia) || (modelTipoResidencia.value.id === EnumTipoResidencia.Apartamento && (!dadosEndereco.value.numeroApartamento || !dadosEndereco.value.numeroResidencia)))
-const emiteValidacaoDados = () => emits('dadosValidos', validaDados())
 
 const iconeReativoTipoResidencia = computed(() => (modelTipoResidencia.value.id === 0) ? 'fa-solid fa-house' : 'fa-solid fa-building')
 const alterarCorInputCEP = computed(() => (cepValido.value) ? 'light-green-14' : 'red-13')
 
+const emiteValidacaoDados = () => emits('dadosValidos', validaDados())
 defineExpose({ enviaDados })
 
 watch([data, barbeiro, local, modelTipoResidencia, () => dadosEndereco.value.numeroResidencia, () => dadosEndereco.value.numeroApartamento], () => {
