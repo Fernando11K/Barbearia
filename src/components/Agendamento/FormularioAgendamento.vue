@@ -82,7 +82,7 @@ const barbeiro = ref<QSelectOption<number | null>>({ value: null, label: '' })
 const listaBarbeiros = buscarBarbeiros()
 const opcoesBarbeiros = ref(listaBarbeiros)
 
-const filtro = (valor: string, update: any) => {
+const filtro = (valor: string, update: CallableFunction) => {
    console.log(valor)
    if (valor === '') {
       update(() => opcoesBarbeiros.value = listaBarbeiros)
@@ -145,7 +145,7 @@ const requisitaDadosViaCep = () => {
 }
 
 const validaDados = () => {
-   return !barbeiro.value?.label || (local.value.id === EnumLocalAtendimento.Outro_Local && (regrasValidacaoOutroLocal.value))
+   return !data.value || !barbeiro.value?.label || (local.value.id === EnumLocalAtendimento.Outro_Local && (regrasValidacaoOutroLocal.value))
 }
 const regrasValidacaoOutroLocal = computed(() => (modelTipoResidencia.value.id === EnumTipoResidencia.Casa && !dadosEndereco.value.numeroResidencia) || (modelTipoResidencia.value.id === EnumTipoResidencia.Apartamento && (!dadosEndereco.value.numeroApartamento || !dadosEndereco.value.numeroResidencia)))
 const emiteValidacaoDados = () => emits('dadosValidos', validaDados())

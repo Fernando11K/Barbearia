@@ -23,7 +23,7 @@
                         {{ menuItem.label }}
                     </q-item-section>
                 </q-item>
-                <q-separator :key="'sep' + index" v-if="menuItem.separator" />
+                <q-separator v-if="menuItem.separator" />
             </template>
         </q-list>
     </q-scroll-area>
@@ -35,6 +35,7 @@ import { signOut } from 'firebase/auth';
 import { useUsuarioStore } from '../../stores/useUsuarioStore';
 import { warning, info, danger } from '../../hooks/alerta'
 import { menu } from 'src/utils/menu'
+import IMenu from 'src/interfaces/IMenu'
 
 
 const usuarioStore = useUsuarioStore()
@@ -42,7 +43,7 @@ const usuarioStore = useUsuarioStore()
 const emits = defineEmits(['abreModalAgendamento'])
 const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/barbers.den/', 250);
 
-const verificaDisponibilidadeDaFuncionalidade = (itemMenu: any) => (!itemMenu.ativo) ? warning('A funcionalidade estará disponível em breve!') : executaAcao(itemMenu.label)
+const verificaDisponibilidadeDaFuncionalidade = (itemMenu: IMenu) => (!itemMenu.ativo) ? warning('A funcionalidade estará disponível em breve!') : executaAcao(itemMenu.label)
 
 
 const executaAcao = (label: string) => {

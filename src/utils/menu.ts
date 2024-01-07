@@ -2,9 +2,10 @@
 
 import { computed } from 'vue';
 import { useUsuarioStore } from 'src/stores/useUsuarioStore';
-
+import IMenu from 'src/interfaces/IMenu'
 
 const usuarioStore = useUsuarioStore()
+
 
 export const menu = computed(() => [
     {
@@ -50,4 +51,4 @@ export const menu = computed(() => [
         iconColor: 'primary',
         rota: '/login'
     },
-]);
+] as Array<IMenu>);

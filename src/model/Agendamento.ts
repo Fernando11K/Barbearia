@@ -4,6 +4,8 @@ import { useUsuarioStore } from 'src/stores/useUsuarioStore';
 
 const usuario = useUsuarioStore()
 class Agendamento {
+
+    private id?: string
     private cliente: string | null;
     private data: string;
     private barbeiro: string;
@@ -22,7 +24,9 @@ class Agendamento {
 
 
 
-    // Métodos acessores
+    getId(): string | undefined {
+        return this.id
+    }
     getCliente(): string {
         return this.cliente ? this.cliente : '';
     }

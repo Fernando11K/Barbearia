@@ -1,13 +1,13 @@
 <template>
     <section class="q-pa-md">
-        <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="data"
-            :selected-rows-label="getSelectedString" selection="multiple" v-model:selected="selected"
+        <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="id"
+            :selected-rows-label="getSelectedString" selection="single" v-model:selected="selected"
             table-header-class="text-bold" rowsPerPageLabel="Resultados por Pagina:" :loading="loading">
 
             <template v-slot:body="props">
                 <q-tr :props="props">
                     <q-td>
-                        <q-checkbox v-model="props.selected" />
+                        <q-checkbox v-model="props.selected" disable />
                     </q-td>
                     <q-td key="acoes" :props="props">
                         <q-btn color="primary" icon="fa-solid fa-pen-to-square" flat round class="q-mr-md" />
@@ -42,11 +42,15 @@
 import { onMounted, ref } from 'vue'
 
 import { buscarAgendamentos } from 'src/service/AgendamentoService'
+
 const rows = ref()
 const loading = ref(true)
+const selected = ref([])
+
 rows.value = buscarAgendamentos()
 onMounted(() => {
     loading.value = false
+
 })
 
 const columns = [
@@ -60,15 +64,8 @@ const columns = [
 
 ]
 
-
-
-
-const selected = ref([])
-
-
-
 const getSelectedString = () => {
-    return selected.value.length === 0 ? '' : `${selected.value.length} record${selected.value.length > 1 ? 's' : ''} selected of ${rows.value.length}`
+    return selected.value.length === 0 ? '' : `${selected.value.length} linha${selected.value.length > 1 ? 's' : ''} selecionada de ${rows.value.length} linhas`
 }
 
 

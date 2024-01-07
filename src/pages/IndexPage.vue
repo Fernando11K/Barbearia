@@ -54,7 +54,7 @@
       <q-separator color="blue-2" />
 
       <div>
-        <div class="text-center text-h2 q-pa-md text-bold text-blue-2 bg-dark text-italic"
+        <div class="text-center text-h2 q-pa-md text-bold text-blue-1 bg-dark "
           :class="{ 'text-h5': q.platform.is.mobile }">Conheça
           Nossos
           Trabalhos
