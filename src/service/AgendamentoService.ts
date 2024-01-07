@@ -42,7 +42,7 @@ const atualizarAgendamento = (agendamento: Agendamento) => {
 
     if (dados.id) {
         update(agendamentoByIdRef(dados.id), dados)
-            .then(response => {
+            .then(() => {
 
                 positive('Agendamento alterado com sucesso')
                 return true

@@ -83,12 +83,7 @@ const listaBarbeiros = buscarBarbeiros()
 const opcoesBarbeiros = ref(listaBarbeiros)
 
 const filtro = (valor: string, update: CallableFunction) => {
-   console.log(valor)
-   if (valor === '') {
-      update(() => opcoesBarbeiros.value = listaBarbeiros)
-      return;
-   }
-   update(() => opcoesBarbeiros.value = listaBarbeiros.filter(v => v.label.toLowerCase().indexOf(valor.toLowerCase()) > -1));
+   update(() => opcoesBarbeiros.value = (valor === '') ? listaBarbeiros : listaBarbeiros.filter(v => v.label.toLowerCase().indexOf(valor.toLowerCase()) > -1));
 }
 
 
