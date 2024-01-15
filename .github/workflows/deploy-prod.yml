@@ -13,6 +13,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Configurar o Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git remote set-url origin https://$ACTION_TOKEN@github.com/Fernando11K/Barbearia.git
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
