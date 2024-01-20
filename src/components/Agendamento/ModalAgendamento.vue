@@ -34,11 +34,7 @@ import { ref, watchEffect } from 'vue';
 import { criarAgendamento } from 'src/service/AgendamentoService'
 import { Agendamento } from 'src/model/Agendamento';
 
-
-
-
 const agendamento = ref<Agendamento | null>(null)
-
 
 const props = defineProps({ statusProp: { type: Boolean } });
 const emits = defineEmits(['atualizaStatusModal']);

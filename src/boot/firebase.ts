@@ -9,14 +9,15 @@ import { getDatabase, ref, push, onValue } from 'firebase/database';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyABqMyEk1oSJEFTvS0E8CqpOwQ6eTeeXDM',
-  authDomain: 'barbearia-e-mercearia.firebaseapp.com',
-  projectId: 'barbearia-e-mercearia',
-  storageBucket: 'barbearia-e-mercearia.appspot.com',
-  messagingSenderId: '299336766206',
-  appId: '1:299336766206:web:de10ab2426cb0797928baf',
-  measurementId: 'G-P25WE9Z1GB'
+  apiKey: 'AIzaSyD47inOiGiqV1lzt9r6Ltc2vYqtqHnIoBc',
+  authDomain: 'barbearia-90acc.firebaseapp.com',
+  projectId: 'barbearia-90acc',
+  storageBucket: 'barbearia-90acc.appspot.com',
+  messagingSenderId: '1064725248483',
+  appId: '1:1064725248483:web:9114ceb5aaa4b7b71fc8d6',
+  measurementId: 'G-YZSZ7Y0MQ9'
 };
+
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
