@@ -33,34 +33,34 @@
 import { QInput, date } from 'quasar';
 import { formataDDMMYYYYHHmmParaDate as formataData } from 'src/utils/dateUtils'
 
-const retornaDataHorarioAtual = () => new Date()
-const data6MesFuturos = date.adjustDate(retornaDataHorarioAtual(), { months: 6, hours: 23, minutes: 59 })
 const props = defineProps(['modelValue'])
 
 const emits = defineEmits(['updateModelValue'])
-
 const atualiza = (data: string) => { emits('updateModelValue', data); }
 
 const regexData = new RegExp('^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3} ([01][0-9]|2[0-3]):[0-5][0-9]$')
 const validaData = [(val: string) => regexData.test(val) || exibeMensagemValidacao()]
+
 const exibeMensagemValidacao = () => {
   atualiza('')
   return 'Data em formato inválido!'
 }
+
+const retornaDataHorarioAtual = () => new Date()
+const data6MesFuturos = date.adjustDate(retornaDataHorarioAtual(), { months: 6, hours: 23, minutes: 59 })
 const opcoesData = (data: string) => {
 
   const dataAtual = retornaDataHorarioAtual();
   return date.isBetweenDates(new Date(data.split('/')?.toString()), dataAtual, data6MesFuturos, { onlyDate: true, inclusiveFrom: true, inclusiveTo: true });
 }
-const opcoesHorario = (hora: number, minutos: number) => {
-  return validacoesHorarioAgendamento(hora, minutos)
-}
+const opcoesHorario = (hora: number, minutos: number) => validacoesHorarioAgendamento(hora, minutos)
+
 const validacoesHorarioAgendamento = (hora: number, minutos: number) => {
 
   const dataHorarioAtual = retornaDataHorarioAtual();
   const dataAtualComHorarioRecebido = date.adjustDate(dataHorarioAtual, { hours: hora, minutes: minutos })
   const dataSelecionada = formataData(props.modelValue) as Date
-  const periodoInvalido = hora < 9 || hora > 17
+  const periodoInvalido = (hora < 9 || hora > 17)
   if (minutos % 15 != 0) {
     return false
   }

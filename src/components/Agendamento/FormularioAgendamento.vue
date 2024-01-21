@@ -121,7 +121,7 @@ const requisitaDadosViaCep = () => {
 }
 
 const validaDados = () => {
-   return !data.value || !barbeiro.value?.label || (local.value.id === EnumLocalAtendimento.Outro_Local && (regrasValidacaoOutroLocal.value))
+   return !data.value || data.value.endsWith('00:00') || !barbeiro.value?.label || (local.value.id === EnumLocalAtendimento.Outro_Local && (regrasValidacaoOutroLocal.value))
 }
 const regrasValidacaoOutroLocal = computed(() => (modelTipoResidencia.value.id === EnumTipoResidencia.Casa && !dadosEndereco.value.numeroResidencia) || (modelTipoResidencia.value.id === EnumTipoResidencia.Apartamento && (!dadosEndereco.value.numeroApartamento || !dadosEndereco.value.numeroResidencia)))
 
