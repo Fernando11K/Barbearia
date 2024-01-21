@@ -1,9 +1,9 @@
 <template>
     <div>
-        <q-btn v-if="false" label="Agendamento" color="primary" style="min-width: 90vw; max-width: 95%;" />
-        <q-dialog v-model="statusModal" class="q-mt-xl" persistent>
-            <q-card class="my-card">
-                <q-card-section class="bg-primary  text-white ">
+        <q-btn v-if="false" label="Agendamento" color="primary" />
+        <q-dialog v-model="statusModal" class="q-mt-xl" persistent transition-show="slide-up" transition-hide="rotate">
+            <q-card ref="card">
+                <q-card-section class="bg-primary text-white ">
                     <div class="text-h6 row justify-between">
                         <q-icon class="q-mr-md q-pt-xs" size="sm" name="fa-regular fa-calendar-days" />Agendamento
                         <q-btn icon="close" flat round dense v-close-popup @click="atualizaStatusModalExternamente()" />
@@ -60,6 +60,9 @@ const realizaAgendamento = () => {
 }
 const agendar = () => { if (agendamento.value) { criarAgendamento(agendamento.value.getAgendamento()) } }
 const atualizaStatusModalExternamente = () => emits('atualizaStatusModal');
+const card = ref(null)
+
+
 
 </script>
   

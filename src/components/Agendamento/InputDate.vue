@@ -30,8 +30,9 @@
 </template>
   
 <script lang="ts" setup>
-import { QInput } from 'quasar';
-import { date } from 'quasar'
+import { QInput, date } from 'quasar';
+
+
 const dataAtual = new Date();
 const data6MesFuturos = date.addToDate(dataAtual, { months: 6 })
 defineProps(['modelValue'])
@@ -47,10 +48,9 @@ const exibeMensagemValidacao = () => {
   return 'Data em formato inválido!'
 }
 const opcoesData = (data: string) => {
-  return date.isBetweenDates(new Date(data.split('/')), dataAtual, data6MesFuturos, { onlyDate: true, inclusiveFrom: true, inclusiveTo: true });
+
+  return date.isBetweenDates(new Date(data.split('/')?.toString()), dataAtual, data6MesFuturos, { onlyDate: true, inclusiveFrom: true, inclusiveTo: true });
 }
-
-
 
 </script>
   

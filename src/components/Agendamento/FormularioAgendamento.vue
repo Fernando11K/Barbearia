@@ -1,15 +1,7 @@
 <template >
    <section class="row col-12 ">
-
-      <q-select v-model.trim="barbeiro" :options="opcoesBarbeiros" use-input @filter="filtro" transition-show="scale"
-         transition-hide="scale" options-cover clearable label="Selecione o profissional:" dense rounded outlined
-         class="col-12 q-pr-xs"
-         :rules="[val => val && val?.label.length > 0 || 'Favor selecionar um profissional para o atendimento']">
-         <template v-slot:prepend>
-            <q-icon name="fa-solid fa-user-tie" color="primary" />
-         </template>
-      </q-select>
-      <InputDate v-model="data" autofocus class="col-12" @updateModelValue="atualiza" />
+      <SelectBarbeiro v-model="barbeiro" class="col-12" />
+      <InputDate v-model="data" class="col-12" @updateModelValue="atualiza" />
 
       <q-select v-model="local" dense rounded outlined :options="localAtendimento"
          label="Selecione o local de atendimento:" behavior="menu" class="col-12 q-pr-xs q-pb-sm"
@@ -68,23 +60,16 @@ import InputDate from './InputDate.vue';
 import { info, danger } from '../../hooks/alerta'
 import { buscarDadosViaCep } from 'src/service/EnderecoService'
 import { QSelectOption } from 'quasar'
-import { buscarBarbeiros } from 'src/service/BabeiroService'
 import { EnumLocalAtendimento } from 'src/model/enum/EnumLocalAtendimento'
 import { EnumTipoResidencia } from 'src/model/enum/EnumTipoResidencia'
 import { Agendamento } from 'src/model/Agendamento';
+import SelectBarbeiro from './SelectBarbeiro.vue';
 
 const emits = defineEmits(['dadosValidos', 'preencheDados']);
 onMounted(() => { emiteValidacaoDados() });
 
 const data = ref('')
 const barbeiro = ref<QSelectOption<number | null>>({ value: null, label: '' })
-const listaBarbeiros = buscarBarbeiros()
-const opcoesBarbeiros = ref(listaBarbeiros)
-
-const filtro = (valor: string, update: CallableFunction) => {
-   update(() => opcoesBarbeiros.value = (valor === '') ? listaBarbeiros : listaBarbeiros.filter(v => v.label.toLowerCase().indexOf(valor.toLowerCase()) > -1));
-}
-
 
 const dadosEndereco = ref(<IEndereco>{})
 const loading = ref(false)
@@ -119,7 +104,7 @@ const cepValido = ref(false)
 const requisitaDadosViaCep = () => {
    cepValido.value = false
    loading.value = false
-   if (dadosEndereco.value.cep.length === 8) {
+   if (dadosEndereco.value?.cep?.length === 8) {
       buscarDadosViaCep(dadosEndereco.value.cep)
          .then(response => {
             dadosEndereco.value = response
