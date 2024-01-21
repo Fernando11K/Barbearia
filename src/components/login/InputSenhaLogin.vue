@@ -18,7 +18,7 @@ const emits = defineEmits(['update:modelValue'])
 
 defineProps(['modelValue'])
 
-const isPassword = ref(<boolean>true)
+const isPassword = ref(true)
 const atualiza = (senha: string | number | null) => emits('update:modelValue', senha)
 
 

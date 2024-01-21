@@ -15,10 +15,10 @@
     </template>
 
     <template v-slot:append>
-      <q-icon name="access_time" class="cursor-pointer">
+      <q-icon name="access_time" class="cursor-pointer" color="primary">
         <q-popup-proxy cover transition-show="scale" transition-hide="scale">
           <q-time id="horário agendamento" :modelValue="modelValue" @update:modelValue="atualiza" mask="DD/MM/YYYY HH:mm"
-            format24h :hour-options="[9, 10, 11, 12, 13, 14, 15, 16, 17]" :minute-options="[0, 15, 30, 45]">
+            format24h :options="opcoesHorario">
             <div class="row items-center justify-end">
               <q-btn v-close-popup label="Fechar" color="primary" flat />
             </div>
@@ -31,11 +31,11 @@
   
 <script lang="ts" setup>
 import { QInput, date } from 'quasar';
+import { formataDDMMYYYYHHmmParaDate as formataData } from 'src/utils/dateUtils'
 
-
-const dataAtual = new Date();
-const data6MesFuturos = date.addToDate(dataAtual, { months: 6 })
-defineProps(['modelValue'])
+const retornaDataHorarioAtual = () => new Date()
+const data6MesFuturos = date.adjustDate(retornaDataHorarioAtual(), { months: 6, hours: 23, minutes: 59 })
+const props = defineProps(['modelValue'])
 
 const emits = defineEmits(['updateModelValue'])
 
@@ -49,8 +49,32 @@ const exibeMensagemValidacao = () => {
 }
 const opcoesData = (data: string) => {
 
+  const dataAtual = retornaDataHorarioAtual();
   return date.isBetweenDates(new Date(data.split('/')?.toString()), dataAtual, data6MesFuturos, { onlyDate: true, inclusiveFrom: true, inclusiveTo: true });
 }
+const opcoesHorario = (hora: number, minutos: number) => {
+  return validacoesHorarioAgendamento(hora, minutos)
+}
+const validacoesHorarioAgendamento = (hora: number, minutos: number) => {
 
+  const dataHorarioAtual = retornaDataHorarioAtual();
+  const dataAtualComHorarioRecebido = date.adjustDate(dataHorarioAtual, { hours: hora, minutes: minutos })
+  const dataSelecionada = formataData(props.modelValue) as Date
+  const periodoInvalido = hora < 9 || hora > 17
+  if (minutos % 15 != 0) {
+    return false
+  }
+  if (!dataSelecionada || periodoInvalido) {
+    return false;
+  }
+  if (dataSelecionada > dataAtualComHorarioRecebido) {
+
+    return true
+  }
+
+  return date.isBetweenDates(dataAtualComHorarioRecebido, dataHorarioAtual, data6MesFuturos, { onlyDate: false, inclusiveFrom: true, inclusiveTo: true });
+
+
+}
 </script>
   
