@@ -2,7 +2,8 @@
     <section class="q-pa-md">
         <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="id"
             :selected-rows-label="getSelectedString" selection="single" v-model:selected="selected"
-            table-header-class="text-bold" rowsPerPageLabel="Resultados por Pagina:" :loading="loading">
+            table-header-class="text-bold" rowsPerPageLabel="Resultados por Pagina:" :loading="loading"
+            :sort-method="ordenarLinhas">
 
             <template v-slot:body="props">
                 <q-tr :props="props">
@@ -40,6 +41,7 @@
   
 <script setup>
 import { onMounted, ref } from 'vue'
+import { converteDataStringAgendamentoParaDate as parseDate } from 'src/utils/dateUtils'
 
 import { buscarAgendamentos } from 'src/service/AgendamentoService'
 
@@ -48,6 +50,20 @@ const loading = ref(true)
 const selected = ref([])
 
 rows.value = buscarAgendamentos()
+const ordenarLinhas = (rows, sortBy, descending) => {
+
+    return rows.sort((a, b) => {
+        const elementoA = a[sortBy]
+        const elementoB = b[sortBy]
+        if (sortBy === 'data') {
+            const data1 = parseDate(elementoA)
+            const data2 = parseDate(elementoB)
+
+            return descending ? (data2 - data1) : (data1 - data2)
+        }
+        return descending ? elementoB.localeCompare(elementoA) : elementoA.localeCompare(elementoB);
+    });
+}
 onMounted(() => {
     loading.value = false
 
@@ -60,12 +76,12 @@ const columns = [
     },
     { name: 'barbeiro', align: 'center', label: 'BARBEIRO', field: 'barbeiro', sortable: true },
     { name: 'cliente', align: 'center', label: 'CLIENTE', field: 'cliente', sortable: true },
-    { name: 'servico', align: 'center', label: 'SERVIÇO', field: 'servico' }
+    { name: 'servico', align: 'center', label: 'SERVIÇO', field: 'servico', sortable: true }
 
 ]
 
 const getSelectedString = () => {
-    return selected.value.length === 0 ? '' : `${selected.value.length} linha${selected.value.length > 1 ? 's' : ''} selecionada de ${rows.value.length} linhas`
+    return selected.value?.length === 0 ? '' : `${selected.value?.length} linha${selected.value?.length > 1 ? 's' : ''} selecionada de ${rows.value?.length} linhas`
 }
 
 
