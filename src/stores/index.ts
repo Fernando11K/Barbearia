@@ -14,8 +14,6 @@ export default store((/* { ssrContext } */) => {
 
   app.use(pinia);
   app.use(router);
-  //app.mount('#q-app'); talvez seja desnecessário testar
-
 
   return pinia
 })
