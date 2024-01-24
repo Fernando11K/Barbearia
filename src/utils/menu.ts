@@ -2,7 +2,7 @@
 
 import { computed } from 'vue';
 import { useUsuarioStore } from 'src/stores/useUsuarioStore';
-import IMenu from 'src/interfaces/IMenu'
+import IMenu from 'src/model/interfaces/IMenu'
 
 const usuarioStore = useUsuarioStore()
 

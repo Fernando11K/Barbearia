@@ -134,4 +134,4 @@ defineExpose({ enviaDados })
 watch([data, barbeiro, local, modelTipoResidencia, () => dadosEndereco.value.numeroResidencia, () => dadosEndereco.value.numeroApartamento], () => {
    emiteValidacaoDados()
 })
-</script>
+</script>../../model/interfaces/IEndereco

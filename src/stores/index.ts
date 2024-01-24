@@ -4,12 +4,8 @@ import { createPinia } from 'pinia'
 import App from '../App.vue';
 import router from '../router/index'
 
-
-
-
 export default store((/* { ssrContext } */) => {
   const pinia = createPinia()
-
   const app = createApp(App);
 
   app.use(pinia);

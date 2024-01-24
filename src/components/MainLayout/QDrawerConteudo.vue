@@ -71,4 +71,4 @@ const logout = async (label: string) => {
 
     }
 }
-</script>
+</script>src/model/interfaces/IMenu
