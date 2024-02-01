@@ -33,7 +33,7 @@
 import { auth } from 'src/boot/firebase'
 import { signOut } from 'firebase/auth';
 import { useUsuarioStore } from '../../stores/useUsuarioStore';
-import { warning, info, danger } from '../../hooks/alerta'
+import { warning, info, danger } from '../../utils/alerta'
 import { menu } from 'src/utils/menu'
 import IMenu from 'src/interfaces/IMenu'
 
@@ -71,4 +71,4 @@ const logout = async (label: string) => {
 
     }
 }
-</script>src/model/interfaces/IMenu
+</script>src/model/interfaces/IMenu../../utils/alerta

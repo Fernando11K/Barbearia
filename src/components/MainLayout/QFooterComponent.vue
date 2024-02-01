@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import ModalAgendamento from 'src/components/Agendamento/ModalAgendamento.vue'
 import { useUsuarioStore } from 'src/stores/useUsuarioStore';
-import { warning } from '../../hooks/alerta'
+import { warning } from '../../utils/alerta'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
@@ -62,3 +62,4 @@ const home = () => { router.push('/home') }
 
 
 </script>
+../../utils/alerta

@@ -57,7 +57,7 @@
 import { IEndereco } from '../../interfaces/IEndereco'
 import { computed, onMounted, ref, watch } from 'vue';
 import InputDate from './InputDate.vue';
-import { info, danger } from '../../hooks/alerta'
+import { info, danger } from '../../utils/alerta'
 import { buscarDadosViaCep } from 'src/service/EnderecoService'
 import { QSelectOption } from 'quasar'
 import { EnumLocalAtendimento } from 'src/model/enum/EnumLocalAtendimento'
@@ -134,4 +134,4 @@ defineExpose({ enviaDados })
 watch([data, barbeiro, local, modelTipoResidencia, () => dadosEndereco.value.numeroResidencia, () => dadosEndereco.value.numeroApartamento], () => {
    emiteValidacaoDados()
 })
-</script>../../model/interfaces/IEndereco
+</script>../../model/interfaces/IEndereco../../utils/alerta

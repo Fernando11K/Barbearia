@@ -1,15 +1,10 @@
 import { update } from 'firebase/database';
 import { agendamentoRef, agendamentoByIdRef, push, onValue } from 'src/boot/firebase';
-import { danger, positive } from 'src/hooks/alerta';
+import { danger, positive } from 'src/utils/alerta';
 import { Agendamento } from 'src/model/Agendamento';
 import { ref } from 'vue';
 
-
-
-
-
 const criarAgendamento = (agendamento: Agendamento) => {
-
 
     const dados = {
         cliente: agendamento.getCliente(),
@@ -22,12 +17,13 @@ const criarAgendamento = (agendamento: Agendamento) => {
         .then(response => {
             console.log(`ID_AGENDAMENTO: ${response.key}`)
             positive('Agendamento realizado com sucesso')
-            return true
+
         })
         .catch(() => {
             danger('Ocorreu um erro ao reallizar o agendamento')
-            return false
+
         })
+
 
 };
 const atualizarAgendamento = (agendamento: Agendamento) => {

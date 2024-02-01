@@ -9,10 +9,11 @@
           name="Barbearia" stamp="agora mesmo" bg-color="grey-12">
           <div>
             <span>
-              Sinta-se a vontade para explorar
+              Sistema em desenvolvimento
             </span>
             <q-space />
-            <span>o sistema
+            <span class="primary">por <a style="text-decoration: none;" href="https://br.linkedin.com/in/fernando11000"
+                target="_blank">Fernando11000</a>
             </span>
             <span> &nbsp;😊</span>
           </div>
@@ -66,30 +67,21 @@
 
 <script lang="ts" setup >
 import CarrosselComponent from 'src/components/Barbearia/PaginaPrincipal/CarrosselComponent.vue'
-import { useQuasar, QSpinnerFacebook } from 'quasar'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useQuasar } from 'quasar'
+import { ref, onMounted } from 'vue'
 
 const q = useQuasar()
-let timer: number | undefined
 
 onMounted(() => {
   ordemMensagens()
 
-
-
-})
-onBeforeUnmount(() => {
-  if (timer !== void 0) {
-    clearTimeout(timer)
-    q.loading.hide()
-  }
 })
 
 const loading = ref(true)
 const bemVindo = ref(false)
 const exibeMensagem = ref(true)
-const imagem = ref(null)
 
+const imagem = ref(null)
 
 const ordemMensagens = () => {
 
@@ -98,22 +90,6 @@ const ordemMensagens = () => {
   setTimeout(() => loading.value = false, 3000);
   setTimeout(() => exibeMensagem.value = false, 6000);
 }
-
-const showLoading = () => {
-  q.loading.show({
-    spinner: QSpinnerFacebook,
-    spinnerColor: 'primary',
-    spinnerSize: 140,
-    backgroundColor: 'white',
-    messageColor: 'black',
-  })
-  timer = setTimeout(() => {
-    q.loading.hide()
-    timer = void 0
-  }, 700) as unknown as number
-}
-
-showLoading()
 
 </script>
 
@@ -124,16 +100,6 @@ showLoading()
 
 .fonte-conteudo {
   font-size: 1rem;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
 

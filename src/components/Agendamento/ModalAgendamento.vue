@@ -33,8 +33,10 @@ import FormularioAgendamento from './FormularioAgendamento.vue';
 import { ref, watchEffect } from 'vue';
 import { criarAgendamento } from 'src/service/AgendamentoService'
 import { Agendamento } from 'src/model/Agendamento';
+import { QSpinnerFacebook, useQuasar } from 'quasar';
 
 const agendamento = ref<Agendamento | null>(null)
+const q = useQuasar()
 
 const props = defineProps({ statusProp: { type: Boolean } });
 const emits = defineEmits(['atualizaStatusModal']);
@@ -58,11 +60,32 @@ const realizaAgendamento = () => {
 
 
 }
-const agendar = () => { if (agendamento.value) { criarAgendamento(agendamento.value.getAgendamento()) } }
+const agendar = () => {
+    Spinner.mostrar();
+    if (agendamento.value) {
+        criarAgendamento(agendamento.value.getAgendamento())
+    }
+    Spinner.ocultar()
+}
 const atualizaStatusModalExternamente = () => emits('atualizaStatusModal');
 const card = ref(null)
 
-
+const Spinner = {
+    mostrar() {
+        q.loading.show({
+            spinner: QSpinnerFacebook,
+            spinnerColor: 'primary',
+            spinnerSize: 140,
+            backgroundColor: 'blue-11',
+            messageColor: 'grey-8',
+            message: '<p class="text-h6">Realizando. Aguarde...</p>',
+            html: true,
+        })
+    },
+    ocultar() {
+        q.loading.hide()
+    }
+}
 
 </script>
   

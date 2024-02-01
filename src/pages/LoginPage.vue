@@ -27,28 +27,48 @@ import { auth } from 'src/boot/firebase'
 import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import InputUsuarioLogin from '/src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
-import { positive, danger } from '../hooks/alerta'
+import { positive, danger } from '../utils/alerta'
 import { useUsuarioStore } from '../stores/useUsuarioStore';
-import { useQuasar } from 'quasar';
+import { useQuasar, QSpinnerFacebook } from 'quasar';
 
 const q = useQuasar()
 const card = ref<null | { $el: HTMLElement }>(null)
-
 const usuarioStore = useUsuarioStore()
 
 const router = useRouter()
 const login = ref({ email: '', senha: '' })
-
+const Spinner = {
+    mostrar() {
+        q.loading.show({
+            spinner: QSpinnerFacebook,
+            spinnerColor: 'primary',
+            spinnerSize: 140,
+            backgroundColor: 'blue-11',
+            messageColor: 'grey-8',
+            message: '<p class="text-h6">Tentando realizar login. Aguarde...</p>',
+            html: true,
+        })
+    },
+    ocultar() {
+        q.loading.hide()
+    }
+}
 const autenticacaoLocal = async () => {
+    Spinner.mostrar()
     await signInWithEmailAndPassword(auth, login.value.email, login.value.senha)
         .then(() => {
+            positive('Seja bem vindo!', 3000)
             router.push('/home')
 
         })
         .catch(() => danger('Usuário ou senha inválidos', 3000))
+        .finally(() => {
+            Spinner.ocultar()
+        })
 
 }
 const autenticacaoGoogle = async () => {
+    Spinner.mostrar()
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider)
         .then(() => {
@@ -62,6 +82,9 @@ const autenticacaoGoogle = async () => {
             danger('Ocorreu um erro')
         }
         )
+        .finally(() => {
+            Spinner.ocultar()
+        })
 }
 
 const alteraPosicaoCard = (estaEmFoco = true) => {
@@ -85,3 +108,4 @@ const alteraPosicaoCard = (estaEmFoco = true) => {
     border-radius: 25px;
 }
 </style>
+../utils/alerta
