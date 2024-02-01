@@ -31,10 +31,10 @@ const routes: RouteRecordRaw[] = [
       },
     ]
   },
-  // {
-  //   path: '/:catchAll(.*)', // Rota curinga para capturar todas as rotas
-  //   component: () => import('layouts/MainLayout.vue'),
-  //   children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
-  // },
+  {
+    path: '/:catchAll(.*)', // Rota curinga para capturar todas as rotas
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/ErrorNotFound.vue') }],
+  },
 ];
 export default routes;

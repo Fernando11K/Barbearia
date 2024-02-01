@@ -1,7 +1,8 @@
 <template>
-  <q-page class="bg-white fonte-index fonte-principal">
-    <section v-if="false && q.platform.is.desktop && exibeMensagem" class="row justify-center  q-pa-md ">
-      <div style="max-width: 400px" class="full-width">
+  <q-page class="bg-blue-4 fonte-index fonte-principal flex flex-center">
+
+    <section v-if="exibeMensagem" class="q-pa-md">
+      <div>
         <q-chat-message v-show="bemVindo" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png"
           name="Barbearia" :text="['Olá, Bem vindo!']" stamp="agora mesmo" bg-color="grey-12" class="" />
         <q-chat-message v-show="!loading" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png"
@@ -18,53 +19,44 @@
         </q-chat-message>
 
         <q-chat-message v-show="loading" name="Barbearia"
-          avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" bg-color="grey-12" class="">
+          avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" bg-color="grey-12" size="9">
           <q-spinner-dots />
         </q-chat-message>
       </div>
     </section>
+    <q-slide-transition :duration="2000">
+      <section v-show="!exibeMensagem" class="full-width">
+
+        <div class="row bg-grey-1">
+          <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')" ref="imagem">
+            <h2 class="text-white">O Refúgio Clássico da Elegância Masculina</h2>
+
+          </q-parallax>
+          <div class="bg-white q-pa-xl justify-center">
+            Sinta a diferença na Barbers Dean, onde a tradição encontra a modernidade para criar experiências únicas.
+            Nossos
+            barbeiros experientes são verdadeiros mestres na arte do corte e da barba, proporcionando não apenas um
+            serviço,
+            mas uma jornada para o estilo clássico e a excelência.
 
 
-    <section v-else class="full-width">
-
-      <div class="row bg-grey-1">
-
-        <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')">
-          <h2 class="text-white">O Refúgio Clássico da Elegância Masculina</h2>
-
-
-
-        </q-parallax>
-        <div class="bg-white q-pa-xl justify-center">
-          Sinta a diferença na Barbers Dean, onde a tradição encontra a modernidade para criar experiências únicas.
-          Nossos
-          barbeiros experientes são verdadeiros mestres na arte do corte e da barba, proporcionando não apenas um
-          serviço,
-          mas uma jornada para o estilo clássico e a excelência.
-
-
-          Barbers Dean: onde a tradição encontra a modernidade, e cada cliente é tratado como parte de nossa história.
-          Estilo, qualidade e camaradagem - experimente o melhor na Barbers Dean.
-          <div class="q-pt-xs">Agende seu momento de elegância agora! 🎩💈 </div>
-          <span>#BarbersDean #EstiloClássico #ExperiênciaMemorável</span>
-
+            Barbers Dean: onde a tradição encontra a modernidade, e cada cliente é tratado como parte de nossa história.
+            Estilo, qualidade e camaradagem - experimente o melhor na Barbers Dean.
+            <div class="q-pt-xs">Agende seu momento de elegância agora! 🎩💈 </div>
+            <span>#BarbersDean #EstiloClássico #ExperiênciaMemorável</span>
+          </div>
         </div>
-
-      </div>
-      <q-separator color="blue-2" />
-
-      <div>
-        <div class="text-center text-h2 q-pa-md text-bold text-blue-1 bg-dark "
-          :class="{ 'text-h5': q.platform.is.mobile }">Conheça
-          Nossos
-          Trabalhos
+        <q-separator color="blue-2" />
+        <div>
+          <div class="text-center text-h2 q-pa-md text-bold text-blue-1 bg-dark "
+            :class="{ 'text-h5': q.platform.is.mobile }">Conheça
+            Nossos
+            Trabalhos
+          </div>
+          <CarrosselComponent class="justify-center" />
         </div>
-
-        <CarrosselComponent class="justify-center" />
-      </div>
-
-
-    </section>
+      </section>
+    </q-slide-transition>
 
     <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
       <q-btn fab icon="keyboard_arrow_up" color="blue" class="" />
@@ -74,13 +66,29 @@
 
 <script lang="ts" setup >
 import CarrosselComponent from 'src/components/Barbearia/PaginaPrincipal/CarrosselComponent.vue'
-import { useQuasar } from 'quasar'
+import { useQuasar, QSpinnerFacebook } from 'quasar'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const q = useQuasar()
-import { ref, onMounted } from 'vue'
+let timer: number | undefined
+
+onMounted(() => {
+  ordemMensagens()
+
+
+
+})
+onBeforeUnmount(() => {
+  if (timer !== void 0) {
+    clearTimeout(timer)
+    q.loading.hide()
+  }
+})
+
 const loading = ref(true)
 const bemVindo = ref(false)
 const exibeMensagem = ref(true)
+const imagem = ref(null)
 
 
 const ordemMensagens = () => {
@@ -90,23 +98,42 @@ const ordemMensagens = () => {
   setTimeout(() => loading.value = false, 3000);
   setTimeout(() => exibeMensagem.value = false, 6000);
 }
-onMounted(() => {
-  // scrollToElement()
-  ordemMensagens()
-})
 
+const showLoading = () => {
+  q.loading.show({
+    spinner: QSpinnerFacebook,
+    spinnerColor: 'primary',
+    spinnerSize: 140,
+    backgroundColor: 'white',
+    messageColor: 'black',
+  })
+  timer = setTimeout(() => {
+    q.loading.hide()
+    timer = void 0
+  }, 700) as unknown as number
+}
+
+showLoading()
 
 </script>
 
 <style scoped>
 .fonte-principal {
   font-size: 1.2rem;
-
 }
 
 .fonte-conteudo {
   font-size: 1rem;
+}
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
 
