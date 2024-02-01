@@ -1,5 +1,5 @@
 <template>
-    <q-img alt="logo instagram" class="full-width q-img-clickable imagem " src="../../assets/instagram.jpg"
+    <q-img alt="logo instagram" class="full-width q-img-clickable imagem cursor-pointer" src="../../assets/instagram.jpg"
         style="height: 150px; width: 500px" @click="redirecionarParaInstagram">
         <div class="bg-transparent">
             <q-avatar size="56px" class="q-mb-sm">
@@ -27,6 +27,7 @@
             </template>
         </q-list>
     </q-scroll-area>
+    <ModalAgendamento :statusProp="statusModalAgendamento" @atualizaStatusModal="atualizaStatusModal" />
 </template>
 
 <script setup lang="ts">
@@ -35,16 +36,18 @@ import { signOut } from 'firebase/auth';
 import { useUsuarioStore } from '../../stores/useUsuarioStore';
 import { warning, info, danger } from '../../utils/alerta'
 import { menu } from 'src/utils/menu'
-import IMenu from 'src/interfaces/IMenu'
+import IMenu from 'src/model/interfaces/IMenu'
+import { ref } from 'vue';
+import ModalAgendamento from '../Agendamento/ModalAgendamento.vue';
 
 
 const usuarioStore = useUsuarioStore()
+const statusModalAgendamento = ref(false)
 
-const emits = defineEmits(['abreModalAgendamento'])
-const redirecionarParaInstagram = () => setTimeout(() => window.location.href = 'https://www.instagram.com/barbers.den/', 250);
+
+const redirecionarParaInstagram = () => setTimeout(() => window.open('https://www.instagram.com/barbers.den/', '_blank'), 250);
 
 const verificaDisponibilidadeDaFuncionalidade = (itemMenu: IMenu) => (!itemMenu.ativo) ? warning('A funcionalidade estará disponível em breve!') : executaAcao(itemMenu.label)
-
 
 const executaAcao = (label: string) => {
 
@@ -54,7 +57,7 @@ const executaAcao = (label: string) => {
 
 const abreModalAgendamento = (label: string) => {
     if (label === 'Agendamento' && usuarioStore.getEmail) {
-        emits('abreModalAgendamento')
+        atualizaStatusModal(true)
     } else if (label === 'Agendamento' && !usuarioStore.getEmail) {
         warning('É necessário estar logado para realizar agendamento!')
     }
@@ -71,4 +74,20 @@ const logout = async (label: string) => {
 
     }
 }
-</script>src/model/interfaces/IMenu../../utils/alerta
+const atualizaStatusModal = (status: boolean) => {
+    statusModalAgendamento.value = status
+}
+</script>
+
+<style scoped lang="scss">
+.fonte-footer {
+    font-size: 13px;
+}
+
+.imagem {
+    &:hover {
+        opacity: 0.5;
+        transition: opacity 0.8s;
+    }
+}
+</style>

@@ -13,16 +13,8 @@ const criarAgendamento = (agendamento: Agendamento) => {
         servico: agendamento.getServico()
 
     }
-    push(agendamentoRef, dados)
-        .then(response => {
-            console.log(`ID_AGENDAMENTO: ${response.key}`)
-            positive('Agendamento realizado com sucesso')
+    return push(agendamentoRef, dados)
 
-        })
-        .catch(() => {
-            danger('Ocorreu um erro ao reallizar o agendamento')
-
-        })
 
 
 };

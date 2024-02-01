@@ -34,6 +34,7 @@ import { ref, watchEffect } from 'vue';
 import { criarAgendamento } from 'src/service/AgendamentoService'
 import { Agendamento } from 'src/model/Agendamento';
 import { QSpinnerFacebook, useQuasar } from 'quasar';
+import { danger, positive } from 'src/utils/alerta';
 
 const agendamento = ref<Agendamento | null>(null)
 const q = useQuasar()
@@ -45,15 +46,13 @@ const statusModal = ref(false)
 watchEffect(() => statusModal.value = props.statusProp);
 
 const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
+const card = ref(null)
 
 const preencheDados = (dados: Agendamento) => agendamento.value = dados
-
-
 const validaDados = (validadeDosDados: boolean) => desabilitaBotao.value = validadeDosDados;
 
 const realizaAgendamento = () => {
 
-    atualizaStatusModalExternamente()
     desabilitaBotao.value = false
     formularioAgendamentoRef.value?.enviaDados()
     agendar()
@@ -61,14 +60,27 @@ const realizaAgendamento = () => {
 
 }
 const agendar = () => {
-    Spinner.mostrar();
     if (agendamento.value) {
+        Spinner.mostrar();
         criarAgendamento(agendamento.value.getAgendamento())
+            .then(response => {
+                console.log(`ID_AGENDAMENTO: ${response.key}`)
+                positive('Agendamento realizado com sucesso')
+                atualizaStatusModalExternamente()
+
+            })
+            .catch((erro) => {
+                console.log(erro)
+                danger('Ocorreu um erro ao reallizar o agendamento')
+
+            })
+            .finally(() => {
+
+                Spinner.ocultar()
+            })
     }
-    Spinner.ocultar()
 }
-const atualizaStatusModalExternamente = () => emits('atualizaStatusModal');
-const card = ref(null)
+const atualizaStatusModalExternamente = () => { emits('atualizaStatusModal', false); }
 
 const Spinner = {
     mostrar() {
@@ -78,7 +90,7 @@ const Spinner = {
             spinnerSize: 140,
             backgroundColor: 'blue-11',
             messageColor: 'grey-8',
-            message: '<p class="text-h6">Realizando. Aguarde...</p>',
+            message: '<p class="text-h6">Realizando agendamento. Aguarde...</p>',
             html: true,
         })
     },

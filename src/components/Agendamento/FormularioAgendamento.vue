@@ -54,7 +54,8 @@
 </template>
 
 <script lang="ts" setup>
-import { IEndereco } from '../../interfaces/IEndereco'
+
+import { IEndereco } from 'src/model/interfaces/IEndereco'
 import { computed, onMounted, ref, watch } from 'vue';
 import InputDate from './InputDate.vue';
 import { info, danger } from '../../utils/alerta'
@@ -134,4 +135,4 @@ defineExpose({ enviaDados })
 watch([data, barbeiro, local, modelTipoResidencia, () => dadosEndereco.value.numeroResidencia, () => dadosEndereco.value.numeroApartamento], () => {
    emiteValidacaoDados()
 })
-</script>../../model/interfaces/IEndereco../../utils/alerta
+</script>
