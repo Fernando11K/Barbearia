@@ -1,5 +1,6 @@
 <template>
     <section class="q-pa-md">
+        <q-btn @click="preencherTabela">teste</q-btn>
         <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="id"
             :selected-rows-label="getSelectedString" selection="single" v-model:selected="selected"
             table-header-class="text-bold" rowsPerPageLabel="Resultados por Pagina:" :loading="loading"
@@ -52,17 +53,29 @@ const selected = ref([])
 
 onMounted(() => preencherTabela());
 
+const columns: QTableProps['columns'] = [
+    { name: 'acoes', align: 'center', label: 'EDITAR', field: 'calories', sortable: true },
+    {
+        name: 'data', align: 'center', required: true, label: 'DATA AGENDAMENTO', field: 'data', sortable: true
+    },
+    { name: 'barbeiro', align: 'center', label: 'BARBEIRO', field: 'barbeiro', sortable: true },
+    { name: 'cliente', align: 'center', label: 'CLIENTE', field: 'cliente', sortable: true },
+    { name: 'servico', align: 'center', label: 'SERVIÇO', field: 'servico', sortable: true }
+
+]
+
+const getSelectedString = () => {
+    return selected.value?.length === 0 ? '' : `${selected.value?.length} linha${selected.value?.length > 1 ? 's' : ''} selecionada de ${rows.value?.length} linhas`
+}
 const preencherTabela = async () => {
     buscarAgendamentos()
         .then((response) => {
             if (response) {
-
                 rows.value = response
                 ordenarLinhas(rows, 'data', 'descending')
             }
         })
         .catch((error) => {
-
             danger('Erro ao buscar agendamentos:', error);
         })
         .finally(() => {
@@ -90,20 +103,6 @@ const ordenarLinhas = (row: QTableProps['rows'], sortBy: string, descending: str
 
 }
 
-const columns: QTableProps['columns'] = [
-    { name: 'acoes', align: 'center', label: 'EDITAR', field: 'calories', sortable: true },
-    {
-        name: 'data', align: 'center', required: true, label: 'DATA AGENDAMENTO', field: 'data', sortable: true
-    },
-    { name: 'barbeiro', align: 'center', label: 'BARBEIRO', field: 'barbeiro', sortable: true },
-    { name: 'cliente', align: 'center', label: 'CLIENTE', field: 'cliente', sortable: true },
-    { name: 'servico', align: 'center', label: 'SERVIÇO', field: 'servico', sortable: true }
-
-]
-
-const getSelectedString = () => {
-    return selected.value?.length === 0 ? '' : `${selected.value?.length} linha${selected.value?.length > 1 ? 's' : ''} selecionada de ${rows.value?.length} linhas`
-}
 
 
 </script>
