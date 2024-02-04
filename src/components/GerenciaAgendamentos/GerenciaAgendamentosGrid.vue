@@ -45,7 +45,7 @@ import { onMounted, ref } from 'vue'
 import { QTableProps } from 'quasar';
 import { converteDataStringAgendamentoParaDate as parseDate } from 'src/utils/dateUtils'
 import { buscarAgendamentos } from 'src/service/AgendamentoService'
-import { danger } from 'src/hooks/alerta';
+import { danger } from 'src/utils/alerta';
 const rows = ref<Array<QTableProps['rows']>>([])
 const loading = ref(true)
 const selected = ref([])
