@@ -31,7 +31,7 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
-/hosting*
+hosting*
 
 #Outros
 LICENSE
