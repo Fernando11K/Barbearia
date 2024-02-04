@@ -1,8 +1,9 @@
-import { update } from 'firebase/database';
+import { update, } from 'firebase/database';
 import { agendamentoRef, agendamentoByIdRef, push, onValue } from 'src/boot/firebase';
 import { danger, positive } from 'src/hooks/alerta';
 import { Agendamento } from 'src/model/Agendamento';
-import { ref } from 'vue';
+
+
 
 
 
@@ -56,19 +57,24 @@ const atualizarAgendamento = (agendamento: Agendamento) => {
 }
 
 const buscarAgendamentos = () => {
-    const listaAgendamentos = ref<Array<Agendamento>>([])
-    onValue(agendamentoRef, (snapshot) => {
+    return new Promise((resolve, reject) => {
+        const listaAgendamentos: Array<Agendamento> = [];
+        onValue(agendamentoRef, (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+                const childKey = childSnapshot.key;
+                const childData = childSnapshot.val();
+                listaAgendamentos.push({ id: childKey, ...childData });
+            });
+            resolve(listaAgendamentos);
+        }, (error) => { // A função de tratamento de erro deve ser passada como terceiro argumento
+            reject(error); // Rejeita a Promise em caso de erro
+        }
 
-        snapshot.forEach((childSnapshot) => {
-            const childKey = childSnapshot.key;
-            const childData = childSnapshot.val();
-            listaAgendamentos.value.push({ id: childKey, ...childData })
-        });
+            , {
+                onlyOnce: true
+            });
 
-    }, {
-        onlyOnce: true
-    });
-    return listaAgendamentos.value
+    }
+    );
 }
-
 export { criarAgendamento, buscarAgendamentos, atualizarAgendamento }

@@ -39,37 +39,58 @@
     </section>
 </template>
   
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { QTableProps } from 'quasar';
 import { converteDataStringAgendamentoParaDate as parseDate } from 'src/utils/dateUtils'
-
 import { buscarAgendamentos } from 'src/service/AgendamentoService'
-
-const rows = ref()
+import { danger } from 'src/hooks/alerta';
+const rows = ref<Array<QTableProps['rows']>>([])
 const loading = ref(true)
 const selected = ref([])
 
-rows.value = buscarAgendamentos()
-const ordenarLinhas = (rows, sortBy, descending) => {
 
-    return rows.sort((a, b) => {
-        const elementoA = a[sortBy]
-        const elementoB = b[sortBy]
-        if (sortBy === 'data') {
-            const data1 = parseDate(elementoA)
-            const data2 = parseDate(elementoB)
+onMounted(() => preencherTabela());
 
-            return descending ? (data2 - data1) : (data1 - data2)
-        }
-        return descending ? elementoB.localeCompare(elementoA) : elementoA.localeCompare(elementoB);
-    });
+const preencherTabela = async () => {
+    buscarAgendamentos()
+        .then((response) => {
+            if (response) {
+
+                rows.value = response
+                ordenarLinhas(rows, 'data', 'descending')
+            }
+        })
+        .catch((error) => {
+
+            danger('Erro ao buscar agendamentos:', error);
+        })
+        .finally(() => {
+            loading.value = false;
+        })
 }
-onMounted(() => {
-    loading.value = false
 
-})
+const ordenarLinhas = (row: QTableProps['rows'], sortBy: string, descending: string) => {
+    if (!rows.value) {
+        return
+    }
+    return rows.value.sort((a, b) => {
+        if (a && b) {
+            const elementoA = a[sortBy]
+            const elementoB = b[sortBy]
+            if (sortBy === 'data') {
+                const data1 = parseDate(elementoA) as Date;
+                const data2 = parseDate(elementoB) as Date;
 
-const columns = [
+                return descending ? (data2.getTime() - data1.getTime()) : (data1.getTime() - data2.getTime())
+            }
+            return descending ? elementoB.localeCompare(elementoA) : elementoA.localeCompare(elementoB);
+        }
+    });
+
+}
+
+const columns: QTableProps['columns'] = [
     { name: 'acoes', align: 'center', label: 'EDITAR', field: 'calories', sortable: true },
     {
         name: 'data', align: 'center', required: true, label: 'DATA AGENDAMENTO', field: 'data', sortable: true

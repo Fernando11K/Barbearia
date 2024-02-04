@@ -19,4 +19,5 @@ const converteDataStringAgendamentoParaDate = (data: string): Date | null => {
     return new Date(`${ano}/${mes}/${dia} ${hora}:${minutos}`);
 }
 
+
 export { formataDDMMYYYYHHmmParaDate, converteDataStringAgendamentoParaDate };
