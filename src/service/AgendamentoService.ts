@@ -66,11 +66,10 @@ const buscarAgendamentos = () => {
                 listaAgendamentos.push({ id: childKey, ...childData });
             });
             resolve(listaAgendamentos);
-        }, (error) => { // A função de tratamento de erro deve ser passada como terceiro argumento
-            reject(error); // Rejeita a Promise em caso de erro
-        }
-
-            , {
+        }, (error) => {
+            reject(error);
+        },
+            {
                 onlyOnce: true
             });
 
