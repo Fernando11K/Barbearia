@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-blue-4 fonte-index fonte-principal flex flex-center">
+  <q-page class="bg-blue-4 fonte-index fonte-principal flex flex-center no-pointer-events">
 
     <section v-if="exibeMensagem" class="q-pa-md">
       <div>
@@ -29,7 +29,7 @@
       <section v-show="!exibeMensagem" class="full-width">
 
         <div class="row bg-grey-1">
-          <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')" ref="imagem">
+          <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')" ref="imagem" class="">
             <h2 class="text-white">O Refúgio Clássico da Elegância Masculina</h2>
 
           </q-parallax>

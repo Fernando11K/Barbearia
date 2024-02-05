@@ -10,7 +10,7 @@
                     <InputUsuarioLogin v-model="login.email" class="full-width q-pa-md" @focus="alteraPosicaoCard" />
                     <InputSenhaLogin v-model="login.senha" class="full-width q-pa-md" @focus="alteraPosicaoCard" />
                     <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="primary" text-color="white"
-                        label="ENTRAR" :disabled="!login.email || !login.senha" />
+                        label="ENTRAR" :disabled="!login.email || !login.senha || loading" />
 
                     <q-btn icon='fa-brands fa-google' @click="autenticacaoGoogle" outline rounded
                         class="q-mt-md col-11 bg-black" text-color="white" label="Fazer login com o Google" />
@@ -25,14 +25,16 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth } from 'src/boot/firebase'
 import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
-import InputUsuarioLogin from '/src/components/login/InputUsuarioLogin.vue';
+import InputUsuarioLogin from 'src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
 import { positive, danger } from '../utils/alerta'
 import { usuarioStore } from '../stores/usuario-store';
 import { useQuasar, QSpinnerFacebook } from 'quasar';
 
+
 const q = useQuasar()
 const card = ref<null | { $el: HTMLElement }>(null)
+const loading = ref(false)
 const usuario = usuarioStore()
 
 const router = useRouter()
@@ -54,6 +56,7 @@ const Spinner = {
     }
 }
 const autenticacaoLocal = async () => {
+    loading.value = true
     Spinner.mostrar()
     await signInWithEmailAndPassword(auth, login.value.email, login.value.senha)
         .then(() => {
@@ -61,11 +64,37 @@ const autenticacaoLocal = async () => {
             router.push('/home')
 
         })
-        .catch(() => danger('Usuário ou senha inválidos', 3000))
+        .catch((error) => {
+
+            mensagensErroAutenticacao(error.code)
+            setTimeout(() => {
+                loading.value = false
+            }, 5000);
+        })
         .finally(() => {
             Spinner.ocultar()
+
         })
 
+}
+const mensagensErroAutenticacao = (mensagem: string) => {
+    switch (mensagem) {
+        case 'auth/invalid-credential':
+        case 'auth/invalid-email':
+            danger('Usuário ou senha inválidos', 3000)
+            break;
+        case 'auth/too-many-requests':
+            danger('O usuário está temporariamente bloqueado devido a várias tentativas de login sem sucesso.', 2400)
+            setTimeout(() => {
+
+                danger('Tente novamente mais tarde...', 1000)
+            }, 4000);
+            break;
+
+        default:
+            danger('Ocorreu um erro verifique sua conexão!', 1000)
+            break;
+    }
 }
 const autenticacaoGoogle = async () => {
     Spinner.mostrar()

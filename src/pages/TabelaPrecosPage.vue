@@ -1,5 +1,5 @@
 <template>
-    <q-page class="flex flex-center background">
+    <q-page class="flex flex-center background no-pointer-events">
         <div class="fit">
             <q-card>
                 <q-skeleton v-if="!imagemCarregada" animation="wave" :style="{ 'min-height': `${q.screen.height}px` }" />
