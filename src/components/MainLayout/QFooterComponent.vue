@@ -12,7 +12,7 @@
           @click="funcionalidadeNaoDisponivel">
         </q-btn>
         <q-btn size="md" flat round icon="fa-regular fa-calendar-days fa-beat" class="fonte-footer "
-          @click="statusModalAgendamento = true" :disabled="!usuarioStore.getEmail">
+          @click="statusModalAgendamento = true" :disabled="!usuario.getEmail">
         </q-btn>
         <q-btn size="md" flat round class="fonte-footer " @click="abrirWhatsApp">
           <q-icon size="md" name="fa-brands fa-whatsapp fa-bounce" color="light-green-13">
@@ -27,14 +27,14 @@
 
 <script setup lang="ts">
 import ModalAgendamento from 'src/components/Agendamento/ModalAgendamento.vue'
-import { useUsuarioStore } from 'src/stores/useUsuarioStore';
+import { usuarioStore } from 'src/stores/usuario-store';
 import { warning } from '../../utils/alerta'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 const q = useQuasar()
 
-const usuarioStore = useUsuarioStore()
+const usuario = usuarioStore()
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);
 
 

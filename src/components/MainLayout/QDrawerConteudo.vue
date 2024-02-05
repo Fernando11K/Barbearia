@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { auth } from 'src/boot/firebase'
 import { signOut } from 'firebase/auth';
-import { useUsuarioStore } from '../../stores/useUsuarioStore';
+import { usuarioStore } from '../../stores/usuario-store';
 import { warning, info, danger } from '../../utils/alerta'
 import { menu } from 'src/utils/menu'
 import IMenu from 'src/model/interfaces/IMenu'
@@ -41,7 +41,7 @@ import { ref } from 'vue';
 import ModalAgendamento from '../Agendamento/ModalAgendamento.vue';
 
 
-const usuarioStore = useUsuarioStore()
+const usuario = usuarioStore()
 const statusModalAgendamento = ref(false)
 
 
@@ -56,9 +56,9 @@ const executaAcao = (label: string) => {
 }
 
 const abreModalAgendamento = (label: string) => {
-    if (label === 'Agendamento' && usuarioStore.getEmail) {
+    if (label === 'Agendamento' && usuario.getEmail) {
         atualizaStatusModal(true)
-    } else if (label === 'Agendamento' && !usuarioStore.getEmail) {
+    } else if (label === 'Agendamento' && !usuario.getEmail) {
         warning('É necessário estar logado para realizar agendamento!')
     }
 };
@@ -68,7 +68,7 @@ const logout = async (label: string) => {
         await signOut(auth)
             .then(() => {
                 info('Usuário deslogado com sucesso!')
-                usuarioStore.limparDados()
+                usuario.limparDados()
             })
             .catch(() => danger('Usuário ou senha inválidos', 3000))
 

@@ -1,24 +1,22 @@
 
 
 import { computed } from 'vue';
-import { useUsuarioStore } from 'src/stores/useUsuarioStore';
+import { usuarioStore } from 'src/stores/usuario-store';
 import IMenu from 'src/model/interfaces/IMenu'
 
-const usuarioStore = useUsuarioStore()
-
-
+const usuario = usuarioStore()
 export const menu = computed(() => [
     {
         icon: 'fa-solid fa-user',
-        label: usuarioStore.getNome
-            ? usuarioStore.getNome
-            : usuarioStore.getEmail
+        label: usuario.getNome
+            ? usuario.getNome
+            : usuario.getEmail
                 ? 'Bem-vindo'
                 : 'Entrar',
         iconColor: 'primary',
         separator: true,
         ativo: true,
-        rota: !usuarioStore.getEmail ? '/login' : '/home'
+        rota: !usuario.getEmail ? '/login' : '/home'
     },
     {
         icon: 'fa-regular fa-calendar-days fa-beat',
@@ -39,7 +37,7 @@ export const menu = computed(() => [
         icon: 'fa-regular fa-clipboard',
         label: 'Gerencia Agendamentos',
         separator: true,
-        ativo: usuarioStore.getEmail,
+        ativo: usuario.getEmail,
         iconColor: 'primary',
         rota: '/gerencia-agendamentos'
     },
@@ -47,7 +45,7 @@ export const menu = computed(() => [
         icon: 'fa-solid fa-person-walking-arrow-right',
         label: 'Sair',
         separator: true,
-        ativo: usuarioStore.getEmail,
+        ativo: usuario.getEmail,
         iconColor: 'primary',
         rota: '/login'
     },

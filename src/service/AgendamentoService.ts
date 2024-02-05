@@ -2,7 +2,10 @@ import { update, } from 'firebase/database';
 import { agendamentoRef, agendamentoByIdRef, push, onValue } from 'src/boot/firebase';
 import { danger, positive } from 'src/utils/alerta';
 import { Agendamento } from 'src/model/Agendamento';
+import { ref } from 'vue';
+import agendamentoStore from 'src/stores/agendamento-store';
 
+const store = agendamentoStore()
 
 
 const criarAgendamento = (agendamento: Agendamento) => {
@@ -15,9 +18,6 @@ const criarAgendamento = (agendamento: Agendamento) => {
 
     }
     return push(agendamentoRef, dados)
-
-
-
 };
 const atualizarAgendamento = (agendamento: Agendamento) => {
     const dados = {
@@ -45,22 +45,24 @@ const atualizarAgendamento = (agendamento: Agendamento) => {
 }
 
 const buscarAgendamentos = () => {
+
     return new Promise((resolve, reject) => {
-        const listaAgendamentos: Array<Agendamento> = [];
+        const listaAgendamentos = ref<Array<Agendamento>>([])
         onValue(agendamentoRef, (snapshot) => {
+            listaAgendamentos.value = []
             snapshot.forEach((childSnapshot) => {
                 const childKey = childSnapshot.key;
                 const childData = childSnapshot.val();
-                listaAgendamentos.push({ id: childKey, ...childData });
+                listaAgendamentos.value.push({ id: childKey, ...childData });
             });
-            resolve(listaAgendamentos);
+            store.setAgendamentos([...listaAgendamentos.value] as Agendamento[])
+            resolve(listaAgendamentos.value);
         }, (error) => {
             reject(error);
         },
             {
-                onlyOnce: true
+                //    onlyOnce: false
             });
-
     }
     );
 }

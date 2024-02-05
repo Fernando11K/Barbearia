@@ -28,12 +28,12 @@ import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 
 import InputUsuarioLogin from '/src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
 import { positive, danger } from '../utils/alerta'
-import { useUsuarioStore } from '../stores/useUsuarioStore';
+import { usuarioStore } from '../stores/usuario-store';
 import { useQuasar, QSpinnerFacebook } from 'quasar';
 
 const q = useQuasar()
 const card = ref<null | { $el: HTMLElement }>(null)
-const usuarioStore = useUsuarioStore()
+const usuario = usuarioStore()
 
 const router = useRouter()
 const login = ref({ email: '', senha: '' })
@@ -72,9 +72,9 @@ const autenticacaoGoogle = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider)
         .then(() => {
-            if (usuarioStore.getNome) {
+            if (usuario.getNome) {
 
-                positive(`Seja bem vindo ${usuarioStore.getNome}!`, 3000)
+                positive(`Seja bem vindo ${usuario.getNome}!`, 3000)
             }
             router.push('/home')
         })

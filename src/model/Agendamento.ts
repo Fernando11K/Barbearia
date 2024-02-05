@@ -1,8 +1,7 @@
-import { useUsuarioStore } from 'src/stores/useUsuarioStore';
+import { usuarioStore } from 'src/stores/usuario-store';
 
 
-
-const usuario = useUsuarioStore()
+const usuario = usuarioStore()
 class Agendamento {
 
     private id?: string

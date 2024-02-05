@@ -3,11 +3,7 @@ import { defineStore } from 'pinia';
 import { auth } from 'src/boot/firebase'
 import Usuario from 'src/model/Usuario';
 
-
-
-
-
-export const useUsuarioStore = defineStore('usuario', {
+export const usuarioStore = defineStore('usuario', {
 
     state: () => ({
         nome: null,

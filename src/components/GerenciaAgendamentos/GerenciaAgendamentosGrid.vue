@@ -1,11 +1,10 @@
 <template>
     <section class="q-pa-md">
-        <q-btn @click="preencherTabela">teste</q-btn>
+        {{ store.getAgendamentos.length }}
         <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="id"
             :selected-rows-label="getSelectedString" selection="single" v-model:selected="selected"
             table-header-class="text-bold" rowsPerPageLabel="Resultados por Pagina:" :loading="loading"
             :sort-method="ordenarLinhas">
-
             <template v-slot:body="props">
                 <q-tr :props="props">
                     <q-td>
@@ -41,17 +40,18 @@
 </template>
   
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref, watch } from 'vue'
 import { QTableProps } from 'quasar';
-import { converteDataStringAgendamentoParaDate as parseDate } from 'src/utils/dateUtils'
 import { buscarAgendamentos } from 'src/service/AgendamentoService'
 import { danger } from 'src/utils/alerta';
+import agendamentoStore from 'src/stores/agendamento-store';
+import { Agendamento } from 'src/model/Agendamento'
+import { converteDataStringAgendamentoParaDate as parseDate } from 'src/utils/dateUtils'
+
+const store = agendamentoStore()
 const rows = ref<Array<QTableProps['rows']>>([])
 const loading = ref(true)
 const selected = ref([])
-
-
-onMounted(() => preencherTabela());
 
 const columns: QTableProps['columns'] = [
     { name: 'acoes', align: 'center', label: 'EDITAR', field: 'calories', sortable: true },
@@ -64,16 +64,12 @@ const columns: QTableProps['columns'] = [
 
 ]
 
-const getSelectedString = () => {
-    return selected.value?.length === 0 ? '' : `${selected.value?.length} linha${selected.value?.length > 1 ? 's' : ''} selecionada de ${rows.value?.length} linhas`
-}
 const preencherTabela = async () => {
     buscarAgendamentos()
         .then((response) => {
-            if (response) {
-                rows.value = response
-                ordenarLinhas(rows, 'data', 'descending')
-            }
+
+            preencherLinhas(response as Agendamento[])
+
         })
         .catch((error) => {
             danger('Erro ao buscar agendamentos:', error);
@@ -82,7 +78,13 @@ const preencherTabela = async () => {
             loading.value = false;
         })
 }
-
+const preencherLinhas = (linhas: Array<Agendamento>) => {
+    if (linhas) {
+        rows.value = linhas
+        ordenarLinhas(rows.value, 'data', 'descending')
+    }
+}
+preencherTabela()
 const ordenarLinhas = (row: QTableProps['rows'], sortBy: string, descending: string) => {
     if (!rows.value) {
         return
@@ -103,12 +105,17 @@ const ordenarLinhas = (row: QTableProps['rows'], sortBy: string, descending: str
 
 }
 
+const getSelectedString = () => {
+    return selected.value?.length === 0 ? '' : `${selected.value?.length} linha${selected.value?.length > 1 ? 's' : ''} selecionada de ${rows.value?.length} linhas`
+}
 
+watch(() => store.getAgendamentos, () => {
+    preencherLinhas(store.getAgendamentos as Agendamento[])
+})
 
 </script>
 
 <style lang="scss" scoped>
-/* Estilos para linhas ímpares e pares */
 .q-table--flat tbody tr:nth-child(odd) {
     background-color: #ffffff;
     /* Cor para linhas ímpares */
