@@ -1,6 +1,5 @@
 <template>
     <section class="q-pa-md">
-        {{ store.getAgendamentos.length }}
         <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="id"
             :selected-rows-label="getSelectedString" selection="single" v-model:selected="selected"
             table-header-class="text-bold" rowsPerPageLabel="Resultados por Pagina:" :loading="loading"
