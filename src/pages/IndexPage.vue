@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-blue-4 fonte-index fonte-principal flex flex-center no-pointer-events">
+  <q-page class="bg-blue-4 fonte-index fonte-principal flex flex-center ">
 
     <section v-if="exibeMensagem" class="q-pa-md">
       <div>
@@ -20,7 +20,8 @@
         </q-chat-message>
 
         <q-chat-message v-show="loading" name="Barbearia"
-          avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" bg-color="grey-12" size="9">
+          avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" bg-color="grey-12" size="9"
+          class="no-pointer-events">
           <q-spinner-dots />
         </q-chat-message>
       </div>
@@ -28,7 +29,7 @@
     <q-slide-transition :duration="2000">
       <section v-show="!exibeMensagem" class="full-width">
 
-        <div class="row bg-grey-1">
+        <div class="row bg-grey-1 no-pointer-events">
           <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')" ref="imagem" class="">
             <h2 class="text-white">O Refúgio Clássico da Elegância Masculina</h2>
 
@@ -49,7 +50,7 @@
         </div>
         <q-separator color="blue-2" />
         <div>
-          <div class="text-center text-h2 q-pa-md text-bold text-blue-1 bg-dark "
+          <div class="text-center text-h2 q-pa-sm text-bold text-blue-1 bg-dark "
             :class="{ 'text-h5': q.platform.is.mobile }">Conheça
             Nossos
             Trabalhos
