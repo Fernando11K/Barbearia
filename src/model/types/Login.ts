@@ -1,4 +1,4 @@
-export default interface ILogin {
+export type Login = {
     email: string;
     senha: string;
 }

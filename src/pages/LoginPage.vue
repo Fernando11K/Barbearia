@@ -6,7 +6,7 @@
                 <div class="text-bold text-h5 text-dark q-pt-sm">Barber's Den - Login</div>
             </div>
             <q-card-section>
-                <q-form class="row justify-center" @submit.prevent="autenticacaoLocal">
+                <q-form class="row justify-center" @submit.prevent="autenticar">
                     <InputUsuarioLogin v-model="login.email" class="full-width q-pa-md" @focus="alteraPosicaoCard" />
                     <InputSenhaLogin v-model="login.senha" class="full-width q-pa-md" @focus="alteraPosicaoCard" />
                     <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="primary" text-color="white"
@@ -22,99 +22,19 @@
 <script setup lang="ts" >
 
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { auth } from 'src/boot/firebase'
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import InputUsuarioLogin from 'src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
-import { positive, danger } from '../utils/alerta'
-import { usuarioStore } from '../stores/usuario-store';
-import { useQuasar, QSpinnerFacebook } from 'quasar';
+import { autenticacaoLocal, autenticacaoGoogle, loading } from 'src/service/LoginService';
 
-
+import { useQuasar } from 'quasar';
+import { Login } from 'src/model/types/Login';
 const q = useQuasar()
 const card = ref<null | { $el: HTMLElement }>(null)
-const loading = ref(false)
-const usuario = usuarioStore()
 
-const router = useRouter()
-const login = ref({ email: '', senha: '' })
-const Spinner = {
-    mostrar() {
-        q.loading.show({
-            spinner: QSpinnerFacebook,
-            spinnerColor: 'primary',
-            spinnerSize: 140,
-            backgroundColor: 'blue-11',
-            messageColor: 'grey-8',
-            message: '<p class="text-h6">Tentando realizar login. Aguarde...</p>',
-            html: true,
-        })
-    },
-    ocultar() {
-        q.loading.hide()
-    }
-}
-const autenticacaoLocal = async () => {
-    loading.value = true
-    Spinner.mostrar()
-    await signInWithEmailAndPassword(auth, login.value.email, login.value.senha)
-        .then(() => {
-            positive('Seja bem vindo!', 3000)
-            router.push('/home')
+const autenticar = () => autenticacaoLocal(login.value)
 
-        })
-        .catch((error) => {
 
-            mensagensErroAutenticacao(error.code)
-            setTimeout(() => {
-                loading.value = false
-            }, 5000);
-        })
-        .finally(() => {
-            Spinner.ocultar()
-
-        })
-
-}
-const mensagensErroAutenticacao = (mensagem: string) => {
-    switch (mensagem) {
-        case 'auth/invalid-credential':
-        case 'auth/invalid-email':
-            danger('Usuário ou senha inválidos', 3000)
-            break;
-        case 'auth/too-many-requests':
-            danger('O usuário está temporariamente bloqueado devido a várias tentativas de login sem sucesso.', 2400)
-            setTimeout(() => {
-
-                danger('Tente novamente mais tarde...', 1000)
-            }, 4000);
-            break;
-
-        default:
-            danger('Ocorreu um erro verifique sua conexão!', 1000)
-            break;
-    }
-}
-const autenticacaoGoogle = async () => {
-    Spinner.mostrar()
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider)
-        .then(() => {
-            if (usuario.getNome) {
-
-                positive(`Seja bem vindo ${usuario.getNome}!`, 3000)
-            }
-            router.push('/home')
-        })
-        .catch(() => {
-            danger('Ocorreu um erro')
-        }
-        )
-        .finally(() => {
-            Spinner.ocultar()
-        })
-}
+const login = ref<Login>({ email: '', senha: '' })
 
 const alteraPosicaoCard = (estaEmFoco = true) => {
     if (q.platform.is.mobile) {

@@ -1,6 +1,7 @@
 <template>
-    <q-img alt="logo instagram" class="full-width q-img-clickable imagem cursor-pointer" src="../../assets/instagram.jpg"
-        style="height: 150px; width: 500px" @click="redirecionarParaInstagram">
+    <q-img class="full-width q-img-clickable imagem cursor-pointer" src="../../assets/instagram.jpg"
+        style="height: 150px; width: 500px" @click="redirecionarParaInstagram"
+        :alt="'Siga a Barbers Dean no Instagram: @barbers.den Clique aqui para acessar nosso perfil e ficar por dentro das novidades, promoções e mais!'">
         <div class="bg-transparent">
             <q-avatar size="56px" class="q-mb-sm">
                 <img alt="retrato de um homem com barba"
