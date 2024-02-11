@@ -45,39 +45,41 @@ import ModalAgendamento from '../Agendamento/ModalAgendamento.vue';
 const usuario = usuarioStore()
 const statusModalAgendamento = ref(false)
 
-
 const redirecionarParaInstagram = () => setTimeout(() => window.open('https://www.instagram.com/barbers.den/', '_blank'), 250);
 
 const verificaDisponibilidadeDaFuncionalidade = (itemMenu: IMenu) => (!itemMenu.ativo) ? warning('A funcionalidade estará disponível em breve!') : executaAcao(itemMenu.label)
 
 const executaAcao = (label: string) => {
 
-    logout(label)
-    abreModalAgendamento(label)
+    if (label == 'Sair') {
+        logout()
+    }
+    if (label === 'Agendamento') {
+        abreModalAgendamento()
+    }
 }
 
-const abreModalAgendamento = (label: string) => {
-    if (label === 'Agendamento' && usuario.getEmail) {
+const abreModalAgendamento = () => {
+    if (usuario.getEmail) {
         atualizaStatusModal(true)
-    } else if (label === 'Agendamento' && !usuario.getEmail) {
-        warning('É necessário estar logado para realizar agendamento!')
+        return
     }
+    warning('É necessário estar logado para realizar agendamento!')
+
 };
 
-const logout = async (label: string) => {
-    if (label == 'Sair') {
-        await signOut(auth)
-            .then(() => {
-                info('Usuário deslogado com sucesso!')
-                usuario.limparDados()
-            })
-            .catch(() => danger('Usuário ou senha inválidos', 3000))
+const logout = () => {
+    signOut(auth)
+        .then(() => {
+            info('Usuário deslogado com sucesso!')
+            usuario.limparDados()
+        })
+        .catch(() => danger('Usuário ou senha inválidos', 3000))
 
-    }
 }
-const atualizaStatusModal = (status: boolean) => {
-    statusModalAgendamento.value = status
-}
+
+const atualizaStatusModal = (status: boolean) => statusModalAgendamento.value = status
+
 </script>
 
 <style scoped lang="scss">

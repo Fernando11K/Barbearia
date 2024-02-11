@@ -86,7 +86,7 @@ const imagem = ref(null)
 
 const ordemMensagens = () => {
 
-  console.log('Desenvolvido por Fernando11000')
+  console.log('Desenvolvido por Fernando11000 (https://br.linkedin.com/in/fernando11000)')
   setTimeout(() => bemVindo.value = true, 1000);
   setTimeout(() => loading.value = false, 3000);
   setTimeout(() => exibeMensagem.value = false, 6000);

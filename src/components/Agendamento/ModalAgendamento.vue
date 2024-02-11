@@ -33,17 +33,16 @@ import FormularioAgendamento from './FormularioAgendamento.vue';
 import { ref, watchEffect } from 'vue';
 import { criarAgendamento } from 'src/service/AgendamentoService'
 import { Agendamento } from 'src/model/Agendamento';
-import { QSpinnerFacebook, useQuasar } from 'quasar';
 import { danger, positive } from 'src/utils/alerta';
+import { spinnerFacebook } from 'src/utils/spinner';
+
+const emits = defineEmits(['atualizaStatusModal']);
+const statusModal = ref(false)
+const props = defineProps({ statusProp: { type: Boolean } });
+watchEffect(() => statusModal.value = props.statusProp);
 
 const agendamento = ref<Agendamento | null>(null)
-const q = useQuasar()
-
-const props = defineProps({ statusProp: { type: Boolean } });
-const emits = defineEmits(['atualizaStatusModal']);
 const desabilitaBotao = ref(true)
-const statusModal = ref(false)
-watchEffect(() => statusModal.value = props.statusProp);
 
 const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
 const card = ref(null)
@@ -61,43 +60,21 @@ const realizaAgendamento = () => {
 }
 const agendar = () => {
     if (agendamento.value) {
-        Spinner.mostrar();
+        spinnerFacebook.mostrar('<p class="text-h6">Realizando agendamento. Aguarde...</p>')
         criarAgendamento(agendamento.value.getAgendamento())
-            .then(response => {
-                console.log(`ID_AGENDAMENTO: ${response.key}`)
+            .then(() => {
+
                 positive('Agendamento realizado com sucesso')
                 atualizaStatusModalExternamente()
 
             })
-            .catch((erro) => {
-                console.log(erro)
-                danger('Ocorreu um erro ao reallizar o agendamento')
-
-            })
-            .finally(() => {
-
-                Spinner.ocultar()
-            })
+            .catch(() => { danger('Ocorreu um erro ao reallizar o agendamento') })
+            .finally(() => spinnerFacebook.ocultar())
     }
 }
-const atualizaStatusModalExternamente = () => { emits('atualizaStatusModal', false); }
+const atualizaStatusModalExternamente = () => emits('atualizaStatusModal', false);
 
-const Spinner = {
-    mostrar() {
-        q.loading.show({
-            spinner: QSpinnerFacebook,
-            spinnerColor: 'primary',
-            spinnerSize: 140,
-            backgroundColor: 'blue-11',
-            messageColor: 'grey-8',
-            message: '<p class="text-h6">Realizando agendamento. Aguarde...</p>',
-            html: true,
-        })
-    },
-    ocultar() {
-        q.loading.hide()
-    }
-}
+
 
 </script>
   
