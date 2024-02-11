@@ -54,22 +54,16 @@ const selected = ref([])
 
 const columns: QTableProps['columns'] = [
     { name: 'acoes', align: 'center', label: 'EDITAR', field: 'calories', sortable: true },
-    {
-        name: 'data', align: 'center', required: true, label: 'DATA AGENDAMENTO', field: 'data', sortable: true
-    },
+    { name: 'data', align: 'center', required: true, label: 'DATA AGENDAMENTO', field: 'data', sortable: true },
     { name: 'barbeiro', align: 'center', label: 'BARBEIRO', field: 'barbeiro', sortable: true },
     { name: 'cliente', align: 'center', label: 'CLIENTE', field: 'cliente', sortable: true },
     { name: 'servico', align: 'center', label: 'SERVIÇO', field: 'servico', sortable: true }
 
 ]
 
-const preencherTabela = async () => {
+const preencherTabela = () => {
     buscarAgendamentos()
-        .then((response) => {
-
-            preencherLinhas(response as Agendamento[])
-
-        })
+        .then((response) => preencherLinhas(response as Agendamento[]))
         .catch((error) => {
             danger('Erro ao buscar agendamentos:', error);
         })
@@ -117,11 +111,11 @@ watch(() => store.getAgendamentos, () => {
 <style lang="scss" scoped>
 .q-table--flat tbody tr:nth-child(odd) {
     background-color: #ffffff;
-    /* Cor para linhas ímpares */
+
 }
 
 .q-table--flat tbody tr:nth-child(even) {
     background-color: #EBFAFD;
-    /* Cor para linhas pares */
+
 }
 </style>
