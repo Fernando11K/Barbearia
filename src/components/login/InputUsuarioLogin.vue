@@ -1,6 +1,6 @@
 <template>
     <q-input for="email" standout="bg-info" round outlined dense bg-color="grey-1" :modelValue='modelValue'
-        @update:modelValue='atualiza' type='text' label='Usuário' autocomplete="username">
+        @update:modelValue='atualiza' type='email' label='Usuário' autocomplete="username">
         <template v-slot:prepend>
             <q-icon name="fa-solid fa-user" />
         </template>

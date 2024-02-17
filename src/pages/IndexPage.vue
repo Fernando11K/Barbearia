@@ -1,12 +1,11 @@
 <template>
-  <q-page class="bg-blue-4 fonte-index fonte-principal flex flex-center ">
-
-    <section v-if="exibeMensagem" class="q-pa-md">
+  <q-page class="bg-blue-4 fonte-index fonte-principal flex flex-center">
+    <section v-if="false" class="q-pa-md">
       <div>
-        <q-chat-message v-show="bemVindo" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png"
-          name="Barbearia" :text="['Olá, Bem vindo!']" stamp="agora mesmo" bg-color="grey-12" class="" />
-        <q-chat-message v-show="!loading" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png"
-          name="Barbearia" stamp="agora mesmo" bg-color="grey-12">
+        <q-chat-message v-if="false" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png"
+          name="Barbearia" :text="['Olá, Bem vindo!']" :stamp="dataHora.chat1.value" bg-color="grey-12" />
+        <q-chat-message v-if="!loading" avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png"
+          name="Barbearia" :stamp="dataHora.chat2.value" bg-color="grey-12">
           <div>
             <span>
               Sistema em desenvolvimento
@@ -20,18 +19,17 @@
         </q-chat-message>
 
         <q-chat-message v-show="loading" name="Barbearia"
-          avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" bg-color="grey-12" size="9"
+          avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" bg-color="grey-12"
           class="no-pointer-events">
           <q-spinner-dots />
         </q-chat-message>
       </div>
     </section>
     <q-slide-transition :duration="2000">
-      <section v-show="!exibeMensagem" class="full-width">
-
+      <section class="full-width">
         <div class="row bg-grey-1 no-pointer-events">
-          <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')" ref="imagem" class="">
-            <h2 class="text-white">O Refúgio Clássico da Elegância Masculina</h2>
+          <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')">
+            <h2 ref="textoParallax" class="text-white">{{ tituloExibido }}</h2>
 
           </q-parallax>
           <div class="bg-white q-pa-xl justify-center">
@@ -49,14 +47,12 @@
           </div>
         </div>
         <q-separator color="blue-2" />
-        <div>
-          <div class="text-center text-h2 q-pa-sm text-bold text-blue-1 bg-dark "
-            :class="{ 'text-h5': q.platform.is.mobile }">Conheça
-            Nossos
-            Trabalhos
+        <section>
+          <div class="text-center text-h4 q-pa-sm text-bold text-blue-1 bg-dark"
+            :class="{ 'text-h5': q.platform.is.mobile }">Conheça Nossos Trabalhos
           </div>
           <CarrosselComponent class="justify-center" />
-        </div>
+        </section>
       </section>
     </q-slide-transition>
 
@@ -67,30 +63,52 @@
 </template>
 
 <script lang="ts" setup >
+
+import { date, useQuasar } from 'quasar'
 import CarrosselComponent from 'src/components/Barbearia/PaginaPrincipal/CarrosselComponent.vue'
-import { useQuasar } from 'quasar'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const q = useQuasar()
+const textoParallax = ref<HTMLElement | null>(null)
 
 onMounted(() => {
-  ordemMensagens()
-
-})
-
-const loading = ref(true)
-const bemVindo = ref(false)
-const exibeMensagem = ref(true)
-
-const imagem = ref(null)
-
-const ordemMensagens = () => {
-
   console.log('Desenvolvido por Fernando11000 (https://br.linkedin.com/in/fernando11000)')
-  setTimeout(() => bemVindo.value = true, 1000);
-  setTimeout(() => loading.value = false, 3000);
-  setTimeout(() => exibeMensagem.value = false, 6000);
+  //ordemMensagens();
+  exibeTitulo()
+})
+const tituloParallax = 'O Refúgio Clássico da Elegância Masculina'
+const tituloExibido = ref('')
+const aguardar = (segundos: number) => new Promise(resolve => setTimeout(resolve, segundos))
+const exibeTitulo = async () => {
+  for (let i = 0; i < tituloParallax.length; i++) {
+    tituloExibido.value += tituloParallax.charAt(i)
+    await aguardar(40)
+  }
+
 }
+const retornarDataHoraAtual = () => date.formatDate(Date.now(), 'DD/MM/YYYY HH:mm:ss');
+const dataHora = {
+  chat1: computed(() => retornarDataHoraAtual()),
+  chat2: computed(() => retornarDataHoraAtual())
+}
+
+const loading = ref(true);
+// const bemVindo = ref(false);
+// const exibeMensagem = ref(true);
+
+// const ordemMensagens = async () => {
+
+//   await aguardar(500)
+//   bemVindo.value = true
+
+//   await aguardar(1000)
+//   loading.value = false
+
+//   await aguardar(2500)
+//   exibeMensagem.value = false
+
+//   exibeTitulo()
+// }
 
 </script>
 

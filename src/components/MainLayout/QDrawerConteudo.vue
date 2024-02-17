@@ -3,10 +3,7 @@
         style="height: 150px; width: 500px" @click="redirecionarParaInstagram"
         :alt="'Siga a Barbers Dean no Instagram: @barbers.den Clique aqui para acessar nosso perfil e ficar por dentro das novidades, promoções e mais!'">
         <div class="bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-                <img alt="retrato de um homem com barba"
-                    src="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png">
-            </q-avatar>
+            <QAvatar />
             <div class="text-weight-bold">Barber's Den</div>
             <div>@barbers.den</div>
         </div>
@@ -40,6 +37,7 @@ import { menu } from 'src/utils/menu'
 import IMenu from 'src/model/interfaces/IMenu'
 import { ref } from 'vue';
 import ModalAgendamento from '../Agendamento/ModalAgendamento.vue';
+import QAvatar from '../GerenciaAgendamentos/QAvatar.vue';
 
 
 const usuario = usuarioStore()

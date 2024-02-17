@@ -1,7 +1,7 @@
 <template>
     <div class="row" :style="{ height: alturaCarousel }">
-
-        <q-carousel swipeable animated v-model="slide" thumbnails infinite height="100%" class="col-12">
+        <q-carousel swipeable animated v-model="slide" thumbnails infinite height="100%" class="col-12"
+            :arrows="q.platform.is.desktop" :autoplay="true">
             <q-carousel-slide :name="1"
                 img-src="https://img.freepik.com/free-photo/hairdresser-grooming-their-client_23-2149205925.jpg?w=740&t=st=1704036365~exp=1704036965~hmac=73af9ba319730098652e45ad9e76ebc88f500e5706697132417a53584dd3ddf0" />
             <q-carousel-slide :name="2"
@@ -12,7 +12,9 @@
                 img-src="https://img.freepik.com/fotos-gratis/homem-cortando-o-cabelo-na-barbearia-4_23-2149186458.jpg?w=1380&t=st=1704054198~exp=1704054798~hmac=34ced433292e050d75772e645264fd5d3594d5448e637ed46f9dfb4613e93872" />
             <q-carousel-slide :name="5"
                 img-src="https://img.freepik.com/fotos-gratis/jovem-afro-americano-visitando-uma-barbearia_1157-47699.jpg?w=1380&t=st=1704053958~exp=1704054558~hmac=c4bcd2240783556f2f8116edfba9fc9f87aeb4e5352df664e423404396404d12" />
+
         </q-carousel>
+
     </div>
 </template>
 
