@@ -2,8 +2,8 @@
     <section class="q-pa-md">
         <q-table flat bordered virtual-scroll title="Gerencia Agendamentos" :rows="rows" :columns="columns" row-key="id"
             :selected-rows-label="getSelectedString" selection="single" v-model:selected="selected"
-            table-header-class="text-bold" rowsPerPageLabel="Resultados por Pagina:" :loading="loading"
-            :sort-method="ordenarLinhas">
+            table-header-class="text-bold" rowsPerPageLabel="Resultados por página:" :loading="loading"
+            :sort-method="ordenarLinhas" color="blue-5">
             <template v-slot:body="props">
                 <q-tr :props="props">
                     <q-td>
@@ -108,14 +108,3 @@ watch(() => store.getAgendamentos, () => {
 
 </script>
 
-<style lang="scss" scoped>
-.q-table--flat tbody tr:nth-child(odd) {
-    background-color: #ffffff;
-
-}
-
-.q-table--flat tbody tr:nth-child(even) {
-    background-color: #EBFAFD;
-
-}
-</style>

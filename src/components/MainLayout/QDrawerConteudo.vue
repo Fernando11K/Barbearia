@@ -33,11 +33,11 @@ import { auth } from 'src/boot/firebase'
 import { signOut } from 'firebase/auth';
 import { usuarioStore } from '../../stores/usuario-store';
 import { warning, info, danger } from '../../utils/alerta'
-import { menu } from 'src/utils/menu'
+import { menu } from 'src/assets/menu'
 import IMenu from 'src/model/interfaces/IMenu'
 import { ref } from 'vue';
 import ModalAgendamento from '../Agendamento/ModalAgendamento.vue';
-import QAvatar from '../GerenciaAgendamentos/QAvatar.vue';
+import QAvatar from 'src/components/Gerenciamento/GerenciaAgendamentos/QAvatar.vue';
 
 
 const usuario = usuarioStore()

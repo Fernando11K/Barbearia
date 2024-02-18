@@ -5,3 +5,13 @@
             #c90909 5px,
             #cc502e 10px);
 }
+
+.q-table--flat tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+
+}
+
+.q-table--flat tbody tr:nth-child(even) {
+    background-color: #EBFAFD;
+
+}

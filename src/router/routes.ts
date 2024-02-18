@@ -17,16 +17,16 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
       },
       {
-        path: '/agendamento', component: () => import('pages/AgendamentoPage.vue'),
+        path: '/agendamento', component: () => import('pages/GerenciaAgendamentosPage.vue'),
         meta: { requiresAuth: true },
       },
       { path: '/login', component: () => import('../pages/LoginPage.vue') },
       {
-        path: '/gerencia-agendamentos', component: () => import('pages/AgendamentoPage.vue'),
+        path: '/gerencia-agendamentos', component: () => import('pages/GerenciaAgendamentosPage.vue'),
         meta: { requiresAuth: false },
       },
       {
-        path: '/tabela-precos', component: () => import('pages/TabelaPrecosPage.vue'),
+        path: '/tabela-precos', component: () => import('pages/GerenciaServicosPage.vue'),
         meta: { requiresAuth: false },
       },
     ]

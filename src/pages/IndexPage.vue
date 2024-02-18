@@ -115,6 +115,7 @@ const loading = ref(true);
 <style scoped>
 .fonte-principal {
   font-size: 1.2rem;
+
 }
 
 .fonte-conteudo {
