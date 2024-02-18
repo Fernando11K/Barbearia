@@ -3,8 +3,10 @@
         <q-table flat bordered title="Tabela de Preços" :rows="rows" :columns="columns" color="primary" row-key="name"
             separator="cell" rowsPerPageLabel="Resultados por página:" :col-props="{ style: 'width: 50%' }">
             <template v-slot:top>
-                <QAvatar />
-                <div class="col-2 q-table__title q-pl-md">Tabela de Preços</div>
+                <section class="row items-center ">
+                    <QAvatar />
+                    <div class="q-table__title q-pl-md">Tabela de Preços</div>
+                </section>
             </template>
             <template v-slot:header="props">
                 <q-tr :props="props">
