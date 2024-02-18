@@ -29,6 +29,10 @@ const routes: RouteRecordRaw[] = [
         path: '/tabela-precos', component: () => import('pages/GerenciaServicosPage.vue'),
         meta: { requiresAuth: false },
       },
+      {
+        path: '/criar-conta', component: () => import('pages/CriarContaPage.vue'),
+        meta: { requiresAuth: false },
+      },
     ]
   },
   {

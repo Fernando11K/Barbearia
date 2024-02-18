@@ -1,6 +1,6 @@
 
 import { ref } from 'vue';
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { usuarioStore } from '../stores/usuario-store';
 import { Login } from 'src/model/types/Login';
 import { auth } from 'src/boot/firebase'
@@ -11,6 +11,20 @@ import router from 'src/router';
 const loading = ref(false)
 const usuario = usuarioStore()
 const mensagem = '<p class="text-h6">Tentando realizar login. Aguarde...</p>'
+
+const criarUsuario = (dados: Login) => {
+    loading.value = true
+    createUserWithEmailAndPassword(auth, dados.email, dados.senha)
+        .then(() => {
+            positive('Sua conta foi criado com sucesso!', 3000)
+        })
+        .catch(() => {
+            danger('Ocorreu um erro na criação de sua conta!')
+        })
+        .finally(() => {
+            loading.value = false
+        })
+}
 
 const autenticacaoLocal = (dados: Login) => {
     loading.value = true
@@ -75,4 +89,4 @@ const mensagensErroAutenticacao = (mensagem: string) => {
     }
 }
 
-export { autenticacaoLocal, autenticacaoGoogle, loading }
+export { autenticacaoLocal, autenticacaoGoogle, loading, criarUsuario }
