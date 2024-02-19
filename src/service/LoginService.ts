@@ -15,11 +15,15 @@ const mensagem = '<p class="text-h6">Tentando realizar login. Aguarde...</p>'
 const criarUsuario = (dados: Login) => {
     loading.value = true
     createUserWithEmailAndPassword(auth, dados.email, dados.senha)
-        .then(() => {
-            positive('Sua conta foi criado com sucesso!', 3000)
+        .then((response) => {
+            console.log(response)
+            positive('Sua conta foi criado com sucesso seja bem vindo!', 3000)
+            router.push('/home')
+
         })
-        .catch(() => {
-            danger('Ocorreu um erro na criação de sua conta!')
+        .catch((error) => {
+            mensagensErroCadastro(error.code)
+
         })
         .finally(() => {
             loading.value = false
@@ -86,6 +90,16 @@ const mensagensErroAutenticacao = (mensagem: string) => {
         // default:
         //     danger('Ocorreu um erro verifique sua conexão!', 1000)
         //     break;
+    }
+}
+
+const mensagensErroCadastro = (mensagem: string) => {
+    switch (mensagem) {
+        case 'auth/email-already-in-use':
+            danger('Email informado já está em uso!', 3000)
+            break;
+
+
     }
 }
 

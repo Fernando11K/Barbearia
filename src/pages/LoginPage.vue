@@ -4,11 +4,15 @@
             <q-form class="row justify-center" @submit.prevent="autenticar">
                 <InputUsuarioLogin v-model="login.email" :label="'Email'" class="full-width q-pa-md"
                     @focus="mudarPosicao" />
-                <InputSenhaLogin v-model="login.senha" class="full-width q-pa-md" @focus="mudarPosicao" />
+                <InputSenhaLogin v-model="login.senha" :label="'Senha'" class="full-width q-pa-md" @focus="mudarPosicao" />
                 <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="primary" text-color="white"
                     label="ENTRAR" :disabled="!login.email || !login.senha || loading" />
                 <q-btn icon='fa-brands fa-google' @click="autenticacaoGoogle" outline rounded
                     class="q-mt-md col-11 bg-black" text-color="white" label="Fazer login com o Google" />
+                <q-separator size="1px" color="grey-4" inset class="col-12 q-my-md" />
+                <span class="justify-center ">
+                    <q-btn unelevated rounded color="positive" :to="'/criar-conta'">Criar Conta</q-btn>
+                </span>
             </q-form>
         </BoxUsuario>
     </q-page>
@@ -40,4 +44,3 @@ const mudarPosicao = (status: boolean) => {
     border-radius: 25px;
 }
 </style>
-../utils/alerta
