@@ -21,7 +21,7 @@ const alteraPosicaoCard = (estaEmFoco = true) => {
         const elemento = card?.value?.$el;
         if (elemento) {
             elemento.style.transition = 'transform 0.5s ease-in-out';
-            elemento.style.transform = (estaEmFoco) ? 'translateY(-30%)' : 'translateY(0%)';
+            elemento.style.transform = (estaEmFoco) ? 'translateY(-17%)' : 'translateY(0%)';
 
         }
     }
