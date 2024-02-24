@@ -2,30 +2,36 @@
     <q-page class="column flex-center bg-white">
         <BoxUsuario :titulo="'Cadastro'" ref="boxUsuario">
             <q-form class="row justify-center" @submit.prevent="criarConta">
-                <InputUsuarioLogin v-model="login.email" :label="'Email'" class="full-width q-pa-md" />
-                <InputSenhaLogin v-model="login.senha" :label="'Senha'" class="full-width q-pa-md" />
-                <InputSenhaLogin v-model="confirmacaoSenha" :label="'Confimar senha'" class="full-width q-pa-md" />
-                <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="positive" text-color="white"
-                    label="CRIAR CONTA" :disabled="desabilitarBotao" />
-                <CardRequisitosSenha :senha="login.senha" @statusRequisitos="atualizarStatusRequisitos" />
+                <InputNome v-model="novoUsuario.nome" class="col-12 q-pa-md" />
+                <InputUsuarioLogin v-model="novoUsuario.email" :label="'Email'" class="col-12 q-pa-md" />
+                <InputSenhaLogin v-model="novoUsuario.senha" :label="'Senha'" class="col-12 q-pa-md" />
+                <InputSenhaLogin v-model="confirmacaoSenha" :label="'Confimar senha'" class="col-12 q-pa-md" />
+                <q-btn type="submit" unelevated rounded class="q-mt-md col-11" color="positive" text-color="white"
+                    label="Cadastrar" :disabled="desabilitarBotao" />
+                <CardRequisitosSenha :senha="novoUsuario.senha" @statusRequisitos="atualizarStatusRequisitos" />
             </q-form>
         </BoxUsuario>
 
     </q-page>
 </template>
 <script setup lang="ts">
+
 import BoxUsuario from 'src/components/common/BoxUsuario.vue';
 import InputUsuarioLogin from 'src/components/login/InputUsuarioLogin.vue';
 import InputSenhaLogin from 'src/components/login/InputSenhaLogin.vue';
+import InputNome from 'src/components/common/InputNome.vue';
 import CardRequisitosSenha from 'src/components/CadastroUsuario/CardRequisitosSenha.vue'
-import { Login } from 'src/model/types/Login';
-import { criarUsuario, loading } from 'src/service/LoginService'
+import { CadastroUsuario } from 'src/model/types/CadastroUsuario';
+import { criarUsuario, loading } from 'src/service/UsuarioService'
 import { ref, computed } from 'vue'
 import { warning } from 'src/utils/alerta';
+
 const boxUsuario = ref()
-const login = ref<Login>({ email: '', senha: '' })
+const novoUsuario = ref<CadastroUsuario>({ email: '', senha: '', nome: '' })
 const confirmacaoSenha = ref('')
 const statusRequisitos = ref(false)
+const desabilitarBotao = computed(() => !(novoUsuario.value.email && novoUsuario.value.senha && confirmacaoSenha.value && !loading.value && statusRequisitos.value))
+
 const atualizarStatusRequisitos = (valor: boolean) => {
     statusRequisitos.value = valor
 }
@@ -33,21 +39,20 @@ const criarConta = () => {
 
     if (validarCadastro()) {
 
-        criarUsuario(login.value)
+        criarUsuario(novoUsuario.value)
     }
 }
 
-const desabilitarBotao = computed(() => !(login.value.email && login.value.senha && confirmacaoSenha.value && !loading.value && statusRequisitos.value))
 const validarCadastro = () => {
 
-    if (login.value.senha !== confirmacaoSenha.value) {
+    if (novoUsuario.value.senha !== confirmacaoSenha.value) {
         warning('As senhas não correspondem!')
-        return false
+        return
 
     }
     else if (!statusRequisitos.value) {
         warning('Atenda aos requisitos de senha!')
-        return false
+        return
     }
     return true
 

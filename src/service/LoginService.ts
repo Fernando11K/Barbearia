@@ -1,6 +1,6 @@
 
 import { ref } from 'vue';
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { usuarioStore } from '../stores/usuario-store';
 import { Login } from 'src/model/types/Login';
 import { auth } from 'src/boot/firebase'
@@ -10,34 +10,16 @@ import router from 'src/router';
 
 const loading = ref(false)
 const usuario = usuarioStore()
-const mensagem = '<p class="text-h6">Tentando realizar login. Aguarde...</p>'
 
-const criarUsuario = (dados: Login) => {
-    loading.value = true
-    createUserWithEmailAndPassword(auth, dados.email, dados.senha)
-        .then((response) => {
-            console.log(response)
-            positive('Sua conta foi criado com sucesso seja bem vindo!', 3000)
-            router.push('/home')
-
-        })
-        .catch((error) => {
-            mensagensErroCadastro(error.code)
-
-        })
-        .finally(() => {
-            loading.value = false
-        })
-}
+const retornarMensagem = (msg: string) => `<p class="text-h6">Tentando realizar ${msg}. Aguarde...</p>`
 
 const autenticacaoLocal = (dados: Login) => {
     loading.value = true
-    spinnerFacebook.mostrar(mensagem)
+    spinnerFacebook.mostrar(retornarMensagem('login'))
     signInWithEmailAndPassword(auth, dados.email, dados.senha)
         .then(() => {
-            positive('Seja bem vindo!', 3000)
+            mostrarBoasVindas()
             router.push('/home')
-
         })
         .catch((error) => {
             mensagensErroAutenticacao(error.code)
@@ -47,19 +29,17 @@ const autenticacaoLocal = (dados: Login) => {
         })
         .finally(() => {
             spinnerFacebook.ocultar()
+            loading.value = false
 
         })
 }
 
 const autenticacaoGoogle = () => {
-    spinnerFacebook.mostrar(mensagem)
+    spinnerFacebook.mostrar('login')
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
         .then(() => {
-            if (usuario.getNome) {
-
-                positive(`Seja bem vindo ${usuario.getNome}!`, 3000)
-            }
+            mostrarBoasVindas()
             console.log(router)
             router.push('/home')
         })
@@ -69,12 +49,20 @@ const autenticacaoGoogle = () => {
         )
         .finally(() => {
             spinnerFacebook.ocultar()
+            loading.value = false
         })
 }
+const mostrarBoasVindas = () => {
+    if (usuario.getNome) {
 
-const mensagensErroAutenticacao = (mensagem: string) => {
+        positive(`Seja bem vindo ${usuario.getNome}!`, 3000)
+    } else {
+        positive('Seja bem vindo!', 3000)
+    }
+}
+const mensagensErroAutenticacao = (mensagemLogin: string) => {
 
-    switch (mensagem) {
+    switch (mensagemLogin) {
         case 'auth/invalid-credential':
         case 'auth/invalid-email':
             danger('Usuário ou senha inválidos!', 3000)
@@ -93,14 +81,5 @@ const mensagensErroAutenticacao = (mensagem: string) => {
     }
 }
 
-const mensagensErroCadastro = (mensagem: string) => {
-    switch (mensagem) {
-        case 'auth/email-already-in-use':
-            danger('Email informado já está em uso!', 3000)
-            break;
 
-
-    }
-}
-
-export { autenticacaoLocal, autenticacaoGoogle, loading, criarUsuario }
+export { autenticacaoLocal, autenticacaoGoogle, loading }
