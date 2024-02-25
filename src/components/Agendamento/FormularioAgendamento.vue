@@ -60,17 +60,17 @@ import { computed, onMounted, ref, watch } from 'vue';
 import InputDate from './InputDate.vue';
 import { info, danger } from '../../utils/alerta'
 import { buscarDadosViaCep } from 'src/service/EnderecoService'
-import { QSelectOption } from 'quasar'
 import { EnumLocalAtendimento } from 'src/model/enum/EnumLocalAtendimento'
 import { EnumTipoResidencia } from 'src/model/enum/EnumTipoResidencia'
 import { Agendamento } from 'src/model/Agendamento';
 import SelectBarbeiro from './SelectBarbeiro.vue';
+import { QSelectOption } from 'quasar';
 
 const emits = defineEmits(['dadosValidos', 'preencheDados']);
 onMounted(() => { emiteValidacaoDados() });
 
 const data = ref('')
-const barbeiro = ref<QSelectOption<number | null>>({ value: null, label: '' })
+const barbeiro = ref<QSelectOption<string>>({ value: '', label: '' });
 
 const dadosEndereco = ref(<IEndereco>{})
 const loading = ref(false)
@@ -84,7 +84,12 @@ const localAtendimento = [
 const local = ref(localAtendimento[0])
 
 const enviaDados = () => { preencheDados() }
-const preencheDados = () => { emits('preencheDados', new Agendamento(data.value, barbeiro.value.label, 'corte', local.value.id)) }
+const preencheDados = () => {
+   if (barbeiro.value.value) {
+
+      emits('preencheDados', new Agendamento(data.value, barbeiro.value.value, 'corte', local.value.id))
+   }
+}
 
 const atualiza = (dados: string) => data.value = dados
 

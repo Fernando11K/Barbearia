@@ -1,9 +1,9 @@
-import { update, } from 'firebase/database';
+import { update, set } from 'firebase/database';
 import { agendamentoRef, agendamentoByIdRef, push, onValue } from 'src/boot/firebase';
 import { danger, positive } from 'src/utils/alerta';
 import { Agendamento } from 'src/model/Agendamento';
-import { ref } from 'vue';
 import agendamentoStore from 'src/stores/agendamento-store';
+import { buscarBarbeiros } from './BabeiroService';
 
 const store = agendamentoStore()
 
@@ -11,9 +11,10 @@ const store = agendamentoStore()
 const criarAgendamento = (agendamento: Agendamento) => {
 
     const dados = {
+        dataRegistro: new Date().toLocaleString('pt-BR').replace(',', ''),
         cliente: agendamento.getCliente(),
         data: agendamento.getData(),
-        barbeiro: agendamento.getBarbeiro(),
+        idBarbeiro: agendamento.getIdBarbeiro(),
         servico: agendamento.getServico()
 
     }
@@ -23,9 +24,9 @@ const atualizarAgendamento = (agendamento: Agendamento) => {
     const dados = {
         cliente: agendamento.getCliente(),
         data: agendamento.getData(),
-        barbeiro: agendamento.getBarbeiro(),
+        idBarbeiro: agendamento.getIdBarbeiro(),
         servico: agendamento.getServico(),
-        id: '-NnWdXh5OUriDo9BkHKL'
+        id: '-NrT7quVBxpj8-TeFAdT'
 
     }
 
@@ -44,19 +45,33 @@ const atualizarAgendamento = (agendamento: Agendamento) => {
 
 }
 
-const buscarAgendamentos = () => {
+const inserirAgendamento = (agendamento: Agendamento) => {//Substitui os dados    
 
+    const dados = {
+        dataRegistro: new Date().toLocaleString('pt-BR').replace(',', ''),
+        cliente: agendamento.getCliente(),
+        data: agendamento.getData(),
+        idBarbeiro: agendamento.getIdBarbeiro(),
+        servico: agendamento.getServico()
+
+    }
+    set(agendamentoByIdRef(agendamento.getId()), dados)
+
+}
+
+const buscarAgendamentos = async () => {
+    const barbeiros = await buscarBarbeiros()
     return new Promise((resolve, reject) => {
-        const listaAgendamentos = ref<Array<Agendamento>>([])
         onValue(agendamentoRef, (snapshot) => {
-            listaAgendamentos.value = []
+            const listaAgendamentos: Array<Agendamento> = []
             snapshot.forEach((childSnapshot) => {
                 const childKey = childSnapshot.key;
                 const childData = childSnapshot.val();
-                listaAgendamentos.value.push({ id: childKey, ...childData });
+                listaAgendamentos.push({ id: childKey, barbeiro: barbeiros.find((barbeiro) => barbeiro.getId() === childData.idBarbeiro), ...childData });
             });
-            store.setAgendamentos([...listaAgendamentos.value] as Agendamento[])
-            resolve(listaAgendamentos.value);
+            store.setAgendamentos([...listaAgendamentos] as Agendamento[])
+
+            resolve(listaAgendamentos);
         }, (error) => {
             reject(error);
         },
@@ -66,4 +81,4 @@ const buscarAgendamentos = () => {
     }
     );
 }
-export { criarAgendamento, buscarAgendamentos, atualizarAgendamento }
+export { criarAgendamento, buscarAgendamentos, atualizarAgendamento, inserirAgendamento }

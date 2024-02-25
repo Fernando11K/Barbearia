@@ -1,25 +1,36 @@
-import { QSelectOption } from 'quasar';
 import { barbeiroRef, onValue } from 'src/boot/firebase';
+import Barbeiro from 'src/model/Barbeiro';
 import { ref } from 'vue';
 
 
+const loading = ref(false)
 
+const buscarBarbeiros = async () => {
 
-const buscarBarbeiros = () => {
-    const barbeiros = ref<Array<QSelectOption<number>>>([])
-    onValue(barbeiroRef, (snapshot) => {
+    loading.value = true
+    return new Promise<Array<Barbeiro>>((resolve, reject) => {
 
-        snapshot.forEach((childSnapshot) => {
-            const childData = childSnapshot.val();
+        onValue(barbeiroRef, (snapshot) => {
 
-            barbeiros.value?.push({ value: childData.id, label: childData.nome })
+            const barbeiros: Array<Barbeiro> = []
+            snapshot.forEach((childSnapshot) => {
+                const chieldKey = childSnapshot.key;
+                const childData = childSnapshot.val();
+                barbeiros.push(new Barbeiro(chieldKey, childData.nome))
 
-        });
+            });
+            resolve(barbeiros);
+        }, (error) => { reject(error); },
 
-    }, {
-        onlyOnce: true
-    });
-    return barbeiros.value
+            {
+                onlyOnce: true
+            }
+
+        );
+        loading.value = false
+    })
 }
 
-export { buscarBarbeiros }
+
+
+export { buscarBarbeiros, loading }

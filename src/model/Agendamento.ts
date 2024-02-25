@@ -4,27 +4,30 @@ import { usuarioStore } from 'src/stores/usuario-store';
 const usuario = usuarioStore()
 class Agendamento {
 
-    private id?: string
+    private id?: string;
+    private nomeCliente: string;
     private cliente: string | null;
     private data: string;
-    private barbeiro: string;
+    private idBarbeiro: string;
     private servico: string;
     private local: number;
     private status: boolean;
 
-    constructor(data: string, barbeiro: string, servico: string, local: number) {
+    constructor(data: string, idBarbeiro: string, servico: string, local: number) {
+        this.nomeCliente = usuario.getNome ?? 'Não Identificado'
         this.cliente = usuario.getEmail;
         this.data = data;
-        this.barbeiro = barbeiro;
+        this.idBarbeiro = idBarbeiro;
         this.servico = servico;
         this.status = true;
         this.local = local
     }
 
-
-
-    getId(): string | undefined {
-        return this.id
+    getId(): string {
+        return this.id ?? ''
+    }
+    getNome(): string {
+        return this.nomeCliente;
     }
     getCliente(): string {
         return this.cliente ? this.cliente : '';
@@ -42,12 +45,12 @@ class Agendamento {
         this.data = data;
     }
 
-    getBarbeiro(): string {
-        return this.barbeiro;
+    getIdBarbeiro(): string {
+        return this.idBarbeiro;
     }
 
     setBarbeiro(barbeiro: string): void {
-        this.barbeiro = barbeiro;
+        this.idBarbeiro = barbeiro;
     }
 
     getServico(): string {

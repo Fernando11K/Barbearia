@@ -19,7 +19,7 @@
                     </q-td>
                     <q-td key="barbeiro" :props="props">
                         <q-badge color="green" class="q-mr-md">
-                            {{ props.row.barbeiro }}
+                            {{ props.row.barbeiro.nome }}
                         </q-badge>
                     </q-td>
                     <q-td key="cliente" :props="props">
@@ -30,6 +30,11 @@
                     <q-td key="servico" :props="props">
                         <q-badge color="orange">
                             {{ props.row.servico }}
+                        </q-badge>
+                    </q-td>
+                    <q-td key="id" :props="props">
+                        <q-badge color="primary">
+                            {{ props.row.id }}
                         </q-badge>
                     </q-td>
                 </q-tr>
@@ -47,17 +52,19 @@ import agendamentoStore from 'src/stores/agendamento-store';
 import { Agendamento } from 'src/model/Agendamento'
 import { converteDataStringAgendamentoParaDate as parseDate } from 'src/utils/dateUtils'
 
+
 const store = agendamentoStore()
 const rows = ref<Array<QTableProps['rows']>>([])
 const loading = ref(true)
 const selected = ref([])
 
 const columns: QTableProps['columns'] = [
-    { name: 'acoes', align: 'center', label: 'EDITAR', field: 'calories', sortable: true },
+    { name: 'acoes', align: 'center', label: 'EDITAR', field: 'acoes', sortable: false },
     { name: 'data', align: 'center', required: true, label: 'DATA AGENDAMENTO', field: 'data', sortable: true },
     { name: 'barbeiro', align: 'center', label: 'BARBEIRO', field: 'barbeiro', sortable: true },
     { name: 'cliente', align: 'center', label: 'CLIENTE', field: 'cliente', sortable: true },
-    { name: 'servico', align: 'center', label: 'SERVIÇO', field: 'servico', sortable: true }
+    { name: 'servico', align: 'center', label: 'SERVIÇO', field: 'servico', sortable: true },
+    { name: 'id', align: 'center', label: 'ID', field: 'id', sortable: false }
 
 ]
 
@@ -71,18 +78,15 @@ const preencherTabela = () => {
             loading.value = false;
         })
 }
-const preencherLinhas = (linhas: Array<Agendamento>) => {
-    if (linhas) {
-        rows.value = linhas
-        ordenarLinhas(rows.value, 'data', 'descending')
-    }
+const preencherLinhas = async (linhas: Array<Agendamento>) => {
+    rows.value = linhas
+    ordenarLinhas(rows.value, 'data', 'descending')
+
 }
 preencherTabela()
 const ordenarLinhas = (row: QTableProps['rows'], sortBy: string, descending: string) => {
-    if (!rows.value) {
-        return
-    }
-    return rows.value.sort((a, b) => {
+    const sortedRows = [...rows.value];
+    return sortedRows.sort((a, b) => {
         if (a && b) {
             const elementoA = a[sortBy]
             const elementoB = b[sortBy]
@@ -92,7 +96,11 @@ const ordenarLinhas = (row: QTableProps['rows'], sortBy: string, descending: str
 
                 return descending ? (data2.getTime() - data1.getTime()) : (data1.getTime() - data2.getTime())
             }
-            return descending ? elementoB.localeCompare(elementoA) : elementoA.localeCompare(elementoB);
+            if (sortBy === 'barbeiro') {
+
+                return descending ? elementoB.nome.localeCompare(elementoA.nome) : elementoA.nome.localeCompare(elementoB.nome);
+            }
+
         }
     });
 

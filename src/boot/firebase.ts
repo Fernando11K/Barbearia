@@ -28,7 +28,10 @@ const auth = getAuth(firebaseApp);
 const dataBase = getDatabase(firebaseApp)
 const agendamentoRef = ref(dataBase, '/agendamentos/')
 const agendamentoByIdRef = (idAgendamento: string) => ref(dataBase, `/agendamentos/${idAgendamento}`)
+const barbeiroByIdRef = (idBarbeiro: number) => ref(dataBase, `/barbeiros/${idBarbeiro}`)
 const barbeiroRef = ref(dataBase, '/barbeiros')
 
-export { firebaseApp, analytics, auth, agendamentoRef, agendamentoByIdRef, barbeiroRef, push, onValue, ref }
+
+
+export { firebaseApp, analytics, auth, agendamentoRef, agendamentoByIdRef, barbeiroByIdRef, barbeiroRef, push, onValue, ref }
 
