@@ -35,8 +35,8 @@ import { formataDDMMYYYYHHmmParaDate as formataData } from 'src/utils/dateUtils'
 
 const props = defineProps(['modelValue'])
 
-const emits = defineEmits(['updateModelValue'])
-const atualiza = (data: string) => { emits('updateModelValue', data); }
+const emits = defineEmits(['update:modelValue'])
+const atualiza = (data: string) => { emits('update:modelValue', data); }
 
 const regexData = new RegExp('^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3} ([01][0-9]|2[0-3]):[0-5][0-9]$')
 const validaData = [(val: string) => regexData.test(val) || exibeMensagemValidacao()]

@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { apiViaCep } from 'src/boot/axios';
+import { danger } from 'src/utils/alerta';
 
 const buscarDadosViaCep = async (cep: string) => {
 
@@ -19,9 +20,9 @@ const buscarDadosViaCep = async (cep: string) => {
 
         })
         .catch((erro: XMLHttpRequest) => {
+            danger('CEP inválido ou não localizado, por favor verifique e tente novamente. ')
             console.error(erro);
-            throw erro;
-
+            throw erro
         })
 
 }
