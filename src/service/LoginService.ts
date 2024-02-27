@@ -55,9 +55,9 @@ const autenticacaoGoogle = () => {
 const mostrarBoasVindas = () => {
     if (usuario.getNome) {
 
-        positive(`Seja bem vindo ${usuario.getNome}!`, 3000)
+        positive(`Seja bem-vindo, ${usuario.getNome}!`, 3000)
     } else {
-        positive('Seja bem vindo!', 3000)
+        positive('Seja bem-vindo!', 3000)
     }
 }
 const mensagensErroAutenticacao = (mensagemLogin: string) => {
@@ -75,9 +75,9 @@ const mensagensErroAutenticacao = (mensagemLogin: string) => {
             }, 4000);
             break;
 
-        // default:
-        //     danger('Ocorreu um erro verifique sua conexão!', 1000)
-        //     break;
+        default:
+            danger('Ocorreu um erro verifique sua conexão!', 1000)
+            break;
     }
 }
 
