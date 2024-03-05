@@ -1,15 +1,15 @@
 <template>
-    <div>
+    <section>
         <q-btn v-if="false" label="Agendamento" color="primary" />
         <q-dialog v-model="statusModal" class="q-mt-xl" persistent transition-show="slide-up" transition-hide="rotate">
-            <q-card ref="card">
+            <q-card ref="card" style="min-width: 350px; min-height: 300px;">
+                <q-card-section class="bg-primary text-white ">
+                    <div class="text-h6 row justify-between">
+                        <q-icon class="q-mr-md q-pt-xs" size="sm" name="fa-regular fa-calendar-days" />Agendamento
+                        <q-btn icon="close" flat round dense v-close-popup @click="atualizaStatusModalExternamente()" />
+                    </div>
+                </q-card-section>
                 <q-form @submit.prevent="realizaAgendamento">
-                    <q-card-section class="bg-primary text-white ">
-                        <div class="text-h6 row justify-between">
-                            <q-icon class="q-mr-md q-pt-xs" size="sm" name="fa-regular fa-calendar-days" />Agendamento
-                            <q-btn icon="close" flat round dense v-close-popup @click="atualizaStatusModalExternamente()" />
-                        </div>
-                    </q-card-section>
 
                     <q-card-section>
                         <FormularioAgendamento ref="formularioAgendamentoRef" @preencheDados="preencheDados"
@@ -27,9 +27,9 @@
                 </q-form>
             </q-card>
         </q-dialog>
-    </div>
+    </section>
 </template>
-  
+
 <script lang="ts" setup>
 import FormularioAgendamento from './FormularioAgendamento.vue';
 import { ref, watchEffect } from 'vue';
@@ -76,7 +76,4 @@ const agendar = () => {
 }
 const atualizaStatusModalExternamente = () => emits('atualizaStatusModal', false);
 
-
-
 </script>
-  
