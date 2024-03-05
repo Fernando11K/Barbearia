@@ -12,7 +12,7 @@
           @click="funcionalidadeNaoDisponivel">
         </q-btn>
         <q-btn size="md" flat round icon="fa-regular fa-calendar-days fa-beat" class="fonte-footer "
-          @click="statusModalAgendamento = true" :disabled="!usuario.getEmail">
+          @click="abrirModalAgendamento" :disabled="!usuario.getEmail">
         </q-btn>
         <q-btn size="md" flat round class="fonte-footer " @click="abrirWhatsApp">
           <q-icon size="md" name="fa-brands fa-whatsapp fa-bounce" color="light-green-13">
@@ -21,8 +21,7 @@
       </div>
     </q-toolbar>
   </q-footer>
-  <ModalAgendamento :statusProp="statusModalAgendamento" v-show="false"
-    @atualizaStatusModal="(value: boolean) => { statusModalAgendamento = value }" />
+  <ModalAgendamento ref="modalAgendamentoRef" />
 </template>
 
 <script setup lang="ts">
@@ -32,25 +31,32 @@ import { warning } from '../../utils/alerta'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
+
 const q = useQuasar()
+const router = useRouter()
 
 const usuario = usuarioStore()
+const modalAgendamentoRef = ref<typeof ModalAgendamento | null>(null)
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo']);
 
+onMounted(() => loopCores)
+onBeforeUnmount(() => clearInterval(loopCores))
 
 
 const corAtual = ref<string>()
 const corAtualIndex = ref<number>(0)
 const cores = ['blue-3', 'blue-4', 'blue-5', 'blue-6'];
-const statusModalAgendamento = ref(false)
-const router = useRouter()
+const abrirModalAgendamento = () => {
+  if (modalAgendamentoRef.value) {
+
+    modalAgendamentoRef.value.atualiza(true)
+  }
+}
 const trocarCor = () => {
   corAtualIndex.value = (corAtualIndex.value + 1) % cores.length;
   corAtual.value = cores[corAtualIndex.value]
 }
 const loopCores = setInterval(trocarCor, 500)
-onMounted(() => loopCores)
-onBeforeUnmount(() => clearInterval(loopCores))
 
 const celular = ref('5521975294416');
 const message = ref('Olá! Está funcionando?');
@@ -62,4 +68,3 @@ const home = () => { router.push('/home') }
 
 
 </script>
-../../utils/alerta
