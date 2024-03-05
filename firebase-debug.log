@@ -1,0 +1,114 @@
+[debug] [2024-03-05T02:22:15.281Z] ----------------------------------------------------------------------
+[debug] [2024-03-05T02:22:15.282Z] Command:       /usr/bin/node /usr/local/bin/firebase deploy
+[debug] [2024-03-05T02:22:15.283Z] CLI Version:   13.3.1
+[debug] [2024-03-05T02:22:15.283Z] Platform:      linux
+[debug] [2024-03-05T02:22:15.283Z] Node Version:  v18.19.0
+[debug] [2024-03-05T02:22:15.283Z] Time:          Mon Mar 04 2024 23:22:15 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2024-03-05T02:22:15.283Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-05T02:22:15.285Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2024-03-05T02:22:15.340Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-05T02:22:15.341Z] > authorizing via signed-in user (fernandosmithmendonca10@gmail.com)
+[debug] [2024-03-05T02:22:15.341Z] [iam] checking project barbearia-90acc for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-03-05T02:22:15.341Z] > refreshing access token with scopes: []
+[debug] [2024-03-05T02:22:15.342Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-03-05T02:22:15.342Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-03-05T02:22:15.625Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-03-05T02:22:15.625Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-03-05T02:22:15.632Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-90acc:testIamPermissions [none]
+[debug] [2024-03-05T02:22:15.632Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-90acc:testIamPermissions x-goog-quota-user=projects/barbearia-90acc
+[debug] [2024-03-05T02:22:15.632Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-90acc:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-05T02:22:15.703Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-03-05T02:22:15.703Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2024-03-05T02:22:16.617Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-90acc:testIamPermissions 200
+[debug] [2024-03-05T02:22:16.618Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/barbearia-90acc:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-03-05T02:22:16.621Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/barbearia-90acc [none]
+[debug] [2024-03-05T02:22:17.641Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/barbearia-90acc 200
+[debug] [2024-03-05T02:22:17.641Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/barbearia-90acc {"projectId":"barbearia-90acc","projectNumber":"1064725248483","displayName":"barbearia","name":"projects/barbearia-90acc","resources":{"hostingSite":"barbearia-90acc","realtimeDatabaseInstance":"barbearia-90acc-default-rtdb"},"state":"ACTIVE","etag":"1_1f394a9d-dee1-4022-a77b-299141d20a41"}
+[info] 
+[info] === Deploying to 'barbearia-90acc'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-03-05T02:22:17.647Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/versions [none]
+[debug] [2024-03-05T02:22:17.647Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2024-03-05T02:22:24.628Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/versions 200
+[debug] [2024-03-05T02:22:24.629Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/versions {"name":"projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[barbearia-90acc]: beginning deploy... 
+[info] i  hosting[barbearia-90acc]: found 52 files in dist/pwa 
+[debug] [2024-03-05T02:22:30.910Z] [hosting] uploading with 200 concurrency
+[debug] [2024-03-05T02:22:31.046Z] [hosting] hash cache [ZGlzdC9wd2E] stored for 52 files
+[debug] [2024-03-05T02:22:31.046Z] [hosting][hash queue][FINAL] {"max":130,"min":11,"avg":22.98076923076924,"active":0,"complete":52,"success":52,"errored":0,"retried":0,"total":52,"elapsed":134}
+[debug] [2024-03-05T02:22:31.047Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc:populateFiles [none]
+[debug] [2024-03-05T02:22:31.047Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc:populateFiles {"files":{"/index.html":"8a4337e571ffa808e27fdcd146768366171f0a90ed1f2bfa01b4a54e9f8c880f","/manifest.json":"fa06d481c06b977dbd479a1cc09a38733f763a75559596a4dc355b913b4f0827","/css/60.4243b51b.css":"f015017f2ed4049efc8ab32140f0394d1e91ad80f26c82fa056f949972b80cfb","/css/677.4243b51b.css":"f015017f2ed4049efc8ab32140f0394d1e91ad80f26c82fa056f949972b80cfb","/css/713.cec25286.css":"685bacbf9f383e1bcd0f2ffb3611bf525e832c4d354bb7ab9229548da664c780","/css/795.1fc00634.css":"95e02a585a2d677f6b879813fffd4fc623f529ca4f557c3502f4e4de7a3689f2","/service-worker.js":"c4327bffa48e1239f28a2c07c812888c6910450ec207a1c2eaa78299907343b5","/css/943.c4462dcc.css":"866f95a9587e02011b6ad2cf3b17608cb7ce640481a8c41169ddfc48fd1020b9","/css/app.83d2bd53.css":"7131d04bee75ddfd67821f140c6291c29f34eb8117d760eaeec37d3daa4f5858","/workbox-7bd9256e.js":"3815d7e8d902c547f27048c30effb53508df9d64affb13e638dab6741abbd1fa","/fonts/fa-v4compatibility.6b0efc24.ttf":"67f0075dc0a70056744beafafe7943ffc5f6b1123bc7fc3786575ed8fcfa46fc","/fonts/la-regular-400.8dc1cedf.woff2":"dbbfb7f2fc036b20c5c2addd5255326cb1742cc35dcf12ad3114105043c17cd4","/fonts/la-regular-400.aa859c0d.woff":"b343193efd0ced7828e8de6300a85333308eaa32c031f1c97b002c5b5aea7816","/icons/icon-128x128.png.png":"ae2f5d2813c9c052deed11f4f75d1eb51e5e98251a0496757b70a8ad1a63eedb","/icons/icon-152x152.png":"eaefe19b90000425cba79d41530e9d71a585ac555626b2604535ce9346b9f751","/icons/safari-pinned-tab.svg":"dae674ec2124c2006b2b20192f9f05109b77fc8e23cb2ecdf63e59f5a84c8cdc","/js/317.e749fdb8.js":"b1472337de15ad11a57177bd53c97420c70dbebd9c580a4b3c94f4d9677c05b4","/js/60.9ef16726.js":"37d66e2bdbff4923e96f335a0b635f08cf51ef1e481a11fe7e0a23ebd1573b44","/js/397.f6c25664.js":"52db2be1ac45ba86fb9fcc6afff70cb79d38a8dfa28363286423d95b6d1326cb","/js/677.a17d25a7.js":"010445348fc8253a17e2b2aa5dfafa30a6445189143d8a03989896121cb1459c","/js/795.300a721b.js":"f02c89a67efaaab2a5fd460965b545f813fa1cd22998b6ba74e51427c59b7d44","/js/943.f2efcf33.js":"e383fed636d72b299ed3c7b6b84f33e4541a1a02aa472d93532f3bca8dca278b","/js/app.c11fa00a.js":"758f9be10f4a4313a5559bc360d397979575737c2cd93dc560882925e1149208","/js/713.13c98933.js":"2e54d13918c63cd24e5c7206a3dd752afbb643f446fafb7ff3c41fb9c353ad2a","/fonts/KFOkCnqEu92Fr1MmgVxIIzQ.68bb21d0.woff":"c32ce0c71c6bd1335fbd97b7df4fb131837112d8928b98a1411a1fa4574d5e9d","/fonts/KFOlCnqEu92Fr1MmWUlfBBc-.77ecb942.woff":"0db369b7f2245185ad0c5b87e51f0a0d56e09b9b861a58286191e0fc701577f7","/fonts/KFOlCnqEu92Fr1MmSU5fBBc-.c2f7ab22.woff":"3c454552d52920b40aaad500768ff768fde941262af64a81cb48908ed037d91e","/fonts/KFOlCnqEu92Fr1MmEU9fBBc-.48af7707.woff":"d9aaed20b9316a69719b65d1949c327f5d7eeb29bcae437533dacdc20fd074b9","/fonts/KFOlCnqEu92Fr1MmYUtfBBc-.f5677eb2.woff":"e24c87b8ed28ffac2db843d1a2e0c332d3a38744634c4dda3b3ef5c84715266f","/fonts/KFOmCnqEu92Fr1Mu4mxM.f1e2a767.woff":"72d13535a69378caa8f34f0fd37618b3173da396830c7b26c10a952335b391e1","/favicon.ico":"88576a35f7f126b7da23054e609909204098e284f61b650e6f157decc605d3d7","/fonts/fa-regular-400.83824cd5.woff2":"8b4cf3afc2f56a3fa1ed7682943ed3dd8fdd0426c0b70f95e7c2467379e21728","/icons/icon-192x192.png":"57932dcf2da09b2ffd315f16889136ffd2481fac6baab6e135b0211c93125713","/fonts/fa-regular-400.96e19e1a.ttf":"799c80868ee263e8fc574f6718b252962ad63d5df6aa551c36165252f7cb1a50","/icons/icon-256x256.png":"43f2abdcc344e3c4a1c78f6ec1bfdef288213c06b441da03c81395c608c77646","/img/instagram.ef55efff.jpg":"421525a21ba4dc5b3ef2fe2f80561fea713e1cd30c690952af3b4b07dc0e6132","/js/chunk-common.33f15c71.js":"12255dcb9bf0176ea1a45be6b44314eaf4014ef51a4ff3e4b90a2333122bb1e8","/fonts/la-brands-400.3a8109c4.woff2":"23faf3b21de90180217d908f959e28f08d85e83b4f1def0dbc6a74a266228a34","/icons/icon-384x384.png":"747c3d828e0f790d05e01e1bfc7f87fffff636331f913c4d891654625f1c389c","/fonts/la-solid-900.3efd5ba1.woff2":"7c7f2bf805d91e6980f774e81d0654af8d0e8f7b3b5dde915f3fe0c3b525328a","/fonts/la-brands-400.925b340f.woff":"8d9809e343b8fcaaef7278740b028a3c9eb0364533bf3d2cf73183ab273d7af4","/fonts/fa-brands-400.498f4d22.woff2":"a08163615ee9fa45a06552562dfd48cc00726dff8457ea4896d5aabe5c13f0fe","/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.c5371cfb.woff2":"4ce79c10df7a25c668108dc8169592982a73a1ef911e9907bf02d6bddaa9b563","/fonts/la-solid-900.89363487.woff":"25676b26ab19b50a69c705c994d19c884529bf37e545bbece01a0b54e5e98ba5","/fonts/fa-solid-900.4cbe3db2.woff2":"be00eee4c768bdc86f213a3510de1674ccfb72249ee1df0dbecc80762f3f003b","/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.4d73cb90.woff":"d9e6de8c5463d77dcf526cde39a40b30e84abbee8289929136d125c4fc31194a","/icons/icon-512x512.png":"9e24319560311f1f86b09eebe10aba92708725928a8425fad03858477356bb93","/fonts/fa-brands-400.4c05cd9b.ttf":"204374b88d4d0d76dd7d355e80d839761d5dc76aa055048a2373a293849e96e5","/css/vendor.dc9f0205.css":"c8a230c1faf1aed564e9c2d4a39ca5222d539f0ae130938e87df53d60e2f1441","/fonts/fa-solid-900.bb5be820.ttf":"e83227dc85329134a387bb4510ac6188ffa05096a851ede9ca2a7b0f27b252d7","/js/vendor.c7a7dbeb.js":"c6c633301bb2dc8ff925d53207d2e6ac840c934f05f2ee06496cb258a72f83bb","/img/cabelo-e-barba.3d5392eb.jpg":"19511a0b8ff5f518a54c472a57cbf7dc35ae2eb30b4c88f9aafe482a0b29e755"}}
+[debug] [2024-03-05T02:22:32.609Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc:populateFiles 200
+[debug] [2024-03-05T02:22:32.609Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc:populateFiles {"uploadRequiredHashes":["8a4337e571ffa808e27fdcd146768366171f0a90ed1f2bfa01b4a54e9f8c880f","c4327bffa48e1239f28a2c07c812888c6910450ec207a1c2eaa78299907343b5","2e54d13918c63cd24e5c7206a3dd752afbb643f446fafb7ff3c41fb9c353ad2a","758f9be10f4a4313a5559bc360d397979575737c2cd93dc560882925e1149208","52db2be1ac45ba86fb9fcc6afff70cb79d38a8dfa28363286423d95b6d1326cb"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files"}
+[debug] [2024-03-05T02:22:32.612Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/8a4337e571ffa808e27fdcd146768366171f0a90ed1f2bfa01b4a54e9f8c880f [none]
+[debug] [2024-03-05T02:22:32.612Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/8a4337e571ffa808e27fdcd146768366171f0a90ed1f2bfa01b4a54e9f8c880f [stream]
+[debug] [2024-03-05T02:22:32.615Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/c4327bffa48e1239f28a2c07c812888c6910450ec207a1c2eaa78299907343b5 [none]
+[debug] [2024-03-05T02:22:32.616Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/c4327bffa48e1239f28a2c07c812888c6910450ec207a1c2eaa78299907343b5 [stream]
+[debug] [2024-03-05T02:22:32.618Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/2e54d13918c63cd24e5c7206a3dd752afbb643f446fafb7ff3c41fb9c353ad2a [none]
+[debug] [2024-03-05T02:22:32.618Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/2e54d13918c63cd24e5c7206a3dd752afbb643f446fafb7ff3c41fb9c353ad2a [stream]
+[debug] [2024-03-05T02:22:32.619Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/758f9be10f4a4313a5559bc360d397979575737c2cd93dc560882925e1149208 [none]
+[debug] [2024-03-05T02:22:32.619Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/758f9be10f4a4313a5559bc360d397979575737c2cd93dc560882925e1149208 [stream]
+[debug] [2024-03-05T02:22:32.621Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/52db2be1ac45ba86fb9fcc6afff70cb79d38a8dfa28363286423d95b6d1326cb [none]
+[debug] [2024-03-05T02:22:32.621Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/52db2be1ac45ba86fb9fcc6afff70cb79d38a8dfa28363286423d95b6d1326cb [stream]
+[debug] [2024-03-05T02:22:32.622Z] [hosting][populate queue][FINAL] {"max":1567,"min":1567,"avg":1567,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1577}
+[debug] [2024-03-05T02:22:32.622Z] [hosting] uploads queued: 5
+[debug] [2024-03-05T02:22:34.544Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/2e54d13918c63cd24e5c7206a3dd752afbb643f446fafb7ff3c41fb9c353ad2a 200
+[debug] [2024-03-05T02:22:34.544Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/2e54d13918c63cd24e5c7206a3dd752afbb643f446fafb7ff3c41fb9c353ad2a [stream]
+[debug] [2024-03-05T02:22:34.760Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/8a4337e571ffa808e27fdcd146768366171f0a90ed1f2bfa01b4a54e9f8c880f 200
+[debug] [2024-03-05T02:22:34.760Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/8a4337e571ffa808e27fdcd146768366171f0a90ed1f2bfa01b4a54e9f8c880f [stream]
+[debug] [2024-03-05T02:22:34.890Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/c4327bffa48e1239f28a2c07c812888c6910450ec207a1c2eaa78299907343b5 200
+[debug] [2024-03-05T02:22:34.890Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/c4327bffa48e1239f28a2c07c812888c6910450ec207a1c2eaa78299907343b5 [stream]
+[debug] [2024-03-05T02:22:36.502Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/758f9be10f4a4313a5559bc360d397979575737c2cd93dc560882925e1149208 200
+[debug] [2024-03-05T02:22:36.502Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/758f9be10f4a4313a5559bc360d397979575737c2cd93dc560882925e1149208 [stream]
+[debug] [2024-03-05T02:22:37.301Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/52db2be1ac45ba86fb9fcc6afff70cb79d38a8dfa28363286423d95b6d1326cb 200
+[debug] [2024-03-05T02:22:37.301Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/barbearia-90acc/versions/bd7c693457e3d6cc/files/52db2be1ac45ba86fb9fcc6afff70cb79d38a8dfa28363286423d95b6d1326cb [stream]
+[debug] [2024-03-05T02:22:37.302Z] [hosting][upload queue][FINAL] {"max":4691,"min":1933,"avg":2989,"active":0,"complete":5,"success":5,"errored":0,"retried":0,"total":5,"elapsed":4692}
+[info] ✔  hosting[barbearia-90acc]: file upload complete 
+[debug] [2024-03-05T02:22:37.303Z] [hosting] deploy completed after 6404ms
+[debug] [2024-03-05T02:22:37.304Z] [
+  {
+    "config": {
+      "public": "dist/pwa",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "site": "barbearia-90acc"
+    },
+    "version": "projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc"
+  }
+]
+[info] i  hosting[barbearia-90acc]: finalizing version... 
+[debug] [2024-03-05T02:22:37.312Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/versions/bd7c693457e3d6cc updateMask=status%2Cconfig
+[debug] [2024-03-05T02:22:37.312Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/versions/bd7c693457e3d6cc {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2024-03-05T02:22:44.570Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/versions/bd7c693457e3d6cc 200
+[debug] [2024-03-05T02:22:44.570Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/versions/bd7c693457e3d6cc {"name":"projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-05T02:22:23.776414Z","createUser":{"email":"fernandosmithmendonca10@gmail.com"},"finalizeTime":"2024-03-05T02:22:44.371751Z","finalizeUser":{"email":"fernandosmithmendonca10@gmail.com"}}
+[debug] [2024-03-05T02:22:44.570Z] [hosting] finalized version for barbearia-90acc:[object Object]
+[info] ✔  hosting[barbearia-90acc]: version finalized 
+[info] i  hosting[barbearia-90acc]: releasing new version... 
+[debug] [2024-03-05T02:22:44.571Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/channels/live/releases versionName=projects%2F1064725248483%2Fsites%2Fbarbearia-90acc%2Fversions%2Fbd7c693457e3d6cc
+[debug] [2024-03-05T02:22:44.571Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/channels/live/releases {}
+[debug] [2024-03-05T02:22:46.000Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/channels/live/releases 200
+[debug] [2024-03-05T02:22:46.000Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/barbearia-90acc/channels/live/releases {"name":"projects/1064725248483/sites/barbearia-90acc/channels/live/releases/1709605365146000","version":{"name":"projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-05T02:22:23.776414Z","createUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ4dIeDoOv-0xOYoIWuOFATp1A-FZE3a4_ZmGZKykcryv4"},"finalizeTime":"2024-03-05T02:22:44.371751Z","finalizeUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ4dIeDoOv-0xOYoIWuOFATp1A-FZE3a4_ZmGZKykcryv4"}},"type":"DEPLOY","releaseTime":"2024-03-05T02:22:45.146Z","releaseUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ4dIeDoOv-0xOYoIWuOFATp1A-FZE3a4_ZmGZKykcryv4"}}
+[debug] [2024-03-05T02:22:46.000Z] [hosting] release: {"name":"projects/1064725248483/sites/barbearia-90acc/channels/live/releases/1709605365146000","version":{"name":"projects/1064725248483/sites/barbearia-90acc/versions/bd7c693457e3d6cc","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-03-05T02:22:23.776414Z","createUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ4dIeDoOv-0xOYoIWuOFATp1A-FZE3a4_ZmGZKykcryv4"},"finalizeTime":"2024-03-05T02:22:44.371751Z","finalizeUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ4dIeDoOv-0xOYoIWuOFATp1A-FZE3a4_ZmGZKykcryv4"}},"type":"DEPLOY","releaseTime":"2024-03-05T02:22:45.146Z","releaseUser":{"email":"fernandosmithmendonca10@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ4dIeDoOv-0xOYoIWuOFATp1A-FZE3a4_ZmGZKykcryv4"}}
+[info] ✔  hosting[barbearia-90acc]: release complete 
+[info] 
+[info] ✔  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/barbearia-90acc/overview
+[info] Hosting URL: https://barbearia-90acc.web.app
+[debug] [2024-03-05T02:22:51.649Z] Error: Timed out.
+    at Timeout._onTimeout (/usr/local/lib/node_modules/firebase-tools/lib/utils.js:258:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.
