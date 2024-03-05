@@ -3,7 +3,6 @@
         label="Digite o CEP do outro local:" mask="#####-###" fill-mask clearable class="q-pr-xs q-py-md"
         :class="{ 'col-6': cepValido, 'col-12': !cepValido }" :color="alterarCorInputCEP" :loading="loading"
         @click="exibeMensagemInformativa()" @blur="buscarEndereco" />
-    {{ cepValido }}
 </template>
 
 <script setup lang="ts">
