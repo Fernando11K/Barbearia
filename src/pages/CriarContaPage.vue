@@ -14,6 +14,7 @@
 
     </q-page>
 </template>
+
 <script setup lang="ts">
 
 import BoxUsuario from 'src/components/common/BoxUsuario.vue';
@@ -23,9 +24,17 @@ import InputNome from 'src/components/common/InputNome.vue';
 import CardRequisitosSenha from 'src/components/CadastroUsuario/CardRequisitosSenha.vue'
 import { CadastroUsuario } from 'src/model/types/CadastroUsuario';
 import { criarUsuario, loading } from 'src/service/UsuarioService'
-import { ref, computed } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import { warning } from 'src/utils/alerta';
+import { usuarioStore } from 'src/stores/usuario-store';
+import router from 'src/router';
 
+onBeforeMount(() => {
+    const usuario = usuarioStore();
+    if (usuario.getEmail) {
+        router.push('/home')
+    }
+})
 const boxUsuario = ref()
 const novoUsuario = ref<CadastroUsuario>({ email: '', senha: '', nome: '' })
 const confirmacaoSenha = ref('')
