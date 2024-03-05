@@ -25,7 +25,7 @@
             </template>
         </q-list>
     </q-scroll-area>
-    <ModalAgendamento :statusProp="statusModalAgendamento" @atualizaStatusModal="atualizaStatusModal" />
+    <ModalAgendamento ref="modalAgendamentoRef" />
 </template>
 
 <script setup lang="ts">
@@ -41,7 +41,7 @@ import QAvatar from 'src/components/Gerenciamento/GerenciaAgendamentos/QAvatar.v
 
 
 const usuario = usuarioStore()
-const statusModalAgendamento = ref(false)
+const modalAgendamentoRef = ref<typeof ModalAgendamento | null>(null)
 
 const redirecionarParaInstagram = () => setTimeout(() => window.open('https://www.instagram.com/barbers.den/', '_blank'), 250);
 
@@ -58,8 +58,8 @@ const executaAcao = (label: string) => {
 }
 
 const abreModalAgendamento = () => {
-    if (usuario.getEmail) {
-        atualizaStatusModal(true)
+    if (usuario.getEmail && modalAgendamentoRef.value) {
+        modalAgendamentoRef.value.atualiza(true)
         return
     }
     warning('É necessário estar logado para realizar agendamento!')
@@ -75,8 +75,6 @@ const logout = () => {
         .catch(() => danger('Usuário ou senha inválidos', 3000))
 
 }
-
-const atualizaStatusModal = (status: boolean) => statusModalAgendamento.value = status
 
 </script>
 
