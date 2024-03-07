@@ -15,6 +15,12 @@
 const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
+
+  const envProd = {
+    TITULO: 'Barbearia',
+    CELULAR: '5521975294416',
+    VERSAO: '0.0.1'
+  }
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: {
@@ -74,6 +80,8 @@ module.exports = configure(function (ctx) {
       // showProgress: false,
       // gzip: true,
       // analyze: true,
+
+      env: envProd
 
       // Options below are automatically set depending on the env, set them if you want to override
       // extractCSS: false,
