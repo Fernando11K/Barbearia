@@ -3,10 +3,10 @@
     <q-separator :color="corAtual" class="shadow-up-24 glossy " />
     <q-toolbar class="orientation-portrait ">
       <div class="row justify-around col-12 fonte-footer ">
-        <q-btn size="md" flat round icon="fa-solid fa-bars" class="fonte-footer  "
+        <q-btn size="md" flat round icon="fa-solid fa-bars" class="fonte-footer"
           @click="capturaClickDoBotaoPainelLateralEsquerdo">
         </q-btn>
-        <q-btn size="md" flat round icon="fa-solid fa-house " class="fonte-footer " @click="home">
+        <q-btn size="md" flat round icon="fa-solid fa-house " class="fonte-footer" @click="home">
         </q-btn>
         <q-btn v-if="false" size="md" flat round icon="fa-solid fa-bell fa-beat" class="fonte-footer disabled"
           @click="funcionalidadeNaoDisponivel">
@@ -58,9 +58,12 @@ const trocarCor = () => {
 }
 const loopCores = setInterval(trocarCor, 500)
 
-const celular = ref('5521975294416');
+const celular = process.env.CELULAR;
 const message = ref('Olá! Está funcionando?');
-const abrirWhatsApp = () => { const url = `https://api.whatsapp.com/send?phone=${celular.value}&text=${encodeURIComponent(message.value)}`; window.open(url, '_blank') }
+const abrirWhatsApp = () => {
+  const url = `https://api.whatsapp.com/send?phone=${celular}&text=${encodeURIComponent(message.value)}`;
+  window.open(url, '_blank')
+}
 const funcionalidadeNaoDisponivel = () => warning('A funcionalidade estará disponível em breve!')
 
 const capturaClickDoBotaoPainelLateralEsquerdo = () => emits('clickBotaoPainelLateralEsquerdo')

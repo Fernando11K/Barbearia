@@ -1,4 +1,3 @@
-
 <template>
   <q-header color="purple-13" reveal elevated class="glossy text-white bg-blue-8" height-hint="98"
     :class="{ 'transparent': q.platform.is.desktop }">

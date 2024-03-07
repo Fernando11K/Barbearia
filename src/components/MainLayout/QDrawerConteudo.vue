@@ -29,15 +29,14 @@
 </template>
 
 <script setup lang="ts">
-import { auth } from 'src/boot/firebase'
-import { signOut } from 'firebase/auth';
 import { usuarioStore } from '../../stores/usuario-store';
-import { warning, info, danger } from '../../utils/alerta'
+import { warning } from '../../utils/alerta'
 import { menu } from 'src/assets/menu'
 import IMenu from 'src/model/interfaces/IMenu'
 import { ref } from 'vue';
 import ModalAgendamento from '../Agendamento/ModalAgendamento.vue';
 import QAvatar from 'src/components/Gerenciamento/GerenciaAgendamentos/QAvatar.vue';
+import { logout } from 'src/service/LoginService';
 
 
 const usuario = usuarioStore()
@@ -65,16 +64,6 @@ const abreModalAgendamento = () => {
     warning('É necessário estar logado para realizar agendamento!')
 
 };
-
-const logout = () => {
-    signOut(auth)
-        .then(() => {
-            info('Usuário deslogado com sucesso!')
-            usuario.limparDados()
-        })
-        .catch(() => danger('Usuário ou senha inválidos', 3000))
-
-}
 
 </script>
 

@@ -26,11 +26,10 @@
       </div>
     </section>
     <q-slide-transition :duration="2000">
-      <section class="full-width">
+      <section class="full-width" v-if="exibe">
         <div class="row bg-grey-1 no-pointer-events">
           <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')">
             <h2 ref="textoParallax" class="text-white">{{ tituloExibido }}</h2>
-
           </q-parallax>
           <div class="bg-white q-pa-xl justify-center">
             Sinta a diferença na Barbers Dean, onde a tradição encontra a modernidade para criar experiências únicas.
@@ -40,20 +39,24 @@
             mas uma jornada para o estilo clássico e a excelência.
 
 
-            Barbers Dean: onde a tradição encontra a modernidade, e cada cliente é tratado como parte de nossa história.
+            Barbers Dean: onde a tradição encontra a modernidade, e cada cliente é tratado como parte de nossa
+            história.
             Estilo, qualidade e camaradagem - experimente o melhor na Barbers Dean.
             <div class="q-pt-xs">Agende seu momento de elegância agora! 🎩💈 </div>
             <span>#BarbersDean #EstiloClássico #ExperiênciaMemorável</span>
           </div>
         </div>
-        <q-separator color="blue-2" />
+
+
         <section>
-          <div class="text-center text-h4 q-pa-sm text-bold text-blue-1 bg-dark"
-            :class="{ 'text-h5': q.platform.is.mobile }">Conheça Nossos Trabalhos
+          <div class="text-center text-h4 q-py-md text-bold text-white bg-dark"
+            :class="{ 'text-h5': q.platform.is.mobile }">
+            Conheça Nossos Trabalhos
           </div>
           <CarrosselComponent class="justify-center" />
         </section>
       </section>
+
     </q-slide-transition>
 
     <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
@@ -62,7 +65,7 @@
   </q-page>
 </template>
 
-<script lang="ts" setup >
+<script lang="ts" setup>
 
 import { date, useQuasar } from 'quasar'
 import CarrosselComponent from 'src/components/Barbearia/PaginaPrincipal/CarrosselComponent.vue'
@@ -70,11 +73,13 @@ import { ref, onMounted, computed } from 'vue'
 
 const q = useQuasar()
 const textoParallax = ref<HTMLElement | null>(null)
+const exibe = ref(false)
 
 onMounted(() => {
   console.log('Desenvolvido por Fernando11000 (https://br.linkedin.com/in/fernando11000)')
   //ordemMensagens();
   exibeTitulo()
+  exibe.value = true
 })
 const tituloParallax = 'O Refúgio Clássico da Elegância Masculina'
 const tituloExibido = ref('')
@@ -122,4 +127,3 @@ const loading = ref(true);
   font-size: 1rem;
 }
 </style>
-
