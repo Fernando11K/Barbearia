@@ -3,7 +3,7 @@
         style="height: 150px; width: 500px" @click="redirecionarParaInstagram"
         :alt="'Siga a Barbers Dean no Instagram: @barbers.den Clique aqui para acessar nosso perfil e ficar por dentro das novidades, promoções e mais!'">
         <div class="bg-transparent">
-            <QAvatar />
+            <AvatarComponent />
             <div class="text-weight-bold">Barber's Den</div>
             <div>@barbers.den</div>
         </div>
@@ -35,7 +35,7 @@ import { menu } from 'src/assets/menu'
 import IMenu from 'src/model/interfaces/IMenu'
 import { ref } from 'vue';
 import ModalAgendamento from '../Agendamento/ModalAgendamento.vue';
-import QAvatar from 'src/components/Gerenciamento/GerenciaAgendamentos/QAvatar.vue';
+import AvatarComponent from 'src/components/Gerenciamento/GerenciaAgendamentos/AvatarComponent.vue';
 import { logout } from 'src/service/LoginService';
 
 

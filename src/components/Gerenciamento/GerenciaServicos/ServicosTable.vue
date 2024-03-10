@@ -2,9 +2,9 @@
     <section class="q-pa-md">
         <q-table flat bordered title="Tabela de Preços" :rows="rows" :columns="columns" color="primary" row-key="name"
             separator="cell" rowsPerPageLabel="Resultados por página:" :col-props="{ style: 'width: 50%' }">
-            <template v-slot:top>
+            <template v-slot:top-left>
                 <section class="row items-center ">
-                    <QAvatar />
+                    <AvatarComponent />
                     <div class="q-table__title q-pl-md">Tabela de Preços</div>
                 </section>
             </template>
@@ -29,7 +29,6 @@
                             {{ converteParaBRL(props.row.preco) }}
                         </q-badge>
                     </q-td>
-
                 </q-tr>
             </template>
             <template v-slot:top-right>
@@ -42,12 +41,9 @@
 <script setup>
 import servicos from 'src/assets/servicos';
 import { exportFile } from 'quasar'
-import QAvatar from '../GerenciaAgendamentos/QAvatar.vue';
+import AvatarComponent from '../GerenciaAgendamentos/AvatarComponent.vue';
 
-const converteParaBRL = (valor) => valor.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-})
+const converteParaBRL = (valor) => valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const columns = [
     {
         name: 'servico',
@@ -68,9 +64,9 @@ const columns = [
         width: '60%'
     }
 
-]
+];
 
-const rows = servicos
+const rows = servicos;
 const wrapCsvValue = (val, formatFn, row) => {
     let formatted = formatFn !== void 0
         ? formatFn(val, row)
@@ -91,12 +87,6 @@ const wrapCsvValue = (val, formatFn, row) => {
     return `"${formatted}"`
 }
 
-
-
-
-
-
-
 const exportTable = () => {
     // naive encoding to csv format
     const content = [columns.map(col => wrapCsvValue(col.label))].concat(
@@ -109,15 +99,11 @@ const exportTable = () => {
         )).join(','))
     ).join('\r\n')
 
-    const status = exportFile(
-        'tabela-precos.csv',
-        content,
-        'text/csv'
-    )
+    const status = exportFile('tabela-precos.csv', content, 'text/csv')
 
     if (status !== true) {
         q.notify({
-            message: 'Browser denied file download...',
+            message: 'Download de arquivo negado pelo navegador...',
             color: 'negative',
             icon: 'warning'
         })
@@ -127,5 +113,3 @@ const exportTable = () => {
 
 
 </script>
-
-
