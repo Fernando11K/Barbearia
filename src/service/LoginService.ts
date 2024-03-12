@@ -35,12 +35,11 @@ const autenticacaoLocal = (dados: Login) => {
 }
 
 const autenticacaoGoogle = () => {
-    spinnerFacebook.mostrar('Tentando realizar login via Google...')
+    spinnerFacebook.mostrar(retornarMensagem('login via Google'))
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
         .then(() => {
             mostrarBoasVindas()
-            console.log(router)
             router.push('/home')
         })
         .catch(() => {
