@@ -32,7 +32,8 @@
                 </q-tr>
             </template>
             <template v-slot:top-right>
-                <q-btn color="primary" icon-right="archive" label="Baixar Planilha" no-caps @click="exportTable" />
+                <q-btn outline color="primary" icon-right="archive" label="Baixar Planilha" no-caps
+                    @click="exportTable" />
             </template>
         </q-table>
     </section>
