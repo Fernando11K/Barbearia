@@ -35,7 +35,7 @@ const autenticacaoLocal = (dados: Login) => {
 }
 
 const autenticacaoGoogle = () => {
-    spinnerFacebook.mostrar('login')
+    spinnerFacebook.mostrar('Tentando realizar login via Google...')
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
         .then(() => {

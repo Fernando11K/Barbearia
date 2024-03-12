@@ -34,7 +34,8 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: false },
       },
     ]
-  },
+  }
+  ,
   {
     path: '/:catchAll(.*)',
     component: () => import('layouts/MainLayout.vue'),
