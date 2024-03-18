@@ -11,14 +11,26 @@
 
 import InputDate from './InputDate.vue'
 import SelectBarbeiro from './SelectBarbeiro.vue';
-import { onMounted, ref, watch } from 'vue';
+import { onBeforeMount, onMounted, ref, watch } from 'vue';
 import { EnumLocalAtendimento } from 'src/model/enum/EnumLocalAtendimento'
 import { Agendamento } from 'src/model/Agendamento';
 import { QSelectOption } from 'quasar';
 import SelectLocalAtendimento from './SelectLocalAtendimento.vue';
 import DadosAgendamentoExternoView from 'src/components/Agendamento/DadosAgendamentoExternoView.vue'
 
+const props = defineProps(['dados'])
+onBeforeMount(() => {
+   if (props.dados) {
+      preencheDadosDeEdicao()
+   }
+})
+const preencheDadosDeEdicao = () => {
 
+   const { barbeiro: barbeiroRecebido, data: dataRecebida } = props.dados
+   barbeiro.value = { value: barbeiroRecebido.id, label: barbeiroRecebido.nome }
+   data.value = dataRecebida
+
+}
 onMounted(() => { emiteValidacaoDados() });
 const emits = defineEmits(['dadosValidos', 'preencheDados']);
 
@@ -27,7 +39,7 @@ const data = ref('')
 const barbeiro = ref<QSelectOption<string>>({ value: '', label: '' });
 const local = ref({ id: 0, label: 'Barbearia' })
 
-const enviaDados = () => {
+const enviaDados = async () => {
    if (barbeiro.value.value) {
       emits('preencheDados', new Agendamento(data.value, barbeiro.value.value, 'corte', local.value.id))
    }

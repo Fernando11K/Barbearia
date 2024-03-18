@@ -4,8 +4,12 @@ import { danger, positive } from 'src/utils/alerta';
 import { Agendamento } from 'src/model/Agendamento';
 import agendamentoStore from 'src/stores/agendamento-store';
 import { buscarBarbeiros } from './BabeiroService';
+import { spinnerFacebook } from 'src/utils/spinner';
+import { ref } from 'vue';
 
 const store = agendamentoStore()
+const loading = ref(false)
+const retornarMensagem = (msg: string) => `<p class="text-h6">Tentando ${msg}. Aguarde...</p>`
 
 
 const criarAgendamento = (agendamento: Agendamento) => {
@@ -20,28 +24,35 @@ const criarAgendamento = (agendamento: Agendamento) => {
     }
     return push(agendamentoRef, dados)
 };
-const atualizarAgendamento = (agendamento: Agendamento) => {
+const atualizarAgendamento = async (agendamento: Agendamento) => {
+    loading.value = true
+    spinnerFacebook.mostrar(retornarMensagem('atualizar agendamento'))
+    /*
+        Implementar logica para edicao pelo operador e usuário
+        Não preencher id do cliente se for operador
+    */
+    const idAgendamento = agendamento.getId();
     const dados = {
-        cliente: agendamento.getCliente(),
+        //    cliente: agendamento.getCliente(),
         data: agendamento.getData(),
         idBarbeiro: agendamento.getIdBarbeiro(),
         servico: agendamento.getServico(),
-        id: '-NrT7quVBxpj8-TeFAdT'
-
+        dataUltimaAtualizacao: new Date().toLocaleString('pt-BR').replace(',', ''),
     }
+    update(agendamentoByIdRef(idAgendamento), dados)
+        .then(() => {
+            positive('Agendamento atualizado com sucesso!')
+        })
+        .catch(() => {
+            danger('Ocorreu um erro ao realizar a atualização!')
+        })
+        .finally(() => {
+            spinnerFacebook.ocultar()
+            loading.value = false
+        })
 
-    if (dados.id) {
-        update(agendamentoByIdRef(dados.id), dados)
-            .then(() => {
 
-                positive('Agendamento alterado com sucesso')
-                return true
-            })
-            .catch(() => {
-                danger('Ocorreu um erro ao reallizar o agendamento')
-                return false
-            })
-    }
+
 
 }
 
@@ -81,4 +92,4 @@ const buscarAgendamentos = async () => {
     }
     );
 }
-export { criarAgendamento, buscarAgendamentos, atualizarAgendamento, inserirAgendamento }
+export { criarAgendamento, buscarAgendamentos, atualizarAgendamento, inserirAgendamento, loading }

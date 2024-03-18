@@ -33,6 +33,10 @@ class Agendamento {
         return this.cliente ? this.cliente : '';
     }
 
+    setId(id: string): void {
+        this.id = id;
+    }
+
     setCliente(cliente: string): void {
         this.cliente = cliente;
     }

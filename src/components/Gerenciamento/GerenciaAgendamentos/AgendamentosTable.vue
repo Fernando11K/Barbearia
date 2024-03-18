@@ -10,7 +10,7 @@
                         <q-checkbox v-model="props.selected" disable />
                     </q-td>
                     <q-td key="acoes" :props="props">
-                        <q-btn color="primary" icon="fa-solid fa-pen-to-square" flat round class="q-mr-md" />
+                        <ModalEdicaoAgendamento :dadosAgendamento="props.row" />
                     </q-td>
                     <q-td key="data" :props="props">
                         <span class="q-mr-md">
@@ -42,7 +42,7 @@
         </q-table>
     </section>
 </template>
-  
+
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { QTableProps } from 'quasar';
@@ -51,6 +51,7 @@ import { danger } from 'src/utils/alerta';
 import agendamentoStore from 'src/stores/agendamento-store';
 import { Agendamento } from 'src/model/Agendamento'
 import { converteDataStringAgendamentoParaDate as parseDate } from 'src/utils/dateUtils'
+import ModalEdicaoAgendamento from 'src/components/Agendamento/Edicao/ModalEdicaoAgendamento.vue'
 
 
 const store = agendamentoStore()
@@ -115,4 +116,3 @@ watch(() => store.getAgendamentos, () => {
 })
 
 </script>
-

@@ -1,10 +1,11 @@
 <template>
-    <q-page class="column flex-center bg-white" @click.self=" boxUsuario.alteraPosicaoCard(false)">
+    <q-page class="column flex-center bg-white" @click.self="mudarPosicao(false)">
         <BoxUsuario :titulo="'Login'" ref="boxUsuario">
-            <q-form class="row justify-center" @submit.prevent="autenticar">
+            <q-form class="row justify-center" @submit.prevent="autenticar" @click.self="mudarPosicao(false)">
                 <InputUsuarioLogin v-model="login.email" :label="'Email'" class="full-width q-pa-md"
                     @focus="mudarPosicao" />
-                <InputSenhaLogin v-model="login.senha" :label="'Senha'" class="full-width q-pa-md" @focus="mudarPosicao" />
+                <InputSenhaLogin v-model="login.senha" :label="'Senha'" class="full-width q-pa-md"
+                    @focus="mudarPosicao" />
                 <q-btn type="submit" unelevated rounded class="q-mt-md  col-11" color="primary" text-color="white"
                     label="ENTRAR" :disabled="!login.email || !login.senha || loading" />
                 <q-btn icon='fa-brands fa-google' @click="autenticacaoGoogle" outline rounded
@@ -17,7 +18,7 @@
         </BoxUsuario>
     </q-page>
 </template>
-<script setup lang="ts" >
+<script setup lang="ts">
 
 import { ref } from 'vue';
 import InputUsuarioLogin from 'src/components/login/InputUsuarioLogin.vue';
@@ -36,7 +37,7 @@ const mudarPosicao = (status: boolean) => {
 }
 
 </script>
-  
+
 <style scoped>
 .login {
     border: 2px solid #676767;
