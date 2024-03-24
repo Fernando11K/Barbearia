@@ -59,7 +59,10 @@ const agendar = () => {
                 positive('Agendamento realizado com sucesso')
 
             })
-            .catch(() => { danger('Ocorreu um erro ao reallizar o agendamento') })
+            .catch((erro) => {
+                (erro.message) ? danger(erro.message, 5000) : danger('Ocorreu um erro ao reallizar o agendamento')
+
+            })
             .finally(() => spinnerFacebook.ocultar())
     }
 }

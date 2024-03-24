@@ -5,30 +5,34 @@ const usuario = usuarioStore()
 class Agendamento {
 
     private id?: string;
-    private nomeCliente: string;
+    // private nomeCliente: string;
     private cliente: string | null;
     private data: string;
+    private dataRegistro: string;
+    private dataUltimaAtualizacao?: string;
+    private barbeiro?: string;
     private idBarbeiro: string;
     private servico: string;
-    private local: number;
-    private status: boolean;
+    // private local: number;
+    private status?: boolean;
 
-    constructor(data: string, idBarbeiro: string, servico: string, local: number) {
-        this.nomeCliente = usuario.getNome ?? 'Não Identificado'
+    constructor(data: string, idBarbeiro: string, servico: string) {
+        // this.nomeCliente = usuario.getNome ?? 'Não Identificado'
         this.cliente = usuario.getEmail;
         this.data = data;
+        this.dataRegistro = new Date().toLocaleString('pt-BR').replace(',', '')
         this.idBarbeiro = idBarbeiro;
         this.servico = servico;
         this.status = true;
-        this.local = local
+        // this.local = local
     }
 
     getId(): string {
         return this.id ?? ''
     }
-    getNome(): string {
-        return this.nomeCliente;
-    }
+    // getNome(): string {
+    //     return this.nomeCliente;
+    // }
     getCliente(): string {
         return this.cliente ? this.cliente : '';
     }
@@ -48,13 +52,25 @@ class Agendamento {
     setData(data: string): void {
         this.data = data;
     }
+    getDataRegistro(): string {
+        return this.dataRegistro
+    }
+    setDataRegistro(dataRegistro: string): void {
+        this.dataRegistro = dataRegistro
+    }
+    getDataUltimaAtualizacao(): string {
+        return this.dataUltimaAtualizacao ?? ''
+    }
 
     getIdBarbeiro(): string {
         return this.idBarbeiro;
     }
+    getBarbeiro(): string {
+        return this.barbeiro ?? ''
+    }
 
-    setBarbeiro(barbeiro: string): void {
-        this.idBarbeiro = barbeiro;
+    setBarbeiro(idBarbeiro: string): void {
+        this.idBarbeiro = idBarbeiro;
     }
 
     getServico(): string {
@@ -66,15 +82,15 @@ class Agendamento {
     }
 
     getStatus(): boolean {
-        return this.status;
+        return this.status ?? true;
     }
 
     setStatus(status: boolean): void {
         this.status = status;
     }
-    getLocal(): number {
-        return this.local
-    }
+    // getLocal(): number {
+    //     return this.local
+    // }
     getAgendamento(): this {
         return this
 

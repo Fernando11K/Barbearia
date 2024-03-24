@@ -11,18 +11,44 @@ const store = agendamentoStore()
 const loading = ref(false)
 const retornarMensagem = (msg: string) => `<p class="text-h6">Tentando ${msg}. Aguarde...</p>`
 
+const retornarSeBarbeiroDisponivel = (agendado: any, agendamento: Agendamento) => {
 
-const criarAgendamento = (agendamento: Agendamento) => {
+    return (agendado.idBarbeiro === agendamento.getIdBarbeiro()) && (agendado.data === agendamento.getData())
+
+}
+const verificarAgendamento = async (agendamento: Agendamento) => {
+    await buscarAgendamentos()
+        .then((agendamentos: Array<Agendamento>) => {
+            const indisponivel = agendamentos.some((agendado: Agendamento) => retornarSeBarbeiroDisponivel(agendado, agendamento))
+
+            if (indisponivel) {
+                throw Error('O agendamento não está disponível para este barbeiro neste horário. Por favor, escolha outro barbeiro ou horário.');
+
+            }
+        })
+}
+
+const criarAgendamento = async (agendamento: Agendamento) => {
+    try {
+        await verificarAgendamento(agendamento)
+
+    } catch (e: any) {
+
+        throw new Error(e.message)
+
+    }
 
     const dados = {
-        dataRegistro: new Date().toLocaleString('pt-BR').replace(',', ''),
+        dataRegistro: agendamento.getDataRegistro(),
         cliente: agendamento.getCliente(),
         data: agendamento.getData(),
         idBarbeiro: agendamento.getIdBarbeiro(),
-        servico: agendamento.getServico()
+        servico: agendamento.getServico(),
+        status: true
 
     }
     return push(agendamentoRef, dados)
+
 };
 const atualizarAgendamento = async (agendamento: Agendamento) => {
     loading.value = true
@@ -72,13 +98,14 @@ const inserirAgendamento = (agendamento: Agendamento) => {//Substitui os dados
 
 const buscarAgendamentos = async () => {
     const barbeiros = await buscarBarbeiros()
-    return new Promise((resolve, reject) => {
+    return new Promise<Array<Agendamento>>((resolve, reject) => {
         onValue(agendamentoRef, (snapshot) => {
             const listaAgendamentos: Array<Agendamento> = []
             snapshot.forEach((childSnapshot) => {
                 const childKey = childSnapshot.key;
                 const childData = childSnapshot.val();
                 listaAgendamentos.push({ id: childKey, barbeiro: barbeiros.find((barbeiro) => barbeiro.getId() === childData.idBarbeiro), ...childData });
+
             });
             store.setAgendamentos([...listaAgendamentos] as Agendamento[])
 
