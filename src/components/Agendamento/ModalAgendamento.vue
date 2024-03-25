@@ -13,7 +13,7 @@
                         <q-btn v-close-popup rounded icon="fa-solid fa-xmark" color="negative" label="Fechar"
                             class="col-5" />
                         <q-btn type="submit" rounded icon="fa-regular fa-calendar-check fa-bounce" color="positive"
-                            label="Agendar" :disable="desabilitaBotao" class="col-5" />
+                            label="Agendar" :disable="desabilitaBotao" class="col-5" :loading="loading" />
                     </q-card-actions>
                 </q-form>
             </CardAgendamentoSlot>
@@ -25,19 +25,16 @@
 import FormularioAgendamento from './FormularioAgendamento.vue';
 import CardAgendamentoSlot from './CardAgendamentoSlot.vue';
 import { ref } from 'vue';
-import { criarAgendamento } from 'src/service/AgendamentoService'
+import { criarAgendamento, loading } from 'src/service/AgendamentoService'
 import { Agendamento } from 'src/model/Agendamento';
 import { danger, positive } from 'src/utils/alerta';
 import { spinnerFacebook } from 'src/utils/spinner';
-
-
+import dialog from 'src/utils/dialog'
 
 const formularioAgendamentoRef = ref<typeof FormularioAgendamento | null>(null);
-
 const agendamento = ref<Agendamento | null>(null)
 const statusModal = ref(false)
 const desabilitaBotao = ref(true)
-
 
 const preencheDados = (dados: Agendamento) => agendamento.value = dados
 const validaDados = (validadeDosDados: boolean) => desabilitaBotao.value = validadeDosDados;
@@ -60,7 +57,7 @@ const agendar = () => {
 
             })
             .catch((erro) => {
-                (erro.message) ? danger(erro.message, 5000) : danger('Ocorreu um erro ao reallizar o agendamento')
+                (erro.message) ? dialog(erro.message) : danger('Ocorreu um erro ao reallizar o agendamento')
 
             })
             .finally(() => spinnerFacebook.ocultar())

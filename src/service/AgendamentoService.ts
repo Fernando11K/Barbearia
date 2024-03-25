@@ -29,25 +29,27 @@ const verificarAgendamento = async (agendamento: Agendamento) => {
 }
 
 const criarAgendamento = async (agendamento: Agendamento) => {
+    loading.value = true
     try {
         await verificarAgendamento(agendamento)
+        const dados = {
+            dataRegistro: agendamento.getDataRegistro(),
+            cliente: agendamento.getCliente(),
+            data: agendamento.getData(),
+            idBarbeiro: agendamento.getIdBarbeiro(),
+            servico: agendamento.getServico(),
+            status: true
+
+        }
+        return push(agendamentoRef, dados)
 
     } catch (e: any) {
-
         throw new Error(e.message)
-
+    }
+    finally {
+        loading.value = false
     }
 
-    const dados = {
-        dataRegistro: agendamento.getDataRegistro(),
-        cliente: agendamento.getCliente(),
-        data: agendamento.getData(),
-        idBarbeiro: agendamento.getIdBarbeiro(),
-        servico: agendamento.getServico(),
-        status: true
-
-    }
-    return push(agendamentoRef, dados)
 
 };
 const atualizarAgendamento = async (agendamento: Agendamento) => {
