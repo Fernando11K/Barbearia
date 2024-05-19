@@ -38,4 +38,4 @@ hosting*
 *.zip
 .cache
 .firebase/hosting/*.cache
-
+src/boot/firebase.ts
