@@ -17,8 +17,8 @@
     <template v-slot:append>
       <q-icon name="access_time" class="cursor-pointer" color="primary">
         <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-          <q-time id="horário agendamento" :modelValue="modelValue" @update:modelValue="atualiza" mask="DD/MM/YYYY HH:mm"
-            format24h :options="opcoesHorario">
+          <q-time id="horário agendamento" :modelValue="modelValue" @update:modelValue="atualiza"
+            mask="DD/MM/YYYY HH:mm" format24h :options="opcoesHorario">
             <div class="row items-center justify-end">
               <q-btn v-close-popup label="Fechar" color="primary" flat />
             </div>
@@ -28,7 +28,7 @@
     </template>
   </q-input>
 </template>
-  
+
 <script lang="ts" setup>
 import { QInput, date } from 'quasar';
 import { formataDDMMYYYYHHmmParaDate as formataData } from 'src/utils/dateUtils'
@@ -47,7 +47,7 @@ const exibeMensagemValidacao = () => {
 }
 
 const retornaDataHorarioAtual = () => new Date()
-const data6MesFuturos = date.adjustDate(retornaDataHorarioAtual(), { months: 6, hours: 23, minutes: 59 })
+const data6MesFuturos = date.addToDate(retornaDataHorarioAtual(), { months: 6, hours: 23, minutes: 59 })
 const opcoesData = (data: string) => {
 
   const dataAtual = retornaDataHorarioAtual();
@@ -77,4 +77,3 @@ const validacoesHorarioAgendamento = (hora: number, minutos: number) => {
 
 }
 </script>
-  
