@@ -12,12 +12,10 @@ import { onMounted, ref } from 'vue';
 import { usuarioStore } from './stores/usuario-store';
 import ModalUsuarioOffline from 'src/components/common/ModalUsuarioOffline.vue'
 const usuario = usuarioStore();
-const offline = ref(false)
 
 onMounted(() => {
   usuario.preencheState()
-  window.addEventListener('offline', () => { offline.value = true })
-  window.addEventListener('online', () => { offline.value = false })
+
 })
 
 </script>

@@ -15,7 +15,7 @@ const criarUsuario = async (dados: CadastroUsuario) => {
         .then(() => {
             atualizarPerfilUsuario(dados.nome, false)
                 .finally(() => {
-                    positive('Sua conta foi criada com sucesso seja bem vindo!', 3000)
+                    positive('Sua conta foi criada com sucesso seja bem vindo(a)!', 3000)
                     router.push('/home')
                 })
 
