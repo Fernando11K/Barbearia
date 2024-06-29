@@ -81,7 +81,6 @@ const atualizarAgendamento = async (agendamento: Agendamento) => {
 
 
 
-
 }
 
 const inserirAgendamento = (agendamento: Agendamento) => {//Substitui os dados    
