@@ -3,12 +3,12 @@
     <Transition name="slide">
       <component :is="Component" :key="route.path" />
     </Transition>
-    <ModalUsuarioOffline :offline="offline" />
+    <ModalUsuarioOffline />
   </router-view>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import { usuarioStore } from './stores/usuario-store';
 import ModalUsuarioOffline from 'src/components/common/ModalUsuarioOffline.vue'
 const usuario = usuarioStore();

@@ -11,6 +11,7 @@ const store = agendamentoStore()
 const loading = ref(false)
 const retornarMensagem = (msg: string) => `<p class="text-h6">Tentando ${msg}. Aguarde...</p>`
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const retornarSeBarbeiroDisponivel = (agendado: any, agendamento: Agendamento) => {
 
     return (agendado.idBarbeiro === agendamento.getIdBarbeiro()) && (agendado.data === agendamento.getData())
@@ -42,7 +43,7 @@ const criarAgendamento = async (agendamento: Agendamento) => {
 
         }
         return push(agendamentoRef, dados)
-
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
         throw new Error(e.message)
     }

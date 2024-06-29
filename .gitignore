@@ -39,3 +39,4 @@ hosting*
 .cache
 .firebase/hosting/*.cache
 src/boot/firebase.ts
+*.cache
