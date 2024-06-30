@@ -24,12 +24,11 @@
           <q-spinner-dots />
         </q-chat-message>
       </div>
-    </section>
-    <q-slide-transition :duration="2000">
+    </section>    
       <section class="full-width" v-if="exibe">
         <div class="row bg-grey-1 no-pointer-events">
-          <q-parallax :height="800" src="../assets/cabelo-e-barba.jpg">
-            <h2 ref="textoParallax" class="text-white">{{ tituloExibido }}</h2>
+          <q-parallax :height="q.platform.is.desktop ? 800 : q.screen.height" src="../assets/cabelo-e-barba.jpg">                             
+            <h2 ref="textoParallax" class="text-white" :class="{'efeito-digitando': (tituloExibido.length < 31)}" >{{ tituloExibido }}</h2>            
           </q-parallax>
           <div class="bg-white q-pa-xl justify-center">
             Sinta a diferença na Barbers Dean, onde a tradição encontra a modernidade para criar experiências únicas.
@@ -46,8 +45,6 @@
             <span>#BarbersDean #EstiloClássico #ExperiênciaMemorável</span>
           </div>
         </div>
-
-
         <section>
           <div class="text-center text-h4 q-py-md text-bold text-white bg-dark"
             :class="{ 'text-h5': q.platform.is.mobile }">
@@ -56,10 +53,7 @@
           <CarrosselComponent class="justify-center" />
         </section>
       </section>
-
-    </q-slide-transition>
-
-    <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+    <q-page-scroller class="z-top" position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
       <q-btn fab icon="keyboard_arrow_up" color="blue" class="" />
     </q-page-scroller>
   </q-page>
@@ -81,9 +75,9 @@ onMounted(() => {
   exibeTitulo()
   exibe.value = true
 })
-const tituloParallax = 'O Refúgio Clássico da Elegância Masculina'
+const tituloParallax = 'O Refúgio Clássico da Elegância'
 const tituloExibido = ref('')
-const aguardar = (segundos: number) => new Promise(resolve => setTimeout(resolve, segundos))
+const aguardar = (delay: number) => new Promise(resolve => setTimeout(resolve, delay))
 const exibeTitulo = async () => {
   for (let i = 0; i < tituloParallax.length; i++) {
     tituloExibido.value += tituloParallax.charAt(i)
@@ -117,7 +111,7 @@ const loading = ref(true);
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .fonte-principal {
   font-size: 1.2rem;
 
@@ -125,5 +119,19 @@ const loading = ref(true);
 
 .fonte-conteudo {
   font-size: 1rem;
+}
+
+.efeito-digitando::after {
+  content: '|';
+  animation: blink-animation 1s infinite;
+}
+
+@keyframes blink-animation {
+  0%, 49% {
+    opacity: 0;
+  }
+  50%, 100% {
+    opacity: 1;
+  }
 }
 </style>
