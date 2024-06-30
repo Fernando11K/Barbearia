@@ -19,12 +19,14 @@ module.exports = configure(function (ctx) {
     VERSAO: '0.0.1'
   }
   return {
+    supportTS: true,
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
 
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
+
     boot: [
       'i18n',
       'axios',
@@ -95,19 +97,7 @@ module.exports = configure(function (ctx) {
             lintCommand: 'eslint "./**/*.{js,ts,mjs,cjs,vue}"'
           }
         }, { server: false }]
-      ],
-      extendWebpack(cfg) {
-        cfg.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /node_modules/,
-          options: {
-            emitWarning: true,
-            emitError: false,
-          },
-        });
-      }
+      ]
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer

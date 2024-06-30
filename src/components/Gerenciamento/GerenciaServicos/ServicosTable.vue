@@ -41,9 +41,9 @@
 
 <script setup>
 import servicos from 'src/assets/servicos';
-import { exportFile } from 'quasar'
+import { exportFile, useQuasar } from 'quasar'
 import AvatarComponent from '../GerenciaAgendamentos/AvatarComponent.vue';
-
+const q = useQuasar()
 const converteParaBRL = (valor) => valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const columns = [
     {

@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "noUnusedLocals": true,
     "skipLibCheck": true,
-    "strict": false
+    "strict": true
   },
   "exclude": [
     "./dist",
