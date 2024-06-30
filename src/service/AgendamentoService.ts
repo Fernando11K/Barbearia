@@ -1,14 +1,17 @@
-import { update, set } from 'firebase/database';
-import { agendamentoRef, agendamentoByIdRef, push, onValue } from 'src/boot/firebase';
+import { ref, push, onValue, update, set } from 'firebase/database';
+import { dataBase } from 'src/boot/database';
 import { danger, positive } from 'src/utils/alerta';
 import { Agendamento } from 'src/model/Agendamento';
 import agendamentoStore from 'src/stores/agendamento-store';
 import { buscarBarbeiros } from './BabeiroService';
 import { spinnerFacebook } from 'src/utils/spinner';
-import { ref } from 'vue';
+
+
+const agendamentoRef = ref(dataBase, '/agendamentos/')
+const agendamentoByIdRef = (idAgendamento: string) => ref(dataBase, `/agendamentos/${idAgendamento}`)
 
 const store = agendamentoStore()
-const loading = ref(false)
+let loading = false
 const retornarMensagem = (msg: string) => `<p class="text-h6">Tentando ${msg}. Aguarde...</p>`
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,7 +33,7 @@ const verificarAgendamento = async (agendamento: Agendamento) => {
 }
 
 const criarAgendamento = async (agendamento: Agendamento) => {
-    loading.value = true
+    loading = true
     try {
         await verificarAgendamento(agendamento)
         const dados = {
@@ -48,13 +51,13 @@ const criarAgendamento = async (agendamento: Agendamento) => {
         throw new Error(e.message)
     }
     finally {
-        loading.value = false
+        loading = false
     }
 
 
 };
 const atualizarAgendamento = async (agendamento: Agendamento) => {
-    loading.value = true
+    loading = true
     spinnerFacebook.mostrar(retornarMensagem('atualizar agendamento'))
     /*
         Implementar logica para edicao pelo operador e usuário
@@ -77,11 +80,8 @@ const atualizarAgendamento = async (agendamento: Agendamento) => {
         })
         .finally(() => {
             spinnerFacebook.ocultar()
-            loading.value = false
+            loading = false
         })
-
-
-
 }
 
 const inserirAgendamento = (agendamento: Agendamento) => {//Substitui os dados    

@@ -19,7 +19,7 @@
                 <q-tr :props="props">
                     <q-td key="servico" :props="props" :style="{ width: columns[0].width }">
                         <span class="q-mr-md">
-                            <q-badge color="blue" class="q-mr-md">
+                            <q-badge color="blue" class="q-mr-md ">
                                 {{ props.row.servico }}
                             </q-badge>
                         </span>
@@ -32,8 +32,8 @@
                 </q-tr>
             </template>
             <template v-slot:top-right>
-                <q-btn outline color="primary" icon-right="archive" label="Baixar Planilha" no-caps
-                    @click="exportTable" />
+                <q-btn outline color="primary" icon-right="archive" label="Baixar Planilha" no-caps @click="exportTable"
+                    rouded />
             </template>
         </q-table>
     </section>

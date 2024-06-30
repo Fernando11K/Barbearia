@@ -1,13 +1,17 @@
-import { barbeiroRef, onValue } from 'src/boot/firebase';
+import { ref, onValue } from 'firebase/database';
+import { dataBase } from 'src/boot/database';
 import Barbeiro from 'src/model/Barbeiro';
-import { ref } from 'vue';
 
 
-const loading = ref(false)
+//const barbeiroByIdRef = (idBarbeiro: number) => ref(dataBase, `/barbeiros/${idBarbeiro}`)
+const barbeiroRef = ref(dataBase, '/barbeiros')
+
+
+let loading = false
 
 const buscarBarbeiros = async () => {
 
-    loading.value = true
+    loading = true
     return new Promise<Array<Barbeiro>>((resolve, reject) => {
 
         onValue(barbeiroRef, (snapshot) => {
@@ -27,7 +31,7 @@ const buscarBarbeiros = async () => {
             }
 
         );
-        loading.value = false
+        loading = false
     })
 }
 

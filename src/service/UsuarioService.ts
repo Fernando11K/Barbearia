@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from 'src/boot/firebase'
+import { auth } from 'src/boot/auth'
 import { danger, positive } from 'src/utils/alerta';
 import { spinnerFacebook } from 'src/utils/spinner';
 import { ref } from 'vue';

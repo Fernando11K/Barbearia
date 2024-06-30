@@ -53,7 +53,6 @@ import { Agendamento } from 'src/model/Agendamento'
 import { converteDataStringAgendamentoParaDate as parseDate } from 'src/utils/dateUtils'
 import ModalEdicaoAgendamento from 'src/components/Agendamento/Edicao/ModalEdicaoAgendamento.vue'
 
-
 const store = agendamentoStore()
 const rows = ref<Array<QTableProps['rows']>>([])
 const loading = ref(true)
