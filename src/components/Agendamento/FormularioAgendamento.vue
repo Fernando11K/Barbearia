@@ -41,7 +41,7 @@ const local = ref({ id: 0, label: 'Barbearia' })
 
 const enviaDados = async () => {
    if (barbeiro.value.value) {
-      emits('preencheDados', new Agendamento(data.value, barbeiro.value.value, 'corte', local.value.id))
+      emits('preencheDados', new Agendamento(data.value, barbeiro.value.value, 'corte'))
    }
 }
 

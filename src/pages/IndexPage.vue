@@ -18,7 +18,7 @@
           </div>
         </q-chat-message>
 
-        <q-chat-message v-show="loading" name="Barbearia"
+        <q-chat-message v-if="loading" name="Barbearia"
           avatar="https://cdn.pixabay.com/photo/2018/01/09/14/23/vector-3071686_1280.png" bg-color="grey-12"
           class="no-pointer-events">
           <q-spinner-dots />
@@ -28,7 +28,7 @@
     <q-slide-transition :duration="2000">
       <section class="full-width" v-if="exibe">
         <div class="row bg-grey-1 no-pointer-events">
-          <q-parallax :height="800" :src="require('src/assets/cabelo-e-barba.jpg')">
+          <q-parallax :height="800" src="src/assets/cabelo-e-barba.jpg">
             <h2 ref="textoParallax" class="text-white">{{ tituloExibido }}</h2>
           </q-parallax>
           <div class="bg-white q-pa-xl justify-center">

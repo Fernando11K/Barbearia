@@ -79,13 +79,14 @@ const preencherTabela = () => {
             loading.value = false;
         })
 }
+
 const preencherLinhas = async (linhas: Array<Agendamento>) => {
     rows.value = linhas
     ordenarLinhas(rows.value, 'data', 'descending')
-
 }
 preencherTabela()
-const ordenarLinhas = (row: QTableProps['rows'], sortBy: string, descending: string) => {
+
+const ordenarLinhas = (row: QTableProps['rows'], sortBy: any, descending: string): readonly any[] => {
     const sortedRows = [...rows.value];
     return sortedRows.sort((a, b) => {
         if (a && b) {

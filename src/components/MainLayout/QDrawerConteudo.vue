@@ -11,7 +11,7 @@
 
     <q-scroll-area class="fit">
         <q-list>
-            <template v-for="(menuItem, index) in menu" :key="index">
+            <template v-for="(menuItem, _index) in menu" :key="_index">
                 <q-item clickable v-if="menuItem.ativo" :active="!menuItem.ativo" v-ripple
                     @click="verificaDisponibilidadeDaFuncionalidade(menuItem)" :to="menuItem.rota">
                     <q-item-section avatar>
