@@ -18,8 +18,6 @@ const criarUsuario = async (dados: CadastroUsuario) => {
                     positive('Sua conta foi criada com sucesso seja bem vindo(a)!', 3000)
                     router.push('/home')
                 })
-
-
         })
         .catch((error) => {
             mensagensErroCadastro(error.code)

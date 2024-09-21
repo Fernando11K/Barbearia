@@ -5,7 +5,8 @@
                 <InputNome v-model="novoUsuario.nome" class="col-12 q-pa-md" />
                 <InputUsuarioLogin v-model="novoUsuario.email" :label="'Email'" class="col-12 q-pa-md" />
                 <InputSenhaLogin v-model="novoUsuario.senha" :label="'Senha'" class="col-12 q-pa-md" />
-                <InputSenhaLogin v-model="confirmacaoSenha" :label="'Confimar senha'" class="col-12 q-pa-md" />
+                <InputSenhaLogin v-model="confirmacaoSenha" :label="'Confimar senha'" class="col-12 q-pa-md"
+                    @paste.prevent />
                 <q-btn type="submit" unelevated rounded class="q-mt-md col-11" color="positive" text-color="white"
                     label="Cadastrar" :disabled="desabilitarBotao" />
                 <CardRequisitosSenha :senha="novoUsuario.senha" @statusRequisitos="atualizarStatusRequisitos" />

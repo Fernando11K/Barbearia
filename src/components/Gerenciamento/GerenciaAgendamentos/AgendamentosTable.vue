@@ -81,7 +81,7 @@ const preencherTabela = () => {
 
 const preencherLinhas = async (linhas: Array<Agendamento>) => {
     rows.value = linhas
-    ordenarLinhas(rows.value, 'data', 'descending')
+    //  ordenarLinhas(rows.value, 'data', 'descending')
 }
 preencherTabela()
 

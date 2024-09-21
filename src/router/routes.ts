@@ -6,31 +6,31 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '/',
+        path: '',
         redirect: '/home', // Redireciona '/' para '/home'
       },
       {
-        path: '/home', component: () => import('pages/IndexPage.vue')
+        path: 'home', component: () => import('pages/IndexPage.vue')
       },
       {
-        path: '/barbearia', component: () => import('pages/IndexPage.vue'),
+        path: 'barbearia', component: () => import('pages/IndexPage.vue'),
         meta: { requiresAuth: true },
       },
       {
-        path: '/agendamento', component: () => import('pages/GerenciaAgendamentosPage.vue'),
+        path: 'agendamento', component: () => import('pages/GerenciaAgendamentosPage.vue'),
         meta: { requiresAuth: true },
       },
-      { path: '/login', component: () => import('../pages/LoginPage.vue') },
+      { path: 'login', component: () => import('../pages/LoginPage.vue') },
       {
-        path: '/gerencia-agendamentos', component: () => import('pages/GerenciaAgendamentosPage.vue'),
+        path: 'gerencia-agendamentos', component: () => import('pages/GerenciaAgendamentosPage.vue'),
         meta: { requiresAuth: true },
       },
       {
-        path: '/tabela-precos', component: () => import('pages/GerenciaServicosPage.vue'),
+        path: 'tabela-precos', component: () => import('pages/GerenciaServicosPage.vue'),
         meta: { requiresAuth: false },
       },
       {
-        path: '/criar-conta', component: () => import('pages/CriarContaPage.vue'),
+        path: 'criar-conta', component: () => import('pages/CriarContaPage.vue'),
         meta: { requiresAuth: false },
       },
     ]
