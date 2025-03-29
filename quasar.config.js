@@ -16,7 +16,7 @@ module.exports = configure(function () {
   const envProd = {
     TITULO: 'Barbearia',
     CELULAR: '5521975294416',
-    VERSAO: '0.0.6'
+    VERSAO: '0.0.7'
   }
   return {
     supportTS: true,

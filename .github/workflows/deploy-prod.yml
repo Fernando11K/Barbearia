@@ -1,4 +1,4 @@
-name: Deploy to Firebase
+name: Deploy para Firebase
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Config Git
         run: |
@@ -22,12 +22,34 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: '20.x'
 
       - name: Install Dependencies
         run: |
           npm install -g @quasar/cli
           npm install
+
+      - name: Renomear arquivo firebase_deploy.ts para firebase.ts
+        run: |
+          if [ ! -f src/boot/firebase_deploy.ts ]; then
+            echo "Erro: src/boot/firebase_deploy.ts não encontrado!"
+            exit 1
+          fi
+          mv src/boot/firebase_deploy.ts src/boot/firebase.ts
+          echo "Arquivo renomeado com sucesso:"
+          ls -l src/boot/
+
+      - name: Criar arquivo de configuração do Firebase
+        run: |          
+          echo "${{ secrets.FIREBASE_CONFIG }}" > ./firebase_config.json
+
+      - name: Substituir conteúdo no firebase.ts com o conteúdo de firebase_config.json
+        run: |
+          
+          FIREBASE_CONFIG_CONTENT=$(cat ./firebase_config.json)       
+          ESCAPED_CONTENT=$(printf '%s' "$FIREBASE_CONFIG_CONTENT" | tr -d '\n' | sed "s/'/\\\\'/g")             
+          sed -i "s|FIREBASE_CONFIG|$ESCAPED_CONTENT|" src/boot/firebase.ts                    
+
           
       - name: Build Quasar App
         run: |
@@ -38,12 +60,5 @@ jobs:
         with:
           args: deploy --only hosting
         env:
-          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
-
-      - name: Commit and Push to GitHub
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add .
-          git commit -m "Auto deploy to GitHub"
-          git push
+           PROJECT_ID: "barbearia-90acc"
+           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
