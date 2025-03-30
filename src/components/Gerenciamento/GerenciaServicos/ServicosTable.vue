@@ -97,7 +97,7 @@ const exportTable = () => {
                 : row[col.field === void 0 ? col.name : col.field],
             col.format,
             row
-        )).join(','))
+        )).join(';'))
     ).join('\r\n')
 
     const status = exportFile('tabela-precos.csv', content, 'text/csv')
