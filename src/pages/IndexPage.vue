@@ -41,7 +41,8 @@
           </picture>
         </template>
 
-        <h2 ref="textoParallax" class="text-white" :class="{ 'efeito-digitando': (tituloExibido.length < 31) }">
+        <h2 ref="textoParallax" class="text-white  non-selectable"
+          :class="{ 'efeito-digitando': (tituloExibido.length < 31) }">
           {{ tituloExibido }}
         </h2>
       </q-parallax>
@@ -74,7 +75,8 @@
       </section>
 
       <section>
-        <div class="text-center text-h4 q-py-sm text-bold bg-blue-8" :class="{ 'text-h5': q.platform.is.mobile }">
+        <div class="text-center text-h4 q-py-sm text-bold bg-blue-8  non-selectable"
+          :class="{ 'text-h5': q.platform.is.mobile }">
           <span class="text-white">
             Conheça Nossos Trabalhos
           </span>

@@ -5,11 +5,13 @@
       <q-btn v-show="q.platform.is.desktop || (q.platform.is.mobile)" class="orientation-landscape" dense flat round
         icon="menu" @click="capturaClickDoBotaoPainelLateralEsquerdo" />
 
-      <q-toolbar-title class="text-center  ">
-        <q-avatar>
+      <q-toolbar-title class="text-center">
+        <q-avatar class="cursor-pointer">
           <q-icon @click="toggleFullscreen" name="fa-solid fa-scissors fa-shake" />
         </q-avatar>
-        {{ titulo }}
+        <span class="non-selectable">
+          {{ titulo }}
+        </span>
       </q-toolbar-title>
 
       <q-btn v-if="false" class="desktop-only" dense flat round icon="menu"
