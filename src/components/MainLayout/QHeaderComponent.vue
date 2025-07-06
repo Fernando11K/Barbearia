@@ -20,16 +20,13 @@
 
 <script setup lang="ts">
 
-import { AppFullscreen, useQuasar } from 'quasar'
+import { useQuasar } from 'quasar'
 const emits = defineEmits(['clickBotaoPainelLateralEsquerdo', 'clickBotaoPainelLateralDireito']);
 const q = useQuasar()
 defineProps(['titulo'])
 
-
-const toggleFullscreen = () => (AppFullscreen.isActive) ? AppFullscreen.exit() : AppFullscreen.request()
+const toggleFullscreen = () => (q.fullscreen.isActive) ? q.fullscreen.exit() : q.fullscreen.request()
 const capturaClickDoBotaoPainelLateralEsquerdo = () => emits('clickBotaoPainelLateralEsquerdo')
 const capturaClickDoBotaoPainelLateralDireito = () => emits('clickBotaoPainelLateralDireito')
-
-
 
 </script>
