@@ -12,7 +12,6 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
     <footer v-if="q.platform.is.desktop">
       <q-toolbar class="shadow-up-24">
         <q-toolbar-title class="text-center text-subtitle1 text-white">

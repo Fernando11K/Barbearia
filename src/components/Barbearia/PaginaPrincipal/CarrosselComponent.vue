@@ -1,6 +1,6 @@
 <template>
-    <div :class="['row', { 'q-mb-xs': q.platform.is.desktop }]" :style="{ height: alturaCarousel }">
-        <q-carousel swipeable animated v-model="slide" thumbnails infinite height="100%" class="col-12"
+    <div :class="['row', { 'q-mb-xs': q.platform.is.desktop }]" :style="{ height: alturaCarousel }" class="blue-8">
+        <q-carousel swipeable animated v-model="slide" thumbnails infinite class="col-12"
             :arrows="q.platform.is.desktop" :autoplay="true">
 
             <q-carousel-slide :name="1"
@@ -23,7 +23,7 @@
 const q = useQuasar()
 import { useQuasar } from 'quasar';
 import { ref } from 'vue'
-const alturaCarousel = q.platform.is.mobile ? '350px' : '720px'
+const alturaCarousel = q.platform.is.mobile ? '300px' : '720px'
 
 const slide = ref(1)
 

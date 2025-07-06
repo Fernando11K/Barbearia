@@ -26,30 +26,58 @@
       </div>
     </section>
     <section class="full-width" v-if="exibe">
-      <div class="row bg-grey-1 no-pointer-events">
-        <q-parallax :height="q.platform.is.desktop ? 800 : q.screen.height" src="../assets/cabelo-e-barba.jpg">
-          <h2 ref="textoParallax" class="text-white" :class="{ 'efeito-digitando': (tituloExibido.length < 31) }">{{
-            tituloExibido }}</h2>
-        </q-parallax>
-        <div class="bg-white q-pa-xl justify-center">
-          Sinta a diferença na Barbers Dean, onde a tradição encontra a modernidade para criar experiências únicas.
-          Nossos
-          barbeiros experientes são verdadeiros mestres na arte do corte e da barba, proporcionando não apenas um
-          serviço,
-          mas uma jornada para o estilo clássico e a excelência.
 
+      <q-parallax :height="q.platform.is.desktop ? 800 : q.screen.height * 0.7">
+        <template v-slot:media>
+          <picture>
+            <source srcset="
+          ../assets/home/cabelo-e-barba-320x180.jpg 320w,
+          ../assets/home/cabelo-e-barba-640x360.jpg 640w,
+          ../assets/home/cabelo-e-barba-960x540.jpg 960w,
+          ../assets/home/cabelo-e-barba-1280x720.jpg 1280w,
+          ../assets/home/cabelo-e-barba-1920x1080.jpg 1920w
+        " sizes="100vw" type="image/jpeg" />
+            <img src="/home/cabelo-e-barba-960x540.jpg" alt="Banner" class="fit" loading="lazy" />
+          </picture>
+        </template>
 
-          Barbers Dean: onde a tradição encontra a modernidade, e cada cliente é tratado como parte de nossa
-          história.
-          Estilo, qualidade e camaradagem - experimente o melhor na Barbers Dean.
-          <div class="q-pt-xs">Agende seu momento de elegância agora! 🎩💈 </div>
+        <h2 ref="textoParallax" class="text-white" :class="{ 'efeito-digitando': (tituloExibido.length < 31) }">
+          {{ tituloExibido }}
+        </h2>
+      </q-parallax>
+      <section class="bg-white  q-pa-xl  " :class="{ 'row justify-around items-center': q.platform.is.desktop }">
+        <div class="col-7">
+          <p>
+            Sente a diferença na Barbers Dean! Aqui é onde o clássico encontra o moderno pra te entregar um
+            estilo
+            só seu,
+            daquele jeito que só a gente sabe fazer. Os barbeiros aqui são fera, manjam demais do cabelinho na régua, da
+            barba no capricho e do cuidado que você merece.
+          </p>
+          <p>
+            Na Barbers Dean, a gente valoriza a tradição dos bons cortes, mas sem deixar de lado a modernidade — porque
+            estilo tem que ser atual, né? O clima é de boa, perfeito pra chegar, trocar ideia, ficar de boa e sair com o
+            visual alinhado, daquele jeito que chama atenção.
+          </p>
+          <p>
+            O atendimento é sempre no capricho, feito com aquele cuidado irmão e irmã pra você. Aqui não tem pressa, é
+            qualidade e resenha de verdade, onde você se sente em casa, parte da família.
+          </p>
+          <span class="q-pt-xs">Agende seu momento de elegância agora! 🎩💈 </span>
+          <br>
           <span>#BarbersDean #EstiloClássico #ExperiênciaMemorável</span>
         </div>
-      </div>
+        <div v-if="q.platform.is.desktop">
+          <img src="../assets/home/cadeiras.png" alt="Banner" class="col-4" loading="lazy"
+            style="  border-radius: 45px;" />
+        </div>
+      </section>
+
       <section>
-        <div class="text-center text-h4 q-py-md text-bold text-white bg-dark"
-          :class="{ 'text-h5': q.platform.is.mobile }">
-          Conheça Nossos Trabalhos
+        <div class="text-center text-h4 q-py-sm text-bold bg-blue-8" :class="{ 'text-h5': q.platform.is.mobile }">
+          <span class="text-white">
+            Conheça Nossos Trabalhos
+          </span>
         </div>
         <CarrosselComponent class="justify-center" />
       </section>
